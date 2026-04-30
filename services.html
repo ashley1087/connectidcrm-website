@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | Connectid</title>
+  <meta name="description" content="Connectid offers Strategy First engagements and fractional CMO retainers for growing businesses. Build the marketing foundation you need — then execute it." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --navy2: #152030; --navy3: #1e2d3d;
+      --red: #EB3656; --orange: #FA5E36;
+      --brand-gradient: linear-gradient(135deg, #FA5E36, #EB3656);
+      --white: #ffffff; --gray-100: #f1f3f5; --gray-200: #e9ecef;
+      --gray-400: #adb5bd; --gray-600: #6c757d; --text: #1a2332;
+      --radius: 10px; --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 7px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all .18s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--brand-gradient); color: white; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(235,54,86,0.35); }
+    .btn-ghost { background: transparent; border: 2px solid var(--gray-200); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13,27,42,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1100px; margin: 0 auto; }
+    .nav-logo img { height: 32px; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: white; }
+    .btn-sm { padding: 9px 20px; font-size: 13px; }
+    section { padding: 88px 24px; }
+    .section-dark { background: var(--navy); color: white; }
+    .section-gray { background: var(--gray-100); }
+    .section-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 12px; display: block; }
+    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -0.8px; line-height: 1.12; margin-bottom: 16px; }
+
+    /* Hero */
+    .services-hero { background: var(--navy); padding: 140px 24px 96px; text-align: center; }
+    .services-hero h1 { font-size: clamp(34px, 5.5vw, 56px); font-weight: 900; color: white; letter-spacing: -1.8px; line-height: 1.08; margin-bottom: 20px; max-width: 780px; margin-left: auto; margin-right: auto; }
+    .services-hero h1 em { font-style: normal; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .services-hero p { font-size: 18px; color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto 40px; line-height: 1.7; }
+
+    /* How it works path */
+    .path-section { padding: 80px 24px; }
+    .path-inner { max-width: 900px; margin: 0 auto; }
+    .path-steps { display: flex; align-items: flex-start; gap: 0; position: relative; }
+    .path-steps::before { content:''; position:absolute; top:28px; left:0; right:0; height:2px; background: linear-gradient(90deg, var(--orange), var(--red)); z-index:0; }
+    .path-step { flex: 1; text-align: center; position: relative; z-index: 1; padding: 0 12px; }
+    .path-circle { width: 56px; height: 56px; border-radius: 50%; background: var(--brand-gradient); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; font-size: 18px; font-weight: 900; color: white; border: 4px solid white; }
+    .path-step h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+    .path-step p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+
+    /* Service cards */
+    .service-block { margin-bottom: 0; }
+    .service-card { background: white; border: 1px solid var(--gray-200); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+    .service-card-header { padding: 48px 48px 40px; display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 32px; border-bottom: 1px solid var(--gray-200); }
+    .service-eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 12px; display: block; }
+    .service-card h2 { font-size: clamp(24px, 3.5vw, 36px); font-weight: 900; letter-spacing: -0.8px; line-height: 1.15; margin-bottom: 14px; }
+    .service-card > .service-card-header p { font-size: 15px; color: var(--gray-600); line-height: 1.7; max-width: 540px; }
+    .service-price-block { text-align: right; flex-shrink: 0; }
+    .service-price { font-size: 38px; font-weight: 900; letter-spacing: -1px; color: var(--text); }
+    .service-price sub { font-size: 16px; font-weight: 700; vertical-align: super; }
+    .service-price-note { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
+    .service-card-body { padding: 40px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+    .service-card-footer { padding: 28px 48px; background: var(--gray-100); border-top: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .service-card-footer p { font-size: 14px; color: var(--gray-600); }
+    .includes-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .includes-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.55; }
+    .check { width: 20px; height: 20px; background: var(--brand-gradient); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; font-size: 10px; font-weight: 700; margin-top: 1px; }
+    .what-box { background: var(--gray-100); border-radius: 12px; padding: 24px; }
+    .what-box h4 { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-600); margin-bottom: 14px; }
+
+    /* Retainer tiers */
+    .tiers-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .tier-card { background: var(--navy3); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 32px 28px; }
+    .tier-card.featured { background: var(--brand-gradient); border: none; }
+    .tier-name { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; color: rgba(255,255,255,0.6); }
+    .tier-card.featured .tier-name { color: rgba(255,255,255,0.75); }
+    .tier-price { font-size: 36px; font-weight: 900; color: white; letter-spacing: -1px; margin-bottom: 4px; }
+    .tier-period { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+    .tier-card.featured .tier-period { color: rgba(255,255,255,0.7); }
+    .tier-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .tier-list li { font-size: 13px; color: rgba(255,255,255,0.7); display: flex; gap: 10px; align-items: flex-start; }
+    .tier-card.featured .tier-list li { color: rgba(255,255,255,0.9); }
+    .tier-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); flex-shrink: 0; margin-top: 7px; }
+    .tier-card.featured .tier-dot { background: rgba(255,255,255,0.8); }
+
+    /* Add-ons */
+    .addons-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .addon-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px; }
+    .addon-card h4 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+    .addon-card .addon-price { font-size: 14px; font-weight: 700; color: var(--red); margin-bottom: 8px; }
+    .addon-card p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+
+    /* CTA */
+    .cta-section { background: var(--navy); text-align: center; padding: 100px 24px; }
+    .cta-section h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 900; color: white; letter-spacing: -1px; line-height: 1.12; margin-bottom: 16px; }
+    .cta-section p { color: rgba(255,255,255,0.55); font-size: 16px; margin-bottom: 36px; }
+
+    /* Footer */
+    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 13px; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 13px; transition: color .15s; }
+    .footer-links a:hover { color: white; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 16px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: white; border-radius: 14px; width: 100%; max-width: 560px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.4); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--gray-200); }
+    .modal-title { font-size: 16px; font-weight: 800; }
+    .modal-sub { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+    .modal-close { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--gray-600); padding: 4px; line-height: 1; }
+    .modal-close:hover { color: var(--text); }
+    .modal-iframe { width: 100%; height: 560px; border: none; display: block; }
+
+    @media (max-width: 768px) {
+      .service-card-header, .service-card-body { grid-template-columns: 1fr; padding: 28px; }
+      .service-price-block { text-align: left; }
+      .tiers-grid, .addons-grid { grid-template-columns: 1fr; }
+      .path-steps { flex-direction: column; gap: 32px; }
+      .path-steps::before { display: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo-light.png" alt="Connectid" /></a>
+    <ul class="nav-links">
+      <li><a href="strategy-first.html">Strategy First</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="#" onclick="openBooking(); return false;" class="btn btn-primary btn-sm">Book a Call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="services-hero">
+  <div class="container">
+    <h1>Marketing built on <em>strategy</em>,<br />not just activity.</h1>
+    <p>From a complete Strategy First engagement to ongoing fractional CMO leadership — here's how we work together to build and execute a marketing system that compounds.</p>
+    <a href="#" onclick="openBooking(); return false;" class="btn btn-primary" style="font-size:16px; padding:16px 32px;">Book Your Free Strategy Call →</a>
+  </div>
+</div>
+
+<!-- How the path works -->
+<div class="path-section">
+  <div class="path-inner">
+    <div style="text-align:center; margin-bottom: 48px;">
+      <span class="section-label">The Path</span>
+      <h2 class="section-title">Strategy before execution — always.</h2>
+      <p style="color: var(--gray-600); font-size: 16px; line-height: 1.7; max-width: 540px; margin: 0 auto;">Every engagement starts with Strategy First, so that everything that follows is grounded in research, clarity, and a real plan.</p>
+    </div>
+    <div class="path-steps">
+      <div class="path-step">
+        <div class="path-circle">1</div>
+        <h3>Strategy First</h3>
+        <p>4 weeks to build your complete marketing strategy from the ground up</p>
+      </div>
+      <div class="path-step">
+        <div class="path-circle">2</div>
+        <h3>Retainer Kickoff</h3>
+        <p>Continue with a monthly fCMO retainer to lead execution and momentum</p>
+      </div>
+      <div class="path-step">
+        <div class="path-circle">3</div>
+        <h3>Build & Activate</h3>
+        <p>Campaigns, content, automation, and systems get built and turned on</p>
+      </div>
+      <div class="path-step">
+        <div class="path-circle">4</div>
+        <h3>Scale & Evolve</h3>
+        <p>Quarterly strategy reviews keep pace with where your business is going</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Service 1: Strategy First -->
+<section class="section-gray">
+  <div class="container">
+    <div style="margin-bottom: 32px;">
+      <span class="section-label">Service 01</span>
+      <h2 class="section-title">Strategy First Engagement</h2>
+    </div>
+    <div class="service-card">
+      <div class="service-card-header">
+        <div>
+          <span class="service-eyebrow">Where every engagement starts</span>
+          <h2>A complete marketing strategy — delivered in 4 weeks.</h2>
+          <p>Deep research, competitive analysis, persona development, core message, and a 90-day execution calendar. Everything you need to market with clarity and confidence.</p>
+        </div>
+        <div class="service-price-block">
+          <div class="service-price"><sub>$</sub>5,000</div>
+          <div class="service-price-note">One-time · Fixed scope · 4 weeks</div>
+        </div>
+      </div>
+      <div class="service-card-body">
+        <div>
+          <p style="font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--gray-600); margin-bottom:14px;">What's included</p>
+          <ul class="includes-list">
+            <li><span class="check">✓</span> Brand, competitor & industry deep research</li>
+            <li><span class="check">✓</span> Full SWOT & marketing audit</li>
+            <li><span class="check">✓</span> 2–4 ideal client personas</li>
+            <li><span class="check">✓</span> Core message & positioning statement</li>
+            <li><span class="check">✓</span> Full customer journey map (7 stages)</li>
+            <li><span class="check">✓</span> Content strategy with 60+ topic ideas</li>
+            <li><span class="check">✓</span> 90-day execution calendar</li>
+            <li><span class="check">✓</span> Growth priorities (top 5–6 initiatives)</li>
+            <li><span class="check">✓</span> Strategy walkthrough session (90 min)</li>
+            <li><span class="check">✓</span> 30-day follow-up check-in</li>
+          </ul>
+        </div>
+        <div>
+          <div class="what-box">
+            <h4>Best for</h4>
+            <ul class="includes-list">
+              <li><span class="check">✓</span> Businesses doing $500K–$10M+ ready to scale</li>
+              <li><span class="check">✓</span> Companies without a documented marketing strategy</li>
+              <li><span class="check">✓</span> Founders who want real clarity before spending more on tactics</li>
+              <li><span class="check">✓</span> Teams that need a plan they can actually hand to an implementer</li>
+            </ul>
+          </div>
+          <div style="margin-top: 24px;">
+            <a href="strategy-first.html" style="font-size:14px; color:var(--red); font-weight:700; text-decoration:none;">Learn more about Strategy First →</a>
+          </div>
+        </div>
+      </div>
+      <div class="service-card-footer">
+        <p>Ready to build your marketing foundation? Start with a free 30-minute strategy call.</p>
+        <a href="#" onclick="openBooking(); return false;" class="btn btn-primary btn-sm">Book Your Free Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Service 2: fCMO Retainer -->
+<section>
+  <div class="container">
+    <div style="margin-bottom: 32px;">
+      <span class="section-label">Service 02</span>
+      <h2 class="section-title">Fractional CMO Retainer</h2>
+    </div>
+    <div class="service-card">
+      <div class="service-card-header">
+        <div>
+          <span class="service-eyebrow">Monthly strategic leadership</span>
+          <h2>Your marketing strategy, led and executed — every month.</h2>
+          <p>After Strategy First, stay on momentum with a monthly retainer. I act as your Fractional CMO — leading execution, managing vendors, reviewing metrics, and evolving the strategy as your business grows.</p>
+        </div>
+        <div class="service-price-block">
+          <div class="service-price"><sub>$</sub>3K–8K</div>
+          <div class="service-price-note">Per month · Based on scope</div>
+        </div>
+      </div>
+      <div class="service-card-body">
+        <div>
+          <p style="font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--gray-600); margin-bottom:14px;">Included in all retainers</p>
+          <ul class="includes-list">
+            <li><span class="check">✓</span> Monthly Momentum Meeting (90 min)</li>
+            <li><span class="check">✓</span> Quarterly Strategic Planning Session</li>
+            <li><span class="check">✓</span> Monthly marketing performance report</li>
+            <li><span class="check">✓</span> Agency and vendor oversight</li>
+            <li><span class="check">✓</span> Priority-based execution guidance</li>
+            <li><span class="check">✓</span> WhatsApp access for quick decisions</li>
+            <li><span class="check">✓</span> ClickUp project management access</li>
+            <li><span class="check">✓</span> AI-powered research & content support</li>
+          </ul>
+        </div>
+        <div>
+          <div class="what-box">
+            <h4>Tier options</h4>
+            <ul class="includes-list" style="gap:10px;">
+              <li><span class="check">✓</span> <div><strong>Foundation — $3,000/mo</strong><br /><span style="color:var(--gray-600);">Monthly strategy + reporting + up to 5 hrs execution support</span></div></li>
+              <li><span class="check">✓</span> <div><strong>Growth — $5,000/mo</strong><br /><span style="color:var(--gray-600);">Full fCMO leadership + 10 hrs execution + content oversight</span></div></li>
+              <li><span class="check">✓</span> <div><strong>Scale — $8,000/mo</strong><br /><span style="color:var(--gray-600);">Comprehensive leadership + 20 hrs + full marketing team management</span></div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="service-card-footer">
+        <p>Retainers require Strategy First as a prerequisite — so we both know the plan we're executing.</p>
+        <a href="#" onclick="openBooking(); return false;" class="btn btn-primary btn-sm">Book Your Free Call →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Retainer tiers detail -->
+<section class="section-dark">
+  <div class="container">
+    <div style="max-width: 640px; margin: 0 auto 48px; text-align: center;">
+      <span class="section-label">Retainer Tiers</span>
+      <h2 class="section-title" style="color:white;">Choose the level of support that fits where you are.</h2>
+    </div>
+    <div class="tiers-grid">
+      <div class="tier-card">
+        <div class="tier-name">Foundation</div>
+        <div class="tier-price">$3,000</div>
+        <div class="tier-period">/month · Strategy + direction</div>
+        <ul class="tier-list">
+          <li><span class="tier-dot"></span>Monthly Momentum Meeting (90 min)</li>
+          <li><span class="tier-dot"></span>Quarterly Strategic Planning Session</li>
+          <li><span class="tier-dot"></span>Monthly marketing report</li>
+          <li><span class="tier-dot"></span>Up to 5 hrs execution support</li>
+          <li><span class="tier-dot"></span>WhatsApp + ClickUp access</li>
+          <li><span class="tier-dot"></span>Vendor/agency review</li>
+        </ul>
+      </div>
+      <div class="tier-card featured">
+        <div class="tier-name">Growth — Most Popular</div>
+        <div class="tier-price">$5,000</div>
+        <div class="tier-period">/month · Strategy + leadership</div>
+        <ul class="tier-list">
+          <li><span class="tier-dot"></span>Everything in Foundation</li>
+          <li><span class="tier-dot"></span>Up to 10 hrs execution support</li>
+          <li><span class="tier-dot"></span>Content strategy oversight</li>
+          <li><span class="tier-dot"></span>Campaign planning + management</li>
+          <li><span class="tier-dot"></span>Monthly content calendar</li>
+          <li><span class="tier-dot"></span>Priority marketing hires support</li>
+        </ul>
+      </div>
+      <div class="tier-card">
+        <div class="tier-name">Scale</div>
+        <div class="tier-price">$8,000</div>
+        <div class="tier-period">/month · Full fCMO leadership</div>
+        <ul class="tier-list">
+          <li><span class="tier-dot"></span>Everything in Growth</li>
+          <li><span class="tier-dot"></span>Up to 20 hrs execution support</li>
+          <li><span class="tier-dot"></span>Full marketing team management</li>
+          <li><span class="tier-dot"></span>Weekly check-ins available</li>
+          <li><span class="tier-dot"></span>Paid media oversight</li>
+          <li><span class="tier-dot"></span>Annual strategy refresh</li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top: 40px;">
+      <a href="#" onclick="openBooking(); return false;" class="btn btn-primary" style="font-size:16px; padding:16px 32px;">Talk about which tier fits →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Add-ons -->
+<section class="section-gray">
+  <div class="container">
+    <div style="max-width: 640px; margin: 0 auto 40px; text-align: center;">
+      <span class="section-label">Add-Ons</span>
+      <h2 class="section-title">Standalone services for specific needs.</h2>
+      <p style="color: var(--gray-600); font-size: 16px; line-height: 1.7;">Available to Strategy First or retainer clients who need a focused deliverable.</p>
+    </div>
+    <div class="addons-grid">
+      <div class="addon-card">
+        <h4>Website Copy Refresh</h4>
+        <div class="addon-price">From $1,500</div>
+        <p>Homepage, about, and services page rewrites based on your Strategy First core message and personas.</p>
+      </div>
+      <div class="addon-card">
+        <h4>GoHighLevel Setup</h4>
+        <div class="addon-price">From $2,000</div>
+        <p>Full GoHighLevel buildout — CRM pipeline, scheduling, lead capture forms, and automated follow-up sequences.</p>
+      </div>
+      <div class="addon-card">
+        <h4>Content Hub Build</h4>
+        <div class="addon-price">From $1,200</div>
+        <p>SEO-focused pillar page with 4–6 supporting blog posts targeting your hub keyword cluster.</p>
+      </div>
+      <div class="addon-card">
+        <h4>Email Welcome Sequence</h4>
+        <div class="addon-price">From $800</div>
+        <p>5-email onboarding sequence for new leads or subscribers — positioning, value delivery, and CTA.</p>
+      </div>
+      <div class="addon-card">
+        <h4>Marketing Audit Only</h4>
+        <div class="addon-price">$1,500</div>
+        <p>A full audit of your current marketing presence — channels, messaging, SEO, trust signals — with a prioritized quick wins list.</p>
+      </div>
+      <div class="addon-card">
+        <h4>Competitive Research Report</h4>
+        <div class="addon-price">$800</div>
+        <p>Deep research on 3 competitors — positioning, messaging, content, SEO, social — with your opportunities identified.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <h2>Not sure where to start?</h2>
+    <p>Book a free 30-minute call. We'll talk through where you are and what kind of engagement makes the most sense for your business right now.</p>
+    <a href="#" onclick="openBooking(); return false;" class="btn btn-primary" style="font-size:17px; padding: 18px 36px;">Book Your Free Strategy Call →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html"><img src="logo-light.png" alt="Connectid" style="height:26px;" /></a>
+    <div class="footer-links">
+      <a href="strategy-first.html">Strategy First</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>© 2026 Connectid. DTM Certified fCMO.</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="booking-modal" onclick="closeBookingOnOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">Book Your Free Strategy Call</div><div class="modal-sub">30 minutes · No pitch · Just strategy</div></div>
+      <button class="modal-close" onclick="closeBooking()">✕</button>
+    </div>
+    <iframe class="modal-iframe" id="booking-iframe" src="" data-src="https://link.connectidcrm.com/widget/booking/rBfjlEMkmCmO5uszg1ET" title="Book a Strategy Call"></iframe>
+  </div>
+</div>
+
+<script>
+  function openBooking() { const m=document.getElementById('booking-modal'),i=document.getElementById('booking-iframe'); if(!i.src||i.src===window.location.href)i.src=i.dataset.src; m.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeBooking() { document.getElementById('booking-modal').classList.remove('open'); document.body.style.overflow=''; }
+  function closeBookingOnOverlay(e) { if(e.target===document.getElementById('booking-modal'))closeBooking(); }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBooking();});
+</script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Ashley | Connectid</title>
+  <meta name="description" content="Ashley is a Duct Tape Marketing Certified fractional CMO helping growing businesses build real marketing strategy. Learn about her approach and background." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --navy2: #152030; --navy3: #1e2d3d;
+      --red: #EB3656; --orange: #FA5E36;
+      --brand-gradient: linear-gradient(135deg, #FA5E36, #EB3656);
+      --white: #ffffff; --gray-100: #f1f3f5; --gray-200: #e9ecef;
+      --gray-400: #adb5bd; --gray-600: #6c757d; --text: #1a2332;
+      --radius: 10px; --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 7px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all .18s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--brand-gradient); color: white; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(235,54,86,0.35); }
+    .btn-outline-dark { background: transparent; border: 2px solid var(--navy); color: var(--navy); }
+    .btn-outline-dark:hover { background: var(--navy); color: white; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13,27,42,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1100px; margin: 0 auto; }
+    .nav-logo img { height: 32px; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: white; }
+    .btn-sm { padding: 9px 20px; font-size: 13px; }
+    section { padding: 88px 24px; }
+    .section-dark { background: var(--navy); color: white; }
+    .section-gray { background: var(--gray-100); }
+    .section-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 12px; display: block; }
+    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -0.8px; line-height: 1.12; margin-bottom: 16px; }
+
+    /* Hero */
+    .about-hero { background: var(--navy); padding: 140px 24px 88px; }
+    .about-hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: center; }
+    .about-hero h1 { font-size: clamp(32px, 5vw, 54px); font-weight: 900; color: white; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
+    .about-hero h1 em { font-style: normal; color: var(--orange); }
+    .about-hero p { color: rgba(255,255,255,0.65); font-size: 17px; line-height: 1.7; margin-bottom: 32px; }
+    .badges { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+    .badge-pill { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 30px; padding: 7px 14px; }
+    .badge-pill img { height: 24px; width: 24px; border-radius: 50%; }
+    .badge-pill span { color: rgba(255,255,255,0.85); font-size: 12px; font-weight: 700; }
+    .about-photo-wrap { position: relative; }
+    .about-photo { width: 100%; border-radius: 16px; display: block; background: var(--navy3); min-height: 480px; object-fit: cover; }
+    .about-photo-placeholder { width: 100%; min-height: 480px; background: linear-gradient(135deg, var(--navy3), var(--navy2)); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.2); font-size: 14px; font-weight: 600; text-align: center; padding: 24px; }
+
+    /* Values */
+    .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .value-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px; border-top: 3px solid var(--red); }
+    .value-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+    .value-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 10px; }
+    .value-card p { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+
+    /* Story */
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .story-text h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 900; letter-spacing: -0.6px; margin-bottom: 20px; color: white; }
+    .story-text p { color: rgba(255,255,255,0.65); font-size: 15px; line-height: 1.75; margin-bottom: 16px; }
+    .story-credentials { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 28px; }
+    .cred-item { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .cred-item:last-child { border-bottom: none; }
+    .cred-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .cred-title { font-size: 14px; font-weight: 700; color: white; margin-bottom: 3px; }
+    .cred-sub { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+    /* What it's like */
+    .working-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .working-card { background: var(--gray-100); border-radius: var(--radius); padding: 24px 26px; border-left: 3px solid var(--red); }
+    .working-card h4 { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+    .working-card p { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+
+    /* CTA */
+    .cta-section { background: var(--navy); text-align: center; padding: 88px 24px; }
+    .cta-section h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 900; color: white; letter-spacing: -0.8px; margin-bottom: 16px; }
+    .cta-section p { color: rgba(255,255,255,0.6); font-size: 17px; max-width: 500px; margin: 0 auto 32px; }
+
+    /* Footer */
+    footer { background: #080f18; color: rgba(255,255,255,0.45); padding: 36px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; }
+    .footer-links a:hover { color: white; }
+
+    /* Modal */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,16,25,0.75); backdrop-filter: blur(6px); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: white; border-radius: 16px; width: 100%; max-width: 780px; max-height: 90vh; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.35); display: flex; flex-direction: column; animation: modalIn .22s ease; }
+    @keyframes modalIn { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-bottom: 1px solid var(--gray-200); flex-shrink: 0; }
+    .modal-title { font-size: 16px; font-weight: 700; }
+    .modal-sub { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+    .modal-close { background: var(--gray-100); border: none; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: var(--gray-600); }
+    .modal-close:hover { background: var(--gray-200); }
+    .modal-iframe { width: 100%; flex: 1; min-height: 600px; border: none; }
+
+    @media (max-width: 768px) {
+      .about-hero-inner { grid-template-columns: 1fr; }
+      .about-photo-wrap { display: none; }
+      .values-grid { grid-template-columns: 1fr; }
+      .story-grid { grid-template-columns: 1fr; gap: 36px; }
+      .working-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo-light.png" alt="Connectid" /></a>
+    <ul class="nav-links">
+      <li><a href="strategy-first.html">Strategy First</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="#" onclick="openBooking(); return false;" class="btn btn-primary btn-sm">Book a Strategy Call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="about-hero">
+  <div class="about-hero-inner">
+    <div>
+      <span class="section-label">About Ashley</span>
+      <h1>Marketing strategy that<br /><em>actually gets executed.</em></h1>
+      <p>I'm a Duct Tape Marketing Certified fractional CMO who helps growing businesses stop reacting to marketing and start leading it — with a complete strategy, a clear plan, and the senior leadership to see it through.</p>
+      <div class="badges">
+        <div class="badge-pill">
+          <span>✦</span>
+          <span>DTM Certified fCMO</span>
+        </div>
+        <div class="badge-pill">
+          <img src="Influential-women-badge.png" alt="Influential Women" />
+          <span>Influential Women Verified</span>
+        </div>
+      </div>
+      <a href="#" onclick="openBooking(); return false;" class="btn btn-primary">Book a Strategy Call →</a>
+    </div>
+    <div class="about-photo-wrap">
+      <div class="about-photo-placeholder">Add ashley.jpg to the website folder to display your photo here</div>
+    </div>
+  </div>
+</div>
+
+<!-- Values -->
+<section>
+  <div class="container">
+    <div style="margin-bottom: 48px;">
+      <span class="section-label">How I Work</span>
+      <h2 class="section-title">Strategy before tactics. Always.</h2>
+      <p style="color: var(--gray-600); font-size: 17px; max-width: 560px; line-height: 1.65;">Most marketing fails because businesses skip the strategy and go straight to execution. I fix that — starting with a complete picture of where you are, where you're going, and exactly how to get there.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="value-icon">🎯</span>
+        <h3>Research first, always</h3>
+        <p>Every strategy starts with deep research — your customers, your competitors, your market. No guesswork, no templates. Real data that drives real decisions.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🤝</span>
+        <h3>A partner, not a vendor</h3>
+        <p>I sit in the strategy seat alongside you — not outside it. That means owning the marketing direction, managing the team, and making sure everything ties to your business goals.</p>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">📈</span>
+        <h3>Built to execute</h3>
+        <p>A strategy that sits in a drawer isn't a strategy. Every engagement ends with a 90-day calendar, clear priorities, and a plan your team can actually run.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Story -->
+<section class="section-dark">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text">
+        <span class="section-label">My Story</span>
+        <h2>Built for business owners who are ready to grow intentionally.</h2>
+        <p>I started Connectid because I kept seeing the same pattern: great businesses with real products, loyal customers, and genuine potential — stuck in reactive marketing mode. Running ads without strategy. Posting without purpose. Spending without tracking.</p>
+        <p>As a Duct Tape Marketing Certified fractional CMO, I bring a proven framework that has helped hundreds of businesses build the kind of marketing that compounds over time — not just campaigns that spike and fade.</p>
+        <p>My work starts with Strategy First: a 30–45 day engagement that produces a complete marketing plan. Then, for businesses ready to execute, I stay on as their fractional CMO — leading the strategy, managing the team, and driving the results.</p>
+        <a href="#" onclick="openBooking(); return false;" class="btn btn-primary" style="margin-top: 8px;">Let's Talk →</a>
+      </div>
+      <div>
+        <div class="story-credentials">
+          <div class="cred-item">
+            <span class="cred-icon">🎓</span>
+            <div>
+              <div class="cred-title">Duct Tape Marketing Certified fCMO</div>
+              <div class="cred-sub">Trained in the DTM System — the most proven small business marketing framework in the world</div>
+            </div>
+          </div>
+          <div class="cred-item">
+            <span class="cred-icon">🏆</span>
+            <div>
+              <div class="cred-title">Influential Women Verified</div>
+              <div class="cred-sub">Recognized as an influential leader in business and marketing</div>
+            </div>
+          </div>
+          <div class="cred-item">
+            <span class="cred-icon">📻</span>
+            <div>
+              <div class="cred-title">Host — The Handshake Business Podcast</div>
+              <div class="cred-sub">Marketing strategy for home service business owners — by Connectid</div>
+            </div>
+          </div>
+          <div class="cred-item">
+            <span class="cred-icon">📊</span>
+            <div>
+              <div class="cred-title">Strategy First Practitioner</div>
+              <div class="cred-sub">Delivered complete Strategy First engagements for businesses from $500K to $10M+</div>
+            </div>
+          </div>
+          <div class="cred-item">
+            <span class="cred-icon">⚙️</span>
+            <div>
+              <div class="cred-title">GoHighLevel & AI Marketing Systems</div>
+              <div class="cred-sub">Expert in building marketing infrastructure that runs without adding headcount</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What it's like to work together -->
+<section class="section-gray">
+  <div class="container">
+    <div style="margin-bottom: 48px; text-align: center;">
+      <span class="section-label">Working Together</span>
+      <h2 class="section-title">What to expect when we work together.</h2>
+    </div>
+    <div class="working-grid">
+      <div class="working-card">
+        <h4>You're in the strategy room — not outside it</h4>
+        <p>You see the research, you review the plan, you choose the direction. This is your strategy, built with you — not handed to you by someone who spent 2 hours on your website.</p>
+      </div>
+      <div class="working-card">
+        <h4>Direct communication, always</h4>
+        <p>No account managers, no layers. You work directly with me through the entire engagement. WhatsApp for quick questions, Google Meet for strategy sessions.</p>
+      </div>
+      <div class="working-card">
+        <h4>Deep research before any recommendations</h4>
+        <p>Before I suggest anything, I dig into your customers, competitors, and market. Every recommendation comes with a "why" grounded in data — not gut feel.</p>
+      </div>
+      <div class="working-card">
+        <h4>You leave with a plan you can execute</h4>
+        <p>The deliverable isn't a deck — it's a decision. A core message you stand behind. A 90-day calendar you can run. Growth priorities your team understands.</p>
+      </div>
+      <div class="working-card">
+        <h4>Monthly momentum, quarterly strategy</h4>
+        <p>Retainer clients get a monthly Momentum Meeting to review signals and make decisions, plus quarterly strategic planning to evolve the strategy as the business grows.</p>
+      </div>
+      <div class="working-card">
+        <h4>AI-powered execution</h4>
+        <p>I use Claude, Perplexity, and GoHighLevel to research faster, execute better, and build automation that scales your marketing without scaling your team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<div class="cta-section">
+  <div class="container">
+    <h2>Ready to build a real marketing strategy?</h2>
+    <p>Book a free 30-minute call. We'll talk through where you are and whether Strategy First is the right next step.</p>
+    <a href="#" onclick="openBooking(); return false;" class="btn btn-primary" style="font-size:17px; padding: 18px 36px;">Book Your Free Strategy Call →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html"><img src="logo-light.png" alt="Connectid" style="height:26px;" /></a>
+    <div class="footer-links">
+      <a href="strategy-first.html">Strategy First</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>© 2026 Connectid. DTM Certified fCMO.</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="booking-modal" onclick="closeBookingOnOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">Book Your Free Strategy Call</div><div class="modal-sub">30 minutes · No pitch · Just strategy</div></div>
+      <button class="modal-close" onclick="closeBooking()">✕</button>
+    </div>
+    <iframe class="modal-iframe" id="booking-iframe" src="" data-src="https://link.connectidcrm.com/widget/booking/rBfjlEMkmCmO5uszg1ET" title="Book a Strategy Call"></iframe>
+  </div>
+</div>
+
+<script>
+  function openBooking() { const m=document.getElementById('booking-modal'),i=document.getElementById('booking-iframe'); if(!i.src||i.src===window.location.href)i.src=i.dataset.src; m.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeBooking() { document.getElementById('booking-modal').classList.remove('open'); document.body.style.overflow=''; }
+  function closeBookingOnOverlay(e) { if(e.target===document.getElementById('booking-modal'))closeBooking(); }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBooking();});
+</script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Connectid</title>
+  <meta name="description" content="Marketing strategy insights for home service and local business owners. Practical thinking on strategy, positioning, content, and execution from Ashley at Connectid." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --navy2: #152030; --navy3: #1e2d3d;
+      --red: #EB3656; --orange: #FA5E36;
+      --brand-gradient: linear-gradient(135deg, #FA5E36, #EB3656);
+      --white: #ffffff; --gray-100: #f1f3f5; --gray-200: #e9ecef;
+      --gray-400: #adb5bd; --gray-600: #6c757d; --text: #1a2332;
+      --radius: 10px; --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 7px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all .18s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--brand-gradient); color: white; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(235,54,86,0.35); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13,27,42,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1100px; margin: 0 auto; }
+    .nav-logo img { height: 32px; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: white; }
+    .btn-sm { padding: 9px 20px; font-size: 13px; }
+    .section-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 12px; display: block; }
+    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -0.8px; line-height: 1.12; margin-bottom: 16px; }
+
+    /* Hero */
+    .blog-hero { background: var(--navy); padding: 140px 24px 88px; }
+    .blog-hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 340px; gap: 64px; align-items: center; }
+    .blog-hero h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 900; color: white; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
+    .blog-hero h1 em { font-style: normal; color: var(--orange); }
+    .blog-hero p { color: rgba(255,255,255,0.6); font-size: 16px; line-height: 1.7; margin-bottom: 28px; }
+    .topic-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .topic-pill { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); text-decoration: none; transition: all .15s; cursor: pointer; }
+    .topic-pill:hover, .topic-pill.active { background: var(--brand-gradient); border-color: transparent; color: white; }
+    .podcast-card { background: var(--navy3); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 28px; }
+    .podcast-card-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 12px; display: block; }
+    .podcast-card h3 { font-size: 17px; font-weight: 800; color: white; margin-bottom: 8px; line-height: 1.35; }
+    .podcast-card p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 18px; }
+    .podcast-card a { font-size: 13px; font-weight: 700; color: var(--orange); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+    .podcast-card a:hover { color: white; }
+
+    /* Featured post */
+    .featured-section { padding: 72px 24px 0; background: var(--gray-100); }
+    .featured-post { background: white; border: 1px solid var(--gray-200); border-radius: 16px; overflow: hidden; display: grid; grid-template-columns: 1fr 420px; box-shadow: var(--shadow); }
+    .featured-img { background: linear-gradient(135deg, var(--navy3), var(--navy2)); min-height: 360px; display: flex; align-items: flex-end; padding: 32px; position: relative; overflow: hidden; }
+    .featured-img::before { content: '📋'; font-size: 80px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -60%); opacity: 0.15; }
+    .featured-tag { display: inline-block; background: var(--brand-gradient); color: white; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 5px 12px; border-radius: 4px; }
+    .featured-body { padding: 40px; display: flex; flex-direction: column; justify-content: center; }
+    .featured-meta { font-size: 12px; color: var(--gray-400); margin-bottom: 14px; display: flex; gap: 12px; }
+    .featured-body h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 900; letter-spacing: -0.5px; line-height: 1.25; margin-bottom: 14px; }
+    .featured-body p { font-size: 14px; color: var(--gray-600); line-height: 1.7; margin-bottom: 24px; }
+    .read-more { font-size: 14px; font-weight: 700; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+    .read-more:hover { gap: 10px; }
+
+    /* Blog grid */
+    .blog-section { padding: 56px 24px 88px; background: var(--gray-100); }
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .blog-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: all .15s; }
+    .blog-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: transparent; }
+    .blog-card-img { height: 160px; background: linear-gradient(135deg, var(--navy2), var(--navy3)); display: flex; align-items: center; justify-content: center; font-size: 40px; }
+    .blog-card-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+    .blog-card-tag { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--red); margin-bottom: 10px; }
+    .blog-card h3 { font-size: 16px; font-weight: 800; line-height: 1.35; margin-bottom: 10px; letter-spacing: -0.2px; }
+    .blog-card p { font-size: 13px; color: var(--gray-600); line-height: 1.65; flex: 1; margin-bottom: 16px; }
+    .blog-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 14px; border-top: 1px solid var(--gray-200); }
+    .blog-card-date { font-size: 12px; color: var(--gray-400); }
+    .blog-card-link { font-size: 12px; font-weight: 700; color: var(--red); text-decoration: none; }
+
+    /* Newsletter */
+    .newsletter { background: var(--navy); padding: 80px 24px; text-align: center; }
+    .newsletter-inner { max-width: 540px; margin: 0 auto; }
+    .newsletter h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 900; color: white; letter-spacing: -0.8px; margin-bottom: 14px; }
+    .newsletter p { color: rgba(255,255,255,0.55); font-size: 15px; margin-bottom: 32px; line-height: 1.7; }
+    .newsletter-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; }
+    .newsletter-form input { flex: 1; padding: 13px 16px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07); border-radius: 7px; font-size: 14px; color: white; font-family: inherit; }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.3); }
+    .newsletter-form input:focus { outline: none; border-color: var(--orange); }
+    .newsletter-form button { padding: 13px 22px; background: var(--brand-gradient); color: white; border: none; border-radius: 7px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; font-family: inherit; }
+    .newsletter-note { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 12px; }
+
+    /* CTA */
+    .cta-section { background: var(--gray-100); text-align: center; padding: 88px 24px; }
+    .cta-section h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 900; letter-spacing: -0.8px; line-height: 1.15; margin-bottom: 14px; }
+    .cta-section p { color: var(--gray-600); font-size: 16px; margin-bottom: 32px; }
+
+    /* Footer */
+    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 13px; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 13px; transition: color .15s; }
+    .footer-links a:hover { color: white; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 16px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: white; border-radius: 14px; width: 100%; max-width: 560px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.4); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--gray-200); }
+    .modal-title { font-size: 16px; font-weight: 800; }
+    .modal-sub { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+    .modal-close { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--gray-600); padding: 4px; line-height: 1; }
+    .modal-iframe { width: 100%; height: 560px; border: none; display: block; }
+
+    @media (max-width: 768px) {
+      .blog-hero-inner { grid-template-columns: 1fr; }
+      .featured-post { grid-template-columns: 1fr; }
+      .featured-img { min-height: 200px; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo-light.png" alt="Connectid" /></a>
+    <ul class="nav-links">
+      <li><a href="strategy-first.html">Strategy First</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="#" onclick="openBooking(); return false;" class="btn btn-primary btn-sm">Book a Call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="blog-hero">
+  <div class="blog-hero-inner">
+    <div>
+      <span class="section-label">The Connectid Blog</span>
+      <h1>Marketing strategy for <em>businesses that mean business</em>.</h1>
+      <p>Practical thinking on strategy, positioning, customer journey, content, and execution — for home service and local business owners who are done guessing.</p>
+      <div class="topic-pills">
+        <span class="topic-pill active">All</span>
+        <span class="topic-pill">Strategy</span>
+        <span class="topic-pill">Positioning</span>
+        <span class="topic-pill">Content</span>
+        <span class="topic-pill">Home Services</span>
+        <span class="topic-pill">fCMO</span>
+        <span class="topic-pill">AI Marketing</span>
+      </div>
+    </div>
+    <div class="podcast-card">
+      <span class="podcast-card-label">Also on YouTube</span>
+      <h3>The Handshake Business Podcast</h3>
+      <p>Marketing strategy episodes built for home service business owners — short, practical, and straight to the point.</p>
+      <a href="https://youtube.com/playlist?list=PLr8L1iEc1z2p7xEe6jqqBnIRHVekQOInm" target="_blank" rel="noopener">
+        ▶ Watch on YouTube →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Featured Post -->
+<div class="featured-section">
+  <div class="container">
+    <span class="section-label" style="margin-bottom:20px;">Featured</span>
+    <div class="featured-post">
+      <div class="featured-img">
+        <span class="featured-tag">Strategy</span>
+      </div>
+      <div class="featured-body">
+        <div class="featured-meta">
+          <span>Ashley · Connectid</span>
+          <span>April 2026</span>
+          <span>7 min read</span>
+        </div>
+        <h2>Why "Strategy Before Tactics" Isn't Just a Slogan — It's the Whole Point</h2>
+        <p>Most growing businesses are investing in marketing without a strategy underneath it. They hire social media managers, run ads, and redesign websites — but none of it compounds because there's no foundation. Here's what changes when you flip the order.</p>
+        <a href="#" class="read-more">Read the article →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Blog Grid -->
+<div class="blog-section">
+  <div class="container">
+    <div class="blog-grid">
+
+      <div class="blog-card">
+        <div class="blog-card-img">🎯</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Positioning</div>
+          <h3>The One Sentence That Changes Everything: How to Write Your Core Message</h3>
+          <p>If your website visitors can't describe what you do to someone else in one sentence, you don't have a core message — you have a wall of words.</p>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">Apr 2026</span>
+            <a href="#" class="blog-card-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">📊</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Home Services</div>
+          <h3>Why Garage Door, HVAC, and Plumbing Companies Struggle to Scale Their Marketing</h3>
+          <p>Referrals got you here. But referrals alone won't get you to $5M. Here's what the marketing gap looks like — and how to close it.</p>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">Apr 2026</span>
+            <a href="#" class="blog-card-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">🗺️</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Customer Journey</div>
+          <h3>The Marketing Hourglass: A Better Way to Think About Your Customer Journey</h3>
+          <p>Most businesses think marketing stops at the sale. The hourglass shows you there are four more stages after "buy" — and they're where real growth happens.</p>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">Mar 2026</span>
+            <a href="#" class="blog-card-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">✍️</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Content</div>
+          <h3>How to Build a Content Strategy Around One Hub Keyword (With Examples)</h3>
+          <p>Stop publishing random posts and wondering why nothing ranks. Here's how to build a content hub that earns authority over time.</p>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">Mar 2026</span>
+            <a href="#" class="blog-card-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">🤖</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">AI Marketing</div>
+          <h3>How I Use AI to Do Better Marketing Research Faster — Without Losing the Human Edge</h3>
+          <p>AI doesn't replace strategy thinking. But it does let me do deeper research, faster — and that shows up in every deliverable I build for clients.</p>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">Mar 2026</span>
+            <a href="#" class="blog-card-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">💼</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">fCMO</div>
+          <h3>What a Fractional CMO Actually Does (vs. What Most People Think)</h3>
+          <p>A fCMO isn't a consultant who shows up with a report. They're a strategic partner who leads — without the full-time price tag. Here's what the difference looks like in practice.</p>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">Feb 2026</span>
+            <a href="#" class="blog-card-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">🔍</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Strategy</div>
+          <h3>The 5 Marketing Channels That Work Best for Local Service Businesses in 2026</h3>
+          <p>Not all channels are equal — and not all of them are equal for your type of business. Here's where the ROI actually lives for home service and local companies.</p>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">Feb 2026</span>
+            <a href="#" class="blog-card-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">📈</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Strategy</div>
+          <h3>How to Build a 90-Day Marketing Plan That Your Team Will Actually Execute</h3>
+          <p>A strategy document that sits in a folder is just expensive homework. Here's how to turn research into a calendar your team can run with on day one.</p>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">Jan 2026</span>
+            <a href="#" class="blog-card-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <div class="blog-card-img">🏆</div>
+        <div class="blog-card-body">
+          <div class="blog-card-tag">Case Study</div>
+          <h3>How Whitaker's Garage Door Doubled Their Lead Volume With a Strategy-First Approach</h3>
+          <p>Before Strategy First, they were posting on social and hoping. After — a clear message, a real content plan, and a marketing system built for scale.</p>
+          <div class="blog-card-footer">
+            <span class="blog-card-date">Jan 2026</span>
+            <a href="index.html#case-study" class="blog-card-link">Read →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Newsletter -->
+<div class="newsletter">
+  <div class="newsletter-inner">
+    <span class="section-label" style="text-align:center; display:block;">Stay Sharp</span>
+    <h2>Get marketing strategy insights in your inbox.</h2>
+    <p>Short, practical content for home service and local business owners — no fluff, no filler. Sent when there's something worth saying.</p>
+    <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+      <input type="email" placeholder="Your email address" required />
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="newsletter-note">No spam. Unsubscribe any time.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <h2>Ready to stop reading about strategy<br />and start building yours?</h2>
+    <p>Book a free 30-minute call and let's talk about what a real marketing strategy looks like for your business.</p>
+    <a href="#" onclick="openBooking(); return false;" class="btn btn-primary" style="font-size:17px; padding: 18px 36px;">Book Your Free Strategy Call →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html"><img src="logo-light.png" alt="Connectid" style="height:26px;" /></a>
+    <div class="footer-links">
+      <a href="strategy-first.html">Strategy First</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>© 2026 Connectid. DTM Certified fCMO.</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="booking-modal" onclick="closeBookingOnOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">Book Your Free Strategy Call</div><div class="modal-sub">30 minutes · No pitch · Just strategy</div></div>
+      <button class="modal-close" onclick="closeBooking()">✕</button>
+    </div>
+    <iframe class="modal-iframe" id="booking-iframe" src="" data-src="https://link.connectidcrm.com/widget/booking/rBfjlEMkmCmO5uszg1ET" title="Book a Strategy Call"></iframe>
+  </div>
+</div>
+
+<script>
+  function openBooking() { const m=document.getElementById('booking-modal'),i=document.getElementById('booking-iframe'); if(!i.src||i.src===window.location.href)i.src=i.dataset.src; m.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeBooking() { document.getElementById('booking-modal').classList.remove('open'); document.body.style.overflow=''; }
+  function closeBookingOnOverlay(e) { if(e.target===document.getElementById('booking-modal'))closeBooking(); }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBooking();});
+  function handleNewsletterSubmit(e) { e.preventDefault(); const btn=e.target.querySelector('button'); btn.textContent='Subscribed ✓'; btn.style.background='#28a745'; e.target.querySelector('input').value=''; }
+</script>
+</body>
+</html>

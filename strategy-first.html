@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strategy First | Connectid</title>
+  <meta name="description" content="Strategy First is a 4-week marketing strategy engagement for growing businesses. Walk away with a complete marketing plan, core message, and 90-day execution calendar." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --navy2: #152030; --navy3: #1e2d3d;
+      --red: #EB3656; --orange: #FA5E36;
+      --brand-gradient: linear-gradient(135deg, #FA5E36, #EB3656);
+      --white: #ffffff; --gray-100: #f1f3f5; --gray-200: #e9ecef;
+      --gray-400: #adb5bd; --gray-600: #6c757d; --text: #1a2332;
+      --radius: 10px; --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 7px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all .18s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--brand-gradient); color: white; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(235,54,86,0.35); }
+    .btn-outline { background: transparent; border: 2px solid rgba(255,255,255,0.3); color: white; }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(13,27,42,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1100px; margin: 0 auto; }
+    .nav-logo img { height: 32px; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: white; }
+    .btn-sm { padding: 9px 20px; font-size: 13px; }
+    section { padding: 88px 24px; }
+    .section-dark { background: var(--navy); color: white; }
+    .section-gray { background: var(--gray-100); }
+    .section-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 12px; display: block; }
+    .section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -0.8px; line-height: 1.12; margin-bottom: 16px; }
+
+    /* Hero */
+    .sf-hero { background: var(--navy); padding: 140px 24px 96px; text-align: center; }
+    .sf-hero-inner { max-width: 820px; margin: 0 auto; }
+    .sf-hero .eyebrow { display: inline-block; background: rgba(250,94,54,0.15); border: 1px solid rgba(250,94,54,0.3); border-radius: 30px; padding: 6px 18px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--orange); margin-bottom: 24px; }
+    .sf-hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 900; color: white; letter-spacing: -2px; line-height: 1.06; margin-bottom: 24px; }
+    .sf-hero h1 em { font-style: normal; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .sf-hero .sub { font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 40px; max-width: 660px; margin-left: auto; margin-right: auto; }
+    .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .hero-proof { margin-top: 56px; display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
+    .proof-item { text-align: center; }
+    .proof-num { font-size: 30px; font-weight: 900; color: white; letter-spacing: -1px; }
+    .proof-num span { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .proof-label { font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 500; margin-top: 4px; }
+
+    /* Problem */
+    .problem-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .problem-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px; position: relative; }
+    .problem-card::before { content: ''; display: block; width: 32px; height: 3px; background: var(--brand-gradient); border-radius: 2px; margin-bottom: 18px; }
+    .problem-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
+    .problem-card p { font-size: 14px; color: var(--gray-600); line-height: 1.65; }
+
+    /* What is it */
+    .what-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .what-text h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 900; letter-spacing: -0.8px; color: white; margin-bottom: 20px; line-height: 1.15; }
+    .what-text h2 em { font-style: normal; color: var(--orange); }
+    .what-text p { color: rgba(255,255,255,0.65); font-size: 15px; line-height: 1.75; margin-bottom: 16px; }
+    .what-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .what-list li { display: flex; gap: 12px; align-items: flex-start; }
+    .what-list li::before { content: ''; flex-shrink: 0; width: 20px; height: 20px; background: var(--brand-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .what-list-icon { flex-shrink: 0; width: 20px; height: 20px; background: var(--brand-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 3px; font-size: 10px; color: white; }
+    .what-list span { color: rgba(255,255,255,0.8); font-size: 15px; line-height: 1.55; }
+    .what-callout { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 32px; }
+    .what-callout-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 14px; display: block; }
+    .what-callout h3 { font-size: 22px; font-weight: 900; color: white; margin-bottom: 16px; line-height: 1.3; }
+    .what-callout p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 20px; }
+    .callout-price { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 12px; }
+
+    /* Process Steps */
+    .steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+    .step { background: white; padding: 36px 28px; border: 1px solid var(--gray-200); position: relative; }
+    .step:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .step:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+    .step-num { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 14px; display: block; }
+    .step h3 { font-size: 17px; font-weight: 800; margin-bottom: 10px; }
+    .step p { font-size: 13px; color: var(--gray-600); line-height: 1.65; }
+
+    /* Deliverables */
+    .deliverables-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .deliverable { background: var(--navy3); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 26px; }
+    .deliverable-icon { font-size: 24px; margin-bottom: 14px; display: block; }
+    .deliverable h4 { font-size: 15px; font-weight: 800; color: white; margin-bottom: 8px; }
+    .deliverable p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+    /* Investment */
+    .investment-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .investment-card { background: white; border: 1px solid var(--gray-200); border-radius: 16px; padding: 56px 48px; box-shadow: var(--shadow); margin-top: 40px; }
+    .investment-price { font-size: 56px; font-weight: 900; letter-spacing: -2px; color: var(--text); margin-bottom: 6px; }
+    .investment-price sub { font-size: 22px; font-weight: 700; vertical-align: super; }
+    .investment-period { color: var(--gray-600); font-size: 14px; margin-bottom: 32px; }
+    .investment-includes { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; text-align: left; }
+    .investment-includes li { display: flex; gap: 12px; align-items: center; font-size: 15px; }
+    .check { width: 22px; height: 22px; background: var(--brand-gradient); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; font-size: 11px; font-weight: 700; }
+    .investment-note { font-size: 13px; color: var(--gray-400); text-align: center; margin-top: 16px; }
+
+    /* Is it for me */
+    .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .fit-column h3 { font-size: 18px; font-weight: 800; margin-bottom: 20px; }
+    .fit-column h3.good { color: var(--text); }
+    .fit-column h3.bad { color: var(--gray-600); }
+    .fit-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .fit-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.55; }
+    .fit-icon { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; margin-top: 2px; }
+    .fit-icon.yes { background: var(--brand-gradient); }
+    .fit-icon.no { background: var(--gray-400); }
+
+    /* FAQ */
+    .faq-list { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+    .faq-item { border-bottom: 1px solid var(--gray-200); }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; cursor: pointer; font-size: 16px; font-weight: 700; gap: 24px; }
+    .faq-q:hover { color: var(--red); }
+    .faq-icon { flex-shrink: 0; font-size: 18px; color: var(--gray-400); transition: transform .2s; }
+    .faq-a { display: none; padding-bottom: 20px; font-size: 14px; color: var(--gray-600); line-height: 1.75; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item.open .faq-a { display: block; }
+
+    /* CTA */
+    .cta-section { background: var(--navy); text-align: center; padding: 100px 24px; }
+    .cta-section h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 900; color: white; letter-spacing: -1px; line-height: 1.12; margin-bottom: 16px; }
+    .cta-section p { color: rgba(255,255,255,0.55); font-size: 16px; margin-bottom: 36px; }
+
+    /* Footer */
+    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 24px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 13px; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 13px; transition: color .15s; }
+    .footer-links a:hover { color: white; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 16px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: white; border-radius: 14px; width: 100%; max-width: 560px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.4); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--gray-200); }
+    .modal-title { font-size: 16px; font-weight: 800; }
+    .modal-sub { font-size: 12px; color: var(--gray-600); margin-top: 2px; }
+    .modal-close { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--gray-600); padding: 4px; line-height: 1; }
+    .modal-close:hover { color: var(--text); }
+    .modal-iframe { width: 100%; height: 560px; border: none; display: block; }
+
+    @media (max-width: 768px) {
+      .what-inner, .fit-grid { grid-template-columns: 1fr; gap: 40px; }
+      .problem-grid, .deliverables-grid, .steps-grid { grid-template-columns: 1fr; }
+      .steps-grid .step { border-radius: var(--radius) !important; }
+      .nav-links { display: none; }
+      .investment-card { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo-light.png" alt="Connectid" /></a>
+    <ul class="nav-links">
+      <li><a href="strategy-first.html" class="active">Strategy First</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="#" onclick="openBooking(); return false;" class="btn btn-primary btn-sm">Book a Call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="sf-hero">
+  <div class="sf-hero-inner">
+    <span class="eyebrow">Strategy First Engagement</span>
+    <h1>Stop guessing.<br /><em>Build a marketing strategy</em><br />that actually works.</h1>
+    <p class="sub">A complete 4-week marketing strategy engagement for growing businesses. You'll leave with a clear message, a documented plan, and a 90-day calendar your team can actually execute.</p>
+    <div class="hero-ctas">
+      <a href="#" onclick="openBooking(); return false;" class="btn btn-primary" style="font-size:16px; padding:16px 32px;">Book Your Free Strategy Call →</a>
+      <a href="#what-you-get" class="btn btn-outline" style="font-size:16px; padding:16px 32px;">See What's Included</a>
+    </div>
+    <div class="hero-proof">
+      <div class="proof-item">
+        <div class="proof-num"><span>4</span> weeks</div>
+        <div class="proof-label">Start to full strategy</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num"><span>10</span>+ deliverables</div>
+        <div class="proof-label">Ready to hand to your team</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num"><span>90</span>-day calendar</div>
+        <div class="proof-label">Walk away ready to execute</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Problem Section -->
+<section class="section-gray">
+  <div class="container">
+    <div style="max-width: 640px; margin: 0 auto 48px; text-align: center;">
+      <span class="section-label">The Real Problem</span>
+      <h2 class="section-title">Most businesses market without a strategy — and it costs them.</h2>
+      <p style="color: var(--gray-600); font-size: 16px; line-height: 1.7;">They post on social, run a few ads, try email once — and none of it connects because there's no foundation underneath it.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <h3>No clear core message</h3>
+        <p>When your team, website, and social media all say something different, buyers can't figure out why they should choose you. Inconsistent messaging loses deals before conversations even start.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Marketing without a map</h3>
+        <p>Every tactic feels like a shot in the dark. You're spending money on things that feel busy but aren't moving the needle — because there's no documented strategy tying any of it together.</p>
+      </div>
+      <div class="problem-card">
+        <h3>Building on a shaky foundation</h3>
+        <p>You can't scale what doesn't have structure. Without a real strategy underneath your marketing, growth is unpredictable, referrals are inconsistent, and you stay stuck in reactive mode.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What Is Strategy First -->
+<section class="section-dark">
+  <div class="container">
+    <div class="what-inner">
+      <div class="what-text">
+        <span class="section-label">What It Is</span>
+        <h2>A complete marketing strategy — <em>built for how you actually work</em>.</h2>
+        <p>Strategy First isn't a template fill-in or a generic marketing plan. It's a research-backed, business-specific marketing strategy built through deep discovery and delivered in a working presentation your whole team can use.</p>
+        <p>Based on the Duct Tape Marketing methodology, every engagement covers your market positioning, customer journey, content strategy, and a prioritized 90-day execution plan.</p>
+        <ul class="what-list">
+          <li><span class="what-list-icon">✓</span><span>Built around deep research into your market, customers, and competitors</span></li>
+          <li><span class="what-list-icon">✓</span><span>Grounded in your actual business — not a generic framework plugged with your name</span></li>
+          <li><span class="what-list-icon">✓</span><span>Delivered as a complete, actionable presentation your team can execute</span></li>
+          <li><span class="what-list-icon">✓</span><span>Designed for businesses doing $500K–$10M+ who are ready to grow intentionally</span></li>
+        </ul>
+      </div>
+      <div class="what-callout">
+        <span class="what-callout-label">Duct Tape Marketing</span>
+        <h3>"Strategy before tactics" is the whole idea.</h3>
+        <p>Most businesses jump straight to tactics — a new website, social ads, a rebrand. Strategy First flips that. We define your ideal customer, your core message, and your most effective channels <em>before</em> spending a dollar on execution.</p>
+        <p>That's how you stop wasting budget and start building a marketing system that compounds over time.</p>
+        <a href="#" onclick="openBooking(); return false;" class="btn btn-primary" style="font-size:14px; padding:12px 24px;">Start With Strategy →</a>
+        <p class="callout-price">Investment starts at $5,000</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section>
+  <div class="container">
+    <div style="max-width: 640px; margin: 0 auto 48px; text-align: center;">
+      <span class="section-label">The Process</span>
+      <h2 class="section-title">How Strategy First works.</h2>
+      <p style="color: var(--gray-600); font-size: 16px; line-height: 1.7;">Four focused weeks. Deep research, collaborative sessions, and a complete deliverable that's yours to keep — and execute.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <span class="step-num">Week 1</span>
+        <h3>Discovery & Research</h3>
+        <p>Intake form, discovery call, and deep research into your business, your customers, your competitors, and your industry — before a single recommendation is made.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">Week 2</span>
+        <h3>Audit & Analysis</h3>
+        <p>We review your current marketing presence, messaging consistency, and channel performance — identifying what's working, what's not, and where the biggest opportunities live.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">Week 3</span>
+        <h3>Strategy Build</h3>
+        <p>Core message, ideal personas, customer journey mapping, content strategy, and competitive positioning — all built together in a structured working presentation.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">Week 4</span>
+        <h3>Delivery & Execution Plan</h3>
+        <p>Presentation walkthrough, 90-day execution calendar, and growth priorities. You leave with a complete plan and the clarity to execute it confidently.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Deliverables -->
+<section id="what-you-get" class="section-dark">
+  <div class="container">
+    <div style="max-width: 640px; margin: 0 auto 48px; text-align: center;">
+      <span class="section-label">What You Get</span>
+      <h2 class="section-title" style="color:white;">Everything you need to market with clarity and confidence.</h2>
+    </div>
+    <div class="deliverables-grid">
+      <div class="deliverable">
+        <span class="deliverable-icon">🎯</span>
+        <h4>Core Message & Positioning</h4>
+        <p>A clear, differentiated statement of who you serve, what you do, and why you're the obvious choice. Ready to be your homepage headline.</p>
+      </div>
+      <div class="deliverable">
+        <span class="deliverable-icon">👥</span>
+        <h4>Ideal Client Personas</h4>
+        <p>2–4 detailed personas with motivations, pain points, buying behavior, and a priority ranking for where to focus first.</p>
+      </div>
+      <div class="deliverable">
+        <span class="deliverable-icon">🗺️</span>
+        <h4>Customer Journey Map</h4>
+        <p>Full marketing hourglass — Know through Refer — with specific tactics and opportunities for each stage of the buyer journey.</p>
+      </div>
+      <div class="deliverable">
+        <span class="deliverable-icon">📊</span>
+        <h4>Competitive Analysis</h4>
+        <p>Deep-dive on 3 competitors: what they're doing well, where they're weak, and exactly how you can take market share from each.</p>
+      </div>
+      <div class="deliverable">
+        <span class="deliverable-icon">✍️</span>
+        <h4>Content Strategy</h4>
+        <p>3–5 content pillars, a recommended hub page strategy, brand voice guide, and 60+ topic ideas across blog, social, and email.</p>
+      </div>
+      <div class="deliverable">
+        <span class="deliverable-icon">📅</span>
+        <h4>90-Day Execution Calendar</h4>
+        <p>A month-by-month plan with weekly focus, specific tasks per priority, and recurring items — ready to import into ClickUp or Asana.</p>
+      </div>
+      <div class="deliverable">
+        <span class="deliverable-icon">🔍</span>
+        <h4>Marketing & Brand Audit</h4>
+        <p>SWOT analysis, channel assessment, trust and proof evaluation, and quick wins you can act on in the first two weeks.</p>
+      </div>
+      <div class="deliverable">
+        <span class="deliverable-icon">📈</span>
+        <h4>Strategy Framework</h4>
+        <p>Long-term vision, phased 3-phase roadmap, and a set of competitive tactics grounded in your specific market position.</p>
+      </div>
+      <div class="deliverable">
+        <span class="deliverable-icon">🚀</span>
+        <h4>Growth Priorities (Top 5–6)</h4>
+        <p>The highest-leverage initiatives for the next 90 days, each framed as a project with clear goals and recommended tactics.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Investment -->
+<section class="section-gray">
+  <div class="container">
+    <div class="investment-inner">
+      <span class="section-label" style="text-align:center; display:block;">Investment</span>
+      <h2 class="section-title" style="text-align:center;">One engagement. One price. Everything included.</h2>
+      <p style="text-align:center; color: var(--gray-600); font-size:16px; line-height:1.7;">Strategy First is a fixed-scope engagement — no hidden add-ons, no hourly billing. You get the complete deliverable for one investment.</p>
+      <div class="investment-card">
+        <div class="investment-price"><sub>$</sub>5,000</div>
+        <div class="investment-period">One-time fixed investment · 4-week engagement · Includes all deliverables</div>
+        <ul class="investment-includes">
+          <li><span class="check">✓</span> Full discovery call + intake process</li>
+          <li><span class="check">✓</span> Brand, competitor, and industry deep research</li>
+          <li><span class="check">✓</span> Complete Strategy First presentation (10 sections)</li>
+          <li><span class="check">✓</span> 90-day execution calendar</li>
+          <li><span class="check">✓</span> Presentation walkthrough session (90 min)</li>
+          <li><span class="check">✓</span> 30-day follow-up check-in call</li>
+          <li><span class="check">✓</span> Option to continue as a retainer client</li>
+        </ul>
+        <a href="#" onclick="openBooking(); return false;" class="btn btn-primary" style="width:100%; justify-content:center; font-size:16px; padding:17px 28px;">Book Your Free Strategy Call →</a>
+        <p class="investment-note">Start with a free 30-minute call to see if Strategy First is the right fit. No commitment required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Is it for me -->
+<section>
+  <div class="container">
+    <div style="max-width: 640px; margin: 0 auto 48px; text-align: center;">
+      <span class="section-label">Is It Right For You?</span>
+      <h2 class="section-title">Strategy First is built for specific businesses.</h2>
+    </div>
+    <div class="fit-grid">
+      <div class="fit-column">
+        <h3 class="good">✅ You're a great fit if...</h3>
+        <ul class="fit-list">
+          <li><span class="fit-icon yes">✓</span> You're doing $500K–$10M+ and ready to scale intentionally</li>
+          <li><span class="fit-icon yes">✓</span> You know marketing matters but don't have a clear documented strategy</li>
+          <li><span class="fit-icon yes">✓</span> You're tired of tactics that don't connect to a bigger picture</li>
+          <li><span class="fit-icon yes">✓</span> You want to hand your team a real plan — not another deck full of ideas</li>
+          <li><span class="fit-icon yes">✓</span> You're a home service, local business, or professional services company</li>
+          <li><span class="fit-icon yes">✓</span> You're willing to invest 4 weeks to build something that lasts years</li>
+        </ul>
+      </div>
+      <div class="fit-column">
+        <h3 class="bad">Not the right fit if...</h3>
+        <ul class="fit-list">
+          <li><span class="fit-icon no">✕</span> You're looking for a done-for-you social media manager or content creator</li>
+          <li><span class="fit-icon no">✕</span> You want a cheap one-page plan you can build yourself in an afternoon</li>
+          <li><span class="fit-icon no">✕</span> You're not ready to spend time on discovery and input — strategy requires your participation</li>
+          <li><span class="fit-icon no">✕</span> You're looking for a guaranteed lead count or instant ROI</li>
+          <li><span class="fit-icon no">✕</span> You want someone to just handle execution without any strategic direction</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-gray">
+  <div class="container">
+    <div style="max-width: 640px; margin: 0 auto 48px; text-align: center;">
+      <span class="section-label">FAQ</span>
+      <h2 class="section-title">Common questions.</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How long does Strategy First take?<span class="faq-icon">+</span></div>
+        <div class="faq-a">The engagement runs 4 weeks from kick-off to delivery. Week 1 is discovery, week 2 is the audit, week 3 is strategy build, and week 4 is delivery and walkthrough.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What does my involvement look like?<span class="faq-icon">+</span></div>
+        <div class="faq-a">You'll complete an intake form (about 45–60 minutes), join a 60–90 minute discovery call, and attend a 90-minute delivery walkthrough. Total time commitment: roughly 4–5 hours over 4 weeks. The research and build work happens on our end.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What format is the deliverable?<span class="faq-icon">+</span></div>
+        <div class="faq-a">You'll receive a complete Google Slides presentation — typically 80–120 slides across 10 sections — along with a separate 90-day execution calendar formatted for ClickUp, Asana, or a spreadsheet.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I continue working together after Strategy First?<span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes — and most clients do. After Strategy First, many businesses continue with a monthly retainer (starting at $3,000/month) where I act as their Fractional CMO to help execute the strategy, manage their marketing team, and keep the plan moving.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is this for B2B or B2C businesses?<span class="faq-icon">+</span></div>
+        <div class="faq-a">Both. Strategy First works well for home service businesses, local service companies, professional services firms, and B2B businesses in the $500K–$10M range. If you're unsure if it's the right fit, book a free call and we'll figure that out together.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What if I already have a marketing person or agency?<span class="faq-icon">+</span></div>
+        <div class="faq-a">Strategy First is designed to work alongside your existing team. It gives them the strategy, positioning, and direction they likely don't have — so they can execute more effectively. Many clients share the Strategy First deck directly with their agency or social media manager.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="container">
+    <h2>Ready to build a marketing strategy that actually works?</h2>
+    <p>Book a free 30-minute call. No pitch — just a real conversation about where you are and where you want to go.</p>
+    <a href="#" onclick="openBooking(); return false;" class="btn btn-primary" style="font-size:17px; padding: 18px 36px;">Book Your Free Strategy Call →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html"><img src="logo-light.png" alt="Connectid" style="height:26px;" /></a>
+    <div class="footer-links">
+      <a href="strategy-first.html">Strategy First</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>© 2026 Connectid. DTM Certified fCMO.</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="booking-modal" onclick="closeBookingOnOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">Book Your Free Strategy Call</div><div class="modal-sub">30 minutes · No pitch · Just strategy</div></div>
+      <button class="modal-close" onclick="closeBooking()">✕</button>
+    </div>
+    <iframe class="modal-iframe" id="booking-iframe" src="" data-src="https://link.connectidcrm.com/widget/booking/rBfjlEMkmCmO5uszg1ET" title="Book a Strategy Call"></iframe>
+  </div>
+</div>
+
+<script>
+  function openBooking() { const m=document.getElementById('booking-modal'),i=document.getElementById('booking-iframe'); if(!i.src||i.src===window.location.href)i.src=i.dataset.src; m.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeBooking() { document.getElementById('booking-modal').classList.remove('open'); document.body.style.overflow=''; }
+  function closeBookingOnOverlay(e) { if(e.target===document.getElementById('booking-modal'))closeBooking(); }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBooking();});
+  function toggleFaq(el) { const item=el.parentElement; item.classList.toggle('open'); }
+</script>
+</body>
+</html>
