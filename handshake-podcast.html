@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Handshake Business Podcast</title>
+  <meta name="description" content="Built for home service business owners who run on trust, reputation, and a handshake. Be a guest on The Handshake Business podcast." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a;
+      --dark: #111827;
+      --dark2: #1f2937;
+      --orange: #f97316;
+      --orange2: #fb923c;
+      --red: #ef4444;
+      --brand: #f97316;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-600: #4b5563;
+      --text: #111827;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--gray-200); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .nav-logo-icon { width: 32px; height: 32px; }
+    .nav-logo-text { font-size: 16px; font-weight: 800; color: var(--text); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--gray-600); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
+    .nav-links a:hover { color: var(--text); }
+    .btn-book { background: linear-gradient(135deg, var(--orange), var(--red)); color: white; padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; transition: opacity .15s; }
+    .btn-book:hover { opacity: 0.9; }
+
+    /* ── HERO ── */
+    .hero { padding: 120px 24px 80px; background: linear-gradient(180deg, #fff5f0 0%, #ffffff 100%); }
+    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 440px; gap: 64px; align-items: center; }
+    .hero-eyebrow { display: inline-block; background: #fff0eb; border: 1px solid #fdd0bb; border-radius: 20px; padding: 6px 16px; font-size: 13px; font-weight: 600; color: var(--orange); margin-bottom: 24px; }
+    .hero h1 { font-size: clamp(40px, 6vw, 72px); font-weight: 900; line-height: 1.05; letter-spacing: -2px; margin-bottom: 16px; color: var(--text); }
+    .hero h1 .accent { color: var(--orange); }
+    .hero-tagline { font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 16px; }
+    .hero p { font-size: 15px; color: var(--gray-600); line-height: 1.75; margin-bottom: 32px; max-width: 480px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--orange), var(--red)); color: white; padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 700; text-decoration: none; transition: all .15s; cursor: pointer; border: none; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(249,115,22,0.4); }
+
+    /* Hero card */
+    .hero-card { background: var(--dark); border-radius: 16px; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.25); }
+    .hero-card-top { padding: 20px 20px 12px; display: flex; align-items: center; justify-content: space-between; }
+    .live-badge { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--orange); }
+    .live-dot { width: 8px; height: 8px; background: var(--orange); border-radius: 50%; }
+    .stars { display: flex; gap: 3px; }
+    .star { color: #fbbf24; font-size: 14px; }
+    .hero-card-episode { background: var(--dark2); margin: 0 16px; border-radius: 10px; padding: 24px; text-align: center; }
+    .episode-icon { font-size: 32px; color: var(--orange); margin-bottom: 12px; display: block; }
+    .episode-name { font-size: 16px; font-weight: 800; color: white; margin-bottom: 4px; }
+    .episode-sub { font-size: 12px; color: var(--gray-400); }
+    .hero-card-guest { margin: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 16px; }
+    .guest-label { font-size: 13px; font-weight: 700; color: white; margin-bottom: 12px; }
+    .guest-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .guest-row:last-child { border-bottom: none; }
+    .guest-key { font-size: 12px; color: var(--gray-400); }
+    .guest-val { font-size: 12px; color: white; font-weight: 500; }
+    .hero-card-cta { margin: 12px 16px 16px; }
+    .hero-card-cta a { display: block; background: linear-gradient(135deg, var(--orange), var(--red)); color: white; text-align: center; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 700; text-decoration: none; transition: opacity .15s; }
+    .hero-card-cta a:hover { opacity: 0.9; }
+
+    /* ── OPPORTUNITY ── */
+    .opportunity { padding: 88px 24px; text-align: center; }
+    .opportunity h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -1px; margin-bottom: 16px; }
+    .opportunity h2 .accent { color: var(--orange); }
+    .opportunity p { font-size: 16px; color: var(--gray-600); line-height: 1.75; max-width: 680px; margin: 0 auto 48px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 900px; margin: 0 auto; }
+    .info-card { background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px; text-align: left; }
+    .info-card h3 { font-size: 17px; font-weight: 800; margin-bottom: 16px; }
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .bullet-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--gray-600); line-height: 1.55; }
+    .bullet-dot { width: 7px; height: 7px; background: var(--orange); border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+    .quote-bar { margin: 40px auto 0; max-width: 700px; font-size: 17px; font-style: italic; color: var(--gray-600); text-align: center; line-height: 1.7; }
+
+    /* ── WHY JOIN ── */
+    .why-join { padding: 88px 24px; background: var(--gray-50); }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 900; letter-spacing: -0.8px; margin-bottom: 12px; }
+    .section-header h2 .accent { color: var(--orange); }
+    .section-header p { font-size: 16px; color: var(--gray-600); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+    .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .benefit-card { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 28px 22px; text-align: center; }
+    .benefit-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+    .benefit-card h4 { font-size: 15px; font-weight: 800; margin-bottom: 10px; }
+    .benefit-card p { font-size: 13px; color: var(--gray-600); line-height: 1.65; }
+    .inline-cta { background: white; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 32px 40px; margin-top: 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .inline-cta-text h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
+    .inline-cta-text p { font-size: 14px; color: var(--gray-600); line-height: 1.6; max-width: 580px; }
+
+    /* ── PROCESS ── */
+    .process { padding: 88px 24px; background: linear-gradient(180deg, #1a0a00 0%, #0d1b2a 100%); }
+    .process .section-header h2 { color: white; }
+    .process .section-header p { color: rgba(255,255,255,0.55); }
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+    .step-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 36px 28px; text-align: center; position: relative; }
+    .step-num { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); width: 36px; height: 36px; background: linear-gradient(135deg, var(--orange), var(--red)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: white; }
+    .step-icon { font-size: 28px; color: var(--orange); margin-bottom: 16px; display: block; }
+    .step-card h3 { font-size: 17px; font-weight: 800; color: white; margin-bottom: 12px; }
+    .step-card p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+    .process-note { text-align: center; margin-top: 36px; font-size: 14px; color: rgba(255,255,255,0.4); }
+    .process-note strong { color: rgba(255,255,255,0.7); }
+
+    /* ── FOOTER ── */
+    footer { background: #050d17; padding: 56px 24px 32px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 24px; }
+    .footer-brand h3 { font-size: 17px; font-weight: 800; color: white; margin-bottom: 12px; }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 8px; }
+    .footer-connect h3 { font-size: 17px; font-weight: 800; color: white; margin-bottom: 12px; text-align: right; }
+    .footer-connect p { font-size: 13px; color: rgba(255,255,255,0.45); text-align: right; }
+    .footer-connect a { color: rgba(255,255,255,0.45); text-decoration: none; }
+    .footer-connect a:hover { color: white; }
+    .footer-bottom { text-align: center; font-size: 12px; color: rgba(255,255,255,0.25); }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 16px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: white; border-radius: 14px; width: 100%; max-width: 560px; overflow: hidden; box-shadow: 0 24px 80px rgba(0,0,0,0.4); }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--gray-200); }
+    .modal-title { font-size: 16px; font-weight: 800; }
+    .modal-sub { font-size: 12px; color: var(--gray-400); margin-top: 2px; }
+    .modal-close { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--gray-600); padding: 4px; line-height: 1; }
+    .modal-iframe { width: 100%; height: 600px; border: none; display: block; }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .two-col, .benefits-grid, .steps-grid { grid-template-columns: 1fr; }
+      .inline-cta { flex-direction: column; align-items: flex-start; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-connect h3, .footer-connect p { text-align: left; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-dark.png" alt="Connectid" style="height:28px;" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#benefits">Benefits</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+    </ul>
+    <a href="#" onclick="openBooking(); return false;" class="btn-book">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-eyebrow">Podcast for Home Service Pros</span>
+      <h1>The<br /><span class="accent">Handshake Business</span></h1>
+      <p class="hero-tagline">Building an Empire on Trust.</p>
+      <p>Built for home service business owners who run on trust, reputation, and a handshake. No hype. No shortcuts. Just real conversations about building something real.</p>
+      <a href="#" onclick="openBooking(); return false;" class="btn-primary">Be a Guest</a>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-top">
+        <div class="live-badge"><span class="live-dot"></span> LIVE</div>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+      </div>
+      <div class="hero-card-episode">
+        <span class="episode-icon">🎬</span>
+        <div class="episode-name">The Handshake Business</div>
+        <div class="episode-sub">Episode: Building on Trust</div>
+      </div>
+      <div class="hero-card-guest">
+        <div class="guest-label">Featured Guest:</div>
+        <div class="guest-row"><span class="guest-key">Business Name:</span><span class="guest-val">Your Company</span></div>
+        <div class="guest-row"><span class="guest-key">Focus:</span><span class="guest-val">Home Services</span></div>
+        <div class="guest-row"><span class="guest-key">Reach:</span><span class="guest-val">Your Local Area</span></div>
+      </div>
+      <div class="hero-card-cta">
+        <a href="#" onclick="openBooking(); return false;">🎙️ Reserve Your Spot</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPPORTUNITY -->
+<section class="opportunity">
+  <div class="container">
+    <h2>Your 45-Minute Opportunity to <span class="accent">Shine</span></h2>
+    <p>This is your chance to get featured on The Handshake Business — a podcast designed to showcase home service professionals who built their company the right way: on reputation, referrals, and doing the work right.</p>
+    <div class="two-col">
+      <div class="info-card">
+        <h3>What We'll Cover</h3>
+        <ul class="bullet-list">
+          <li><span class="bullet-dot"></span>The Handshake Story: How you built it from the ground up</li>
+          <li><span class="bullet-dot"></span>The moments someone trusted you and gave you a shot</li>
+          <li><span class="bullet-dot"></span>The Real Cost: The operational chaos of being great</li>
+          <li><span class="bullet-dot"></span>Protecting the Handshake: Scaling without losing the personal touch</li>
+          <li><span class="bullet-dot"></span>Your vision for the future of your business</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>How It Works</h3>
+        <ul class="bullet-list">
+          <li><span class="bullet-dot"></span>Book your 45 min interview slot</li>
+          <li><span class="bullet-dot"></span>No prep needed. Just a real conversation.</li>
+          <li><span class="bullet-dot"></span>We talk about building on trust and reputation</li>
+          <li><span class="bullet-dot"></span>We'll dive into the real challenges of running a business</li>
+          <li><span class="bullet-dot"></span>Your episode is published and shared with our audience</li>
+        </ul>
+      </div>
+    </div>
+    <p class="quote-bar">"This is a relaxed, no-pressure interview. No fancy setup needed — just your voice and your story."</p>
+  </div>
+</section>
+
+<!-- WHY JOIN -->
+<section class="why-join" id="benefits">
+  <div class="container">
+    <div class="section-header">
+      <h2>Why Join <span class="accent">The Handshake Business</span>?</h2>
+      <p>Being featured on our podcast offers numerous benefits for your home service business.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <span class="benefit-icon">🎤</span>
+        <h4>Tell Your Story</h4>
+        <p>Share how you built your business on trust and reputation, the hard way.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">📡</span>
+        <h4>Reach Your Community</h4>
+        <p>We'll share your episode with a wide audience of peers and potential customers.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">🔍</span>
+        <h4>Identify Pain Points</h4>
+        <p>Discuss the operational chaos that comes with being great at what you do.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">💡</span>
+        <h4>Find Solutions</h4>
+        <p>Learn how AI systems can handle back-end tasks while keeping the personal touch.</p>
+      </div>
+    </div>
+    <div class="inline-cta">
+      <div class="inline-cta-text">
+        <h3>You built something real. Let's make sure nothing gets in the way of it.</h3>
+        <p>Join us to share your story and discover how to eliminate missed calls and follow-ups without sounding like a robot.</p>
+      </div>
+      <a href="#" onclick="openBooking(); return false;" class="btn-primary" style="white-space:nowrap; flex-shrink:0;">Be a Guest</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="process" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <h2>Simple <span class="accent">3-Step</span> Process</h2>
+      <p>Getting featured on The Handshake Business podcast is straightforward and designed to be stress-free.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <span class="step-icon">🎬</span>
+        <h3>Book Your Slot</h3>
+        <p>Select a convenient 45 min time slot for your interview. We'll talk about how you built your business.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <span class="step-icon">📹</span>
+        <h3>Prepare & Join</h3>
+        <p>No prep needed. No slides. Just a real conversation — the kind you probably have with your best customers.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <span class="step-icon">🔗</span>
+        <h3>Share & Promote</h3>
+        <p>After the video interview, we'll provide you with a shareable recording that you can use across your own marketing channels.</p>
+      </div>
+    </div>
+    <p class="process-note"><strong>Note:</strong> There is no fee to be a guest on the podcast.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>The Handshake Business</h3>
+        <p>A podcast showcasing home service professionals making an impact in their communities by building on trust and reputation.</p>
+        <p>AI Automation Services</p>
+      </div>
+      <div class="footer-connect">
+        <h3>Connect With Us</h3>
+        <p><a href="https://connectidcrm.com">connectidcrm.com</a></p>
+        <p><a href="mailto:support@connectidcrm.com">support@connectidcrm.com</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Connectid. All rights reserved. AI Automation</div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="booking-modal" onclick="closeBookingOnOverlay(event)">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Be a Guest on The Handshake Business</div>
+        <div class="modal-sub">45 minutes · No prep · No fee</div>
+      </div>
+      <button class="modal-close" onclick="closeBooking()">✕</button>
+    </div>
+    <iframe class="modal-iframe" id="booking-iframe" src="" data-src="https://link.connectidcrm.com/widget/booking/rBfjlEMkmCmO5uszg1ET" title="Book Your Podcast Slot"></iframe>
+  </div>
+</div>
+
+<script>
+  function openBooking() { const m=document.getElementById('booking-modal'),i=document.getElementById('booking-iframe'); if(!i.src||i.src===window.location.href)i.src=i.dataset.src; m.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeBooking() { document.getElementById('booking-modal').classList.remove('open'); document.body.style.overflow=''; }
+  function closeBookingOnOverlay(e) { if(e.target===document.getElementById('booking-modal'))closeBooking(); }
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBooking();});
+</script>
+</body>
+</html>
