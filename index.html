@@ -436,8 +436,8 @@
       gap: 16px;
     }
     .deliverable-card {
-      background: white;
-      border: 1px solid var(--gray-200);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--radius);
       padding: 22px 22px;
       transition: box-shadow .15s, border-color .15s;
@@ -452,10 +452,11 @@
       font-size: 14px;
       font-weight: 700;
       margin-bottom: 6px;
+      color: white;
     }
     .deliverable-card p {
       font-size: 12px;
-      color: var(--gray-600);
+      color: rgba(255,255,255,0.6);
       line-height: 1.55;
     }
 
@@ -1064,12 +1065,12 @@
 </section>
 
 <!-- ═══ DELIVERABLES ═══ -->
-<section id="deliverables">
+<section id="deliverables" class="section-dark">
   <div class="container">
     <div class="section-header text-center">
-      <span class="section-label">What You Get</span>
-      <h2 class="section-title">Everything needed to lead your market.</h2>
-      <p class="section-sub" style="margin: 0 auto;">Every section of the Strategy First deliverable is built from real research — not templates, not guesswork.</p>
+      <span class="section-label" style="color: var(--orange);">What You Get</span>
+      <h2 class="section-title section-title-white">Everything needed to lead your market.</h2>
+      <p class="section-sub" style="margin: 0 auto; color: rgba(255,255,255,0.7);">Every section of the Strategy First deliverable is built from real research — not templates, not guesswork.</p>
     </div>
     <div class="deliverables-grid">
       <div class="deliverable-card">
