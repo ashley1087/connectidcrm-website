@@ -284,6 +284,24 @@
     .section-header { margin-bottom: 52px; }
 
     /* ── PROBLEM SECTION ── */
+    .problem-header-full {
+      max-width: 100%;
+      padding: 0 5vw 52px;
+    }
+    .problem-title-wide {
+      font-size: clamp(36px, 6.5vw, 80px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.06;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    .problem-sub-wide {
+      font-size: 18px;
+      color: var(--gray-600);
+      max-width: 640px;
+      line-height: 1.65;
+    }
     .problem-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -917,12 +935,12 @@
 
 <!-- ═══ PROBLEM ═══ -->
 <section>
+  <div class="problem-header-full">
+    <span class="section-label">The Problem</span>
+    <h2 class="problem-title-wide">You're running a great business.<br />But marketing is running you.</h2>
+    <p class="problem-sub-wide">Sound familiar? These are the four patterns we see in almost every growing business before Strategy First.</p>
+  </div>
   <div class="container">
-    <div class="section-header">
-      <span class="section-label">The Problem</span>
-      <h2 class="section-title">You're running a great business.<br />But marketing is running you.</h2>
-      <p class="section-sub">Sound familiar? These are the four patterns we see in almost every growing business before Strategy First.</p>
-    </div>
     <div class="problem-grid">
       <div class="problem-card">
         <h3>You're reacting instead of planning.</h3>
