@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strategy First Intake | Connectid</title>
+  <meta name="description" content="Complete your Strategy First intake. ~45 minutes." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #111111; --navy2: #1a1a1a; --navy3: #222222;
+      --red: #EC3857; --red-alt: #EB3656; --orange: #FF1744;
+      --brand-gradient: linear-gradient(135deg, #FA5E36, #EC3857);
+      --white: #ffffff; --gray-100: #FAF9F8; --gray-200: #F0EFEE;
+      --gray-300: #E5E4E2; --gray-400: #adb5bd; --gray-600: #6c757d;
+      --text: #1a1a1a;
+      --radius: 10px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 48px rgba(0,0,0,0.14);
+    }
+    body {
+      font-family: 'Poppins', -apple-system, sans-serif;
+      color: var(--text); background: var(--gray-100); font-size: 16px; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .intake-header { background: var(--navy); padding: 24px 24px 0; position: sticky; top: 0; z-index: 50; }
+    .header-inner { max-width: 820px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; }
+    .header-logo img { height: 28px; display: block; }
+    .header-meta { color: rgba(255,255,255,0.5); font-size: 13px; font-weight: 500; }
+    .header-meta strong { color: white; font-weight: 700; }
+
+    /* Progress */
+    .progress-wrap { max-width: 820px; margin: 0 auto; padding-bottom: 16px; }
+    .progress-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--brand-gradient); width: 14%; transition: width .3s ease; }
+    .progress-label { color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
+    .progress-label strong { color: white; }
+
+    /* Form container */
+    .form-wrap { max-width: 820px; margin: 40px auto 80px; padding: 0 24px; }
+    .form-card { background: white; border-radius: 14px; box-shadow: var(--shadow-lg); padding: 48px; }
+
+    .step-eyebrow { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 12px; display: block; }
+    .step-title { font-size: 32px; font-weight: 900; letter-spacing: -0.8px; line-height: 1.15; margin-bottom: 12px; color: var(--navy); }
+    .step-sub { color: var(--gray-600); font-size: 15px; margin-bottom: 36px; line-height: 1.7; }
+
+    /* Form fields */
+    .field { margin-bottom: 24px; }
+    .field label { display: block; font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+    .field .hint { font-size: 13px; color: var(--gray-600); margin-bottom: 8px; }
+    .field input[type="text"],
+    .field input[type="email"],
+    .field input[type="tel"],
+    .field input[type="url"],
+    .field textarea,
+    .field select {
+      width: 100%; padding: 12px 14px; border: 1.5px solid var(--gray-300); border-radius: 8px;
+      font-family: inherit; font-size: 15px; color: var(--text); background: white;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(236,56,87,0.12);
+    }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+    .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--gray-300); border-radius: 8px; cursor: pointer; transition: all .15s; font-size: 14px; }
+    .checkbox-item:hover { border-color: var(--red); }
+    .checkbox-item input { width: 16px; height: 16px; accent-color: var(--red); }
+    .checkbox-item.checked { border-color: var(--red); background: rgba(236,56,87,0.04); }
+    .required { color: var(--red); }
+
+    /* Buttons */
+    .form-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--gray-200); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: 7px; font-size: 14px; font-weight: 700; text-decoration: none; transition: all .18s; cursor: pointer; border: none; font-family: inherit; }
+    .btn-primary { background: var(--brand-gradient); color: white; }
+    .btn-primary:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(236,56,87,0.35); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-ghost { background: transparent; color: var(--gray-600); }
+    .btn-ghost:hover { color: var(--navy); }
+    .btn-ghost:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    /* Steps */
+    .step { display: none; }
+    .step.active { display: block; }
+
+    /* Success state */
+    .success { text-align: center; padding: 24px 0; }
+    .success-icon { width: 72px; height: 72px; margin: 0 auto 28px; background: var(--brand-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 36px; }
+    .success h2 { font-size: 32px; font-weight: 900; letter-spacing: -0.6px; margin-bottom: 14px; color: var(--navy); }
+    .success p { color: var(--gray-600); font-size: 15px; line-height: 1.7; max-width: 480px; margin: 0 auto 28px; }
+
+    /* Error */
+    .form-error { background: #fff5f5; border: 1px solid #fecaca; color: #991b1b; padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-top: 16px; display: none; }
+    .form-error.show { display: block; }
+
+    /* Gate (token validation) */
+    .gate { position: fixed; inset: 0; background: var(--navy); display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 200; }
+    .gate-card { max-width: 480px; text-align: center; color: white; }
+    .gate-logo { margin-bottom: 32px; }
+    .gate-logo img { height: 36px; }
+    .gate-icon { width: 72px; height: 72px; margin: 0 auto 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+    .gate-icon.spin { background: rgba(255,255,255,0.08); }
+    .gate-icon.spin::after { content: ''; width: 28px; height: 28px; border: 3px solid rgba(255,255,255,0.2); border-top-color: var(--orange); border-radius: 50%; animation: spin .8s linear infinite; }
+    .gate-icon.err { background: rgba(236,56,87,0.18); color: var(--red); }
+    .gate-icon.ok { background: var(--brand-gradient); color: white; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .gate h1 { font-size: 28px; font-weight: 900; letter-spacing: -0.6px; margin-bottom: 12px; }
+    .gate p { color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.7; }
+    .gate p a { color: var(--orange); text-decoration: none; }
+    .gate-hidden { display: none; }
+    .app-hidden { display: none; }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .form-card { padding: 28px 22px; }
+      .step-title { font-size: 24px; }
+      .field-row { grid-template-columns: 1fr; }
+      .checkbox-grid { grid-template-columns: 1fr; }
+      .header-inner { flex-direction: column; gap: 8px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Token gate -->
+<div id="gate" class="gate">
+  <div class="gate-card">
+    <div class="gate-logo"><img src="logo-light.png" alt="Connectid" /></div>
+    <div id="gate-state-loading">
+      <div class="gate-icon spin"></div>
+      <h1>Loading your intake…</h1>
+      <p>One moment.</p>
+    </div>
+    <div id="gate-state-invalid" class="gate-hidden">
+      <div class="gate-icon err">✕</div>
+      <h1>This link isn't valid</h1>
+      <p>The intake link you used has expired or doesn't match a client. If you think this is a mistake, email <a href="mailto:ashley@connectidcrm.com">ashley@connectidcrm.com</a>.</p>
+    </div>
+    <div id="gate-state-submitted" class="gate-hidden">
+      <div class="gate-icon ok">✓</div>
+      <h1>Already submitted</h1>
+      <p>You've already completed this intake. Ashley has your responses and will be in touch.</p>
+    </div>
+    <div id="gate-state-expired" class="gate-hidden">
+      <div class="gate-icon err">!</div>
+      <h1>This link has expired</h1>
+      <p>Email <a href="mailto:ashley@connectidcrm.com">ashley@connectidcrm.com</a> for a fresh link.</p>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="app-hidden">
+<header class="intake-header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <img src="logo-light.png" alt="Connectid" />
+    </div>
+    <div class="header-meta">Strategy First Intake · <strong>~45 min</strong></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="progress-label">Step <strong id="step-num">1</strong> of <strong>7</strong> · <span id="step-name">About you</span></div>
+  </div>
+</header>
+
+<main class="form-wrap">
+  <form id="intake-form" class="form-card" autocomplete="on">
+
+    <!-- STEP 1: General Information -->
+    <section class="step active" data-step="1" data-step-name="About you">
+      <span class="step-eyebrow">Section 1 of 7</span>
+      <h1 class="step-title">About you</h1>
+      <p class="step-sub">The basics so we know who you are and how to reach you.</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Your name <span class="required">*</span></label>
+          <input type="text" name="contact_name" required />
+        </div>
+        <div class="field">
+          <label>Email <span class="required">*</span></label>
+          <input type="email" name="contact_email" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Company name <span class="required">*</span></label>
+        <input type="text" name="company_name" required />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Phone</label>
+          <input type="tel" name="phone" />
+        </div>
+        <div class="field">
+          <label>Website</label>
+          <input type="url" name="website" placeholder="https://" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Business address</label>
+        <input type="text" name="address" />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Primary industry</label>
+          <input type="text" name="primary_industry" placeholder="e.g. HVAC, Roofing, Plumbing" />
+        </div>
+        <div class="field">
+          <label>Secondary industry</label>
+          <input type="text" name="secondary_industry" />
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2: Business Overview -->
+    <section class="step" data-step="2" data-step-name="Business overview">
+      <span class="step-eyebrow">Section 2 of 7</span>
+      <h1 class="step-title">Business overview</h1>
+      <p class="step-sub">Where you are and where you're trying to go.</p>
+
+      <div class="field">
+        <label>Mission and vision</label>
+        <textarea name="mission_vision" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Short- and long-term business goals</label>
+        <p class="hint">Include current revenue and revenue growth goals.</p>
+        <textarea name="business_goals" rows="4"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Most profitable products or services</label>
+        <textarea name="profitable_offers" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>What sets you apart from competitors</label>
+        <textarea name="differentiators" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>KPIs you track to measure success</label>
+        <p class="hint">e.g. booked jobs, average ticket, callbacks, capacity, repeat customers, sales conversions.</p>
+        <textarea name="kpis_tracked" rows="3"></textarea>
+      </div>
+    </section>
+
+    <!-- STEP 3: Marketing Assessment -->
+    <section class="step" data-step="3" data-step-name="Marketing">
+      <span class="step-eyebrow">Section 3 of 7</span>
+      <h1 class="step-title">Marketing assessment</h1>
+      <p class="step-sub">What you're doing now to generate and keep customers.</p>
+
+      <div class="field">
+        <label>Short- and long-term marketing goals</label>
+        <textarea name="marketing_goals" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Current lead generation tactics</label>
+        <textarea name="lead_gen_tactics" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Current lead generation process</label>
+        <p class="hint">From first touch to booked.</p>
+        <textarea name="lead_gen_process" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Customer retention / repeat process</label>
+        <textarea name="retention_process" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Your #1 marketing challenge today <span class="required">*</span></label>
+        <textarea name="top_marketing_challenge" rows="3" required></textarea>
+      </div>
+    </section>
+
+    <!-- STEP 4: Brand Assessment -->
+    <section class="step" data-step="4" data-step-name="Brand">
+      <span class="step-eyebrow">Section 4 of 7</span>
+      <h1 class="step-title">Brand assessment</h1>
+      <p class="step-sub">Who you serve and how you show up.</p>
+
+      <div class="field">
+        <label>Your ideal client or client segments</label>
+        <textarea name="ideal_client" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Your core message / differentiator</label>
+        <textarea name="core_message" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Brand personality</label>
+        <p class="hint">How you (or your clients) would describe your brand.</p>
+        <textarea name="brand_personality" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Brand identity assets</label>
+        <p class="hint">Logo, color scheme, typography, visual assets.</p>
+        <textarea name="brand_identity_assets" rows="2"></textarea>
+      </div>
+
+      <label style="display:block; font-size:14px; font-weight:600; color:var(--navy); margin-bottom:12px;">Top 3 competitors</label>
+      <div class="field-row">
+        <div class="field"><label>Competitor 1 name</label><input type="text" name="competitor_1_name" /></div>
+        <div class="field"><label>URL</label><input type="url" name="competitor_1_url" placeholder="https://" /></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Competitor 2 name</label><input type="text" name="competitor_2_name" /></div>
+        <div class="field"><label>URL</label><input type="url" name="competitor_2_url" placeholder="https://" /></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Competitor 3 name</label><input type="text" name="competitor_3_name" /></div>
+        <div class="field"><label>URL</label><input type="url" name="competitor_3_url" placeholder="https://" /></div>
+      </div>
+    </section>
+
+    <!-- STEP 5: Growth Assessment -->
+    <section class="step" data-step="5" data-step-name="Growth">
+      <span class="step-eyebrow">Section 5 of 7</span>
+      <h1 class="step-title">Growth assessment</h1>
+      <p class="step-sub">Where you're investing and what's powering growth today.</p>
+
+      <div class="field">
+        <label>Marketing channels you currently use</label>
+        <p class="hint">Select all that apply.</p>
+        <div class="checkbox-grid" id="channels-grid">
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Online paid ads (Google)" /> Online paid ads (Google)</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Social media" /> Social media</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Content marketing" /> Content marketing</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Networking" /> Networking</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Referrals" /> Referrals</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Sales outreach" /> Sales outreach</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Strategic partners" /> Strategic partners</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Search engine marketing" /> Search engine marketing</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Email marketing" /> Email marketing</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Print or media (radio, news, TV)" /> Print or media (radio, news, TV)</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="PR or media relations" /> PR or media relations</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Events or sponsorships" /> Events or sponsorships</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Direct mail / lawn signs / door hangers" /> Direct mail / signs / door hangers</label>
+          <label class="checkbox-item"><input type="checkbox" name="marketing_channels" value="Google My Business" /> Google My Business</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Other channels (not listed above)</label>
+        <input type="text" name="marketing_channels_other" />
+      </div>
+
+      <div class="field">
+        <label>Current sales cycle</label>
+        <p class="hint">How long from first contact to closed deal?</p>
+        <textarea name="sales_cycle" rows="2"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Do you have a content strategy in place?</label>
+        <textarea name="has_content_strategy" rows="2"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Current marketing budget and how it's determined</label>
+        <textarea name="marketing_budget" rows="2"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Marketing technology you currently use</label>
+        <p class="hint">CRM, analytics, content tools — include names.</p>
+        <textarea name="marketing_tech" rows="2"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Who handles your marketing today</label>
+        <p class="hint">Internal team, agencies, contractors.</p>
+        <textarea name="marketing_team" rows="2"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Previous marketing materials you can share</label>
+        <p class="hint">Brand books, collateral, ad examples — you can email them after this form.</p>
+        <textarea name="previous_materials" rows="2"></textarea>
+      </div>
+    </section>
+
+    <!-- STEP 6: Customer Assessment -->
+    <section class="step" data-step="6" data-step-name="Customer experience">
+      <span class="step-eyebrow">Section 6 of 7</span>
+      <h1 class="step-title">Customer experience</h1>
+      <p class="step-sub">What happens after someone says yes.</p>
+
+      <div class="field">
+        <label>New customer transaction process</label>
+        <p class="hint">Proposal, quote, agreement, contract, etc.</p>
+        <textarea name="transaction_process" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>New customer onboarding process</label>
+        <textarea name="onboarding_process" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>After-sale follow-up and communication</label>
+        <p class="hint">Routine reporting, post-sale survey, "wow" process.</p>
+        <textarea name="after_sale_followup" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>How you assess customer satisfaction</label>
+        <p class="hint">Testimonials, reviews, NPS, etc.</p>
+        <textarea name="satisfaction_process" rows="3"></textarea>
+      </div>
+    </section>
+
+    <!-- STEP 7: Online Presence -->
+    <section class="step" data-step="7" data-step-name="Online presence">
+      <span class="step-eyebrow">Section 7 of 7</span>
+      <h1 class="step-title">Online presence</h1>
+      <p class="step-sub">Drop the URLs for everywhere you show up online.</p>
+
+      <div class="field"><label>Google Business profile</label><input type="url" name="url_google_business" placeholder="https://" /></div>
+      <div class="field"><label>Facebook</label><input type="url" name="url_facebook" placeholder="https://" /></div>
+      <div class="field"><label>Instagram</label><input type="url" name="url_instagram" placeholder="https://" /></div>
+      <div class="field"><label>LinkedIn</label><input type="url" name="url_linkedin" placeholder="https://" /></div>
+      <div class="field"><label>YouTube</label><input type="url" name="url_youtube" placeholder="https://" /></div>
+      <div class="field"><label>X / Twitter</label><input type="url" name="url_x" placeholder="https://" /></div>
+      <div class="field"><label>Other platform</label><input type="url" name="url_other" placeholder="https://" /></div>
+    </section>
+
+    <!-- SUCCESS -->
+    <section class="step" data-step="8" data-step-name="Submitted">
+      <div class="success">
+        <div class="success-icon">✓</div>
+        <h2>You're in.</h2>
+        <p>Thanks. Ashley will review your intake within one business day and reach out to schedule your Strategy First kickoff.</p>
+        <p style="font-size:13px; color:var(--gray-400);">You can close this tab.</p>
+      </div>
+    </section>
+
+    <div class="form-error" id="form-error"></div>
+
+    <div class="form-nav" id="form-nav">
+      <button type="button" class="btn btn-ghost" id="btn-back" disabled>← Back</button>
+      <button type="button" class="btn btn-primary" id="btn-next">Next →</button>
+    </div>
+  </form>
+</main>
+</div><!-- /#app -->
+
+<!-- Supabase JS client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // =========================================================
+  // CONFIG — paste your Supabase project URL + anon key here
+  // Find both at: Supabase Dashboard → Settings → API
+  // The anon key is safe to expose in client-side code.
+  // =========================================================
+  const SUPABASE_URL = 'https://ihjhfcuiofudkdpinkxo.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloamhmY3Vpb2Z1ZGtkcGlua3hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NjgxNzQsImV4cCI6MjA5MzA0NDE3NH0.fvnL13SthNvKxCvjAdvintux50YkbL1rgMLSWUUrDEk';
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // =========================================================
+  // Token gate
+  // =========================================================
+  const urlParams = new URLSearchParams(window.location.search);
+  const token = urlParams.get('token') || urlParams.get('client');
+  let invitation = null;
+
+  const gateEl = document.getElementById('gate');
+  const appEl = document.getElementById('app');
+  const gateStates = {
+    loading: document.getElementById('gate-state-loading'),
+    invalid: document.getElementById('gate-state-invalid'),
+    submitted: document.getElementById('gate-state-submitted'),
+    expired: document.getElementById('gate-state-expired'),
+  };
+
+  function showGateState(name) {
+    Object.entries(gateStates).forEach(([k, el]) => {
+      el.classList.toggle('gate-hidden', k !== name);
+    });
+  }
+
+  async function validateToken() {
+    if (!token) { showGateState('invalid'); return false; }
+
+    const { data, error } = await supabase
+      .from('intake_invitations')
+      .select('id, token, client_name, client_email, company_name, submitted_at, expires_at')
+      .eq('token', token)
+      .maybeSingle();
+
+    if (error || !data) { showGateState('invalid'); return false; }
+    if (data.submitted_at) { showGateState('submitted'); return false; }
+    if (data.expires_at && new Date(data.expires_at) < new Date()) { showGateState('expired'); return false; }
+
+    invitation = data;
+    return true;
+  }
+
+  function revealApp() {
+    gateEl.style.display = 'none';
+    appEl.classList.remove('app-hidden');
+  }
+
+  function prefillFromInvitation() {
+    if (!invitation) return;
+    const fields = {
+      contact_name: invitation.client_name,
+      contact_email: invitation.client_email,
+      company_name: invitation.company_name,
+    };
+    Object.entries(fields).forEach(([name, val]) => {
+      const el = document.querySelector(`[name="${name}"]`);
+      if (el && !el.value) el.value = val;
+    });
+  }
+
+  // =========================================================
+  // Wizard logic
+  // =========================================================
+  const totalSteps = 7;
+  let currentStep = 1;
+  const STORAGE_KEY = token ? `connectid_intake_draft_${token}` : 'connectid_intake_draft_v1';
+
+  const stepEls = document.querySelectorAll('.step');
+  const progressFill = document.getElementById('progress-fill');
+  const stepNum = document.getElementById('step-num');
+  const stepName = document.getElementById('step-name');
+  const btnBack = document.getElementById('btn-back');
+  const btnNext = document.getElementById('btn-next');
+  const formNav = document.getElementById('form-nav');
+  const errorBox = document.getElementById('form-error');
+  const form = document.getElementById('intake-form');
+
+  function showStep(n) {
+    stepEls.forEach(el => el.classList.remove('active'));
+    const target = document.querySelector(`.step[data-step="${n}"]`);
+    target.classList.add('active');
+    currentStep = n;
+    stepNum.textContent = n;
+    stepName.textContent = target.dataset.stepName;
+    progressFill.style.width = (n / totalSteps * 100) + '%';
+    btnBack.disabled = n === 1;
+    btnNext.textContent = n === totalSteps ? 'Submit intake' : 'Next →';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showSuccess() {
+    stepEls.forEach(el => el.classList.remove('active'));
+    document.querySelector('.step[data-step="8"]').classList.add('active');
+    formNav.style.display = 'none';
+    progressFill.style.width = '100%';
+    stepNum.textContent = '7';
+    stepName.textContent = 'Submitted';
+    localStorage.removeItem(STORAGE_KEY);
+  }
+
+  function validateStep(n) {
+    const step = document.querySelector(`.step[data-step="${n}"]`);
+    const required = step.querySelectorAll('[required]');
+    for (const f of required) {
+      if (!f.value.trim()) {
+        f.focus();
+        showError(`Please fill in: ${f.previousElementSibling?.textContent?.replace('*','').trim() || 'required field'}`);
+        return false;
+      }
+    }
+    hideError();
+    return true;
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
+  function hideError() {
+    errorBox.classList.remove('show');
+  }
+
+  function saveDraft() {
+    const data = collectFormData();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ step: currentStep, data }));
+  }
+
+  function loadDraft() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    try {
+      const { step, data } = JSON.parse(raw);
+      Object.entries(data).forEach(([key, val]) => {
+        if (Array.isArray(val)) {
+          form.querySelectorAll(`[name="${key}"]`).forEach(el => {
+            if (val.includes(el.value)) el.checked = true;
+          });
+        } else {
+          const el = form.querySelector(`[name="${key}"]`);
+          if (el) el.value = val;
+        }
+      });
+      if (step && step >= 1 && step <= totalSteps) showStep(step);
+    } catch (e) { /* ignore */ }
+  }
+
+  function collectFormData() {
+    const fd = new FormData(form);
+    const out = {};
+    for (const [key, val] of fd.entries()) {
+      if (key === 'marketing_channels') {
+        if (!out[key]) out[key] = [];
+        out[key].push(val);
+      } else {
+        out[key] = val.trim();
+      }
+    }
+    // Ensure marketing_channels is always an array even if empty
+    if (!out.marketing_channels) out.marketing_channels = [];
+    return out;
+  }
+
+  async function submitForm() {
+    btnNext.disabled = true;
+    btnNext.textContent = 'Submitting…';
+    hideError();
+
+    const payload = collectFormData();
+
+    // Attach invitation token so the DB trigger can mark it submitted
+    if (token) payload.invitation_token = token;
+
+    // Strip empty strings to null so the DB stays clean
+    Object.keys(payload).forEach(k => {
+      if (payload[k] === '') payload[k] = null;
+    });
+
+    const { error } = await supabase
+      .from('strategy_first_intakes')
+      .insert([payload]);
+
+    if (error) {
+      console.error(error);
+      showError('Something went wrong submitting your intake. Please email ashley@connectidcrm.com and we\'ll sort it out.');
+      btnNext.disabled = false;
+      btnNext.textContent = 'Submit intake';
+      return;
+    }
+
+    showSuccess();
+  }
+
+  btnBack.addEventListener('click', () => {
+    if (currentStep > 1) showStep(currentStep - 1);
+  });
+
+  btnNext.addEventListener('click', async () => {
+    if (!validateStep(currentStep)) return;
+    saveDraft();
+    if (currentStep < totalSteps) {
+      showStep(currentStep + 1);
+    } else {
+      await submitForm();
+    }
+  });
+
+  // Auto-save draft on input
+  form.addEventListener('input', () => saveDraft());
+
+  // Visual feedback for checked checkboxes
+  document.querySelectorAll('.checkbox-item input').forEach(cb => {
+    cb.addEventListener('change', () => {
+      cb.closest('.checkbox-item').classList.toggle('checked', cb.checked);
+    });
+  });
+
+  // Boot: validate token first, then reveal app
+  (async () => {
+    const ok = await validateToken();
+    if (!ok) return;
+    revealApp();
+    prefillFromInvitation();
+    loadDraft();
+    showStep(currentStep);
+  })();
+</script>
+
+</body>
+</html>
