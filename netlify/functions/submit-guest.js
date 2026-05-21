@@ -55,7 +55,7 @@ exports.handler = async (event) => {
         companyName: company,
         source:      'Instagram Link in Bio',
         tags:        ['handshake apply', `trade: ${trade}`],
-        customFields: [{ fieldKey: 'annual_revenue', value: revenue }],
+        customFields: [{ id: 't6wHo2y6k0RuHwn4DMaB', value: revenue }],
       }),
     });
 
