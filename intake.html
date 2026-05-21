@@ -464,18 +464,36 @@
 </main>
 </div><!-- /#app -->
 
-<!-- Supabase JS client -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // =========================================================
-  // CONFIG — paste your Supabase project URL + anon key here
-  // Find both at: Supabase Dashboard → Settings → API
-  // The anon key is safe to expose in client-side code.
+  // CONFIG
   // =========================================================
   const SUPABASE_URL = 'https://ihjhfcuiofudkdpinkxo.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloamhmY3Vpb2Z1ZGtkcGlua3hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NjgxNzQsImV4cCI6MjA5MzA0NDE3NH0.fvnL13SthNvKxCvjAdvintux50YkbL1rgMLSWUUrDEk';
 
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // Lightweight REST helpers — no CDN library needed
+  const SB_HEADERS = {
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'Content-Type': 'application/json',
+  };
+
+  async function sbSelect(table, query) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${query}`, { headers: SB_HEADERS });
+    const rows = await res.json();
+    if (!res.ok) return { data: null, error: rows };
+    return { data: rows[0] || null, error: null };
+  }
+
+  async function sbInsert(table, payload) {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: { ...SB_HEADERS, 'Prefer': 'return=minimal' },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) { const e = await res.json(); return { error: e }; }
+    return { error: null };
+  }
 
   // =========================================================
   // Token gate
@@ -502,20 +520,12 @@
   async function validateToken() {
     if (!token) { showGateState('invalid'); return false; }
 
-    // Race the DB query against a 12-second timeout so the gate never hangs forever
-    const timeout = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('timeout')), 12000)
-    );
     let data, error;
     try {
-      ({ data, error } = await Promise.race([
-        supabase
-          .from('intake_invitations')
-          .select('id, token, client_name, client_email, company_name, submitted_at, expires_at')
-          .eq('token', token)
-          .maybeSingle(),
-        timeout,
-      ]));
+      ({ data, error } = await sbSelect(
+        'intake_invitations',
+        `token=eq.${encodeURIComponent(token)}&select=id,token,client_name,client_email,company_name,submitted_at,expires_at`
+      ));
     } catch (e) {
       showGateState('invalid'); return false;
     }
@@ -663,9 +673,7 @@
       if (payload[k] === '') payload[k] = null;
     });
 
-    const { error } = await supabase
-      .from('strategy_first_intakes')
-      .insert([payload]);
+    const { error } = await sbInsert('strategy_first_intakes', payload);
 
     if (error) {
       console.error(error);
