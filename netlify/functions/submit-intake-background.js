@@ -99,10 +99,18 @@ async function clickupGetTask(taskId, apiKey) {
 }
 
 async function clickupCreateSubtask(parentTaskId, listId, name, description, apiKey) {
+  const dueDateMs = Date.now() + 24 * 60 * 60 * 1000; // 1 day from now
   const res = await fetch(`https://api.clickup.com/api/v2/list/${listId}/task`, {
     method: 'POST',
     headers: { Authorization: apiKey, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, description, parent: parentTaskId }),
+    body: JSON.stringify({
+      name,
+      description,
+      parent:    parentTaskId,
+      assignees: [32335581],   // Ashley DePiano
+      due_date:  dueDateMs,
+      due_date_time: true,
+    }),
   });
   const data = await res.json();
   if (!res.ok) {
