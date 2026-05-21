@@ -502,11 +502,23 @@
   async function validateToken() {
     if (!token) { showGateState('invalid'); return false; }
 
-    const { data, error } = await supabase
-      .from('intake_invitations')
-      .select('id, token, client_name, client_email, company_name, submitted_at, expires_at')
-      .eq('token', token)
-      .maybeSingle();
+    // Race the DB query against a 12-second timeout so the gate never hangs forever
+    const timeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('timeout')), 12000)
+    );
+    let data, error;
+    try {
+      ({ data, error } = await Promise.race([
+        supabase
+          .from('intake_invitations')
+          .select('id, token, client_name, client_email, company_name, submitted_at, expires_at')
+          .eq('token', token)
+          .maybeSingle(),
+        timeout,
+      ]));
+    } catch (e) {
+      showGateState('invalid'); return false;
+    }
 
     if (error || !data) { showGateState('invalid'); return false; }
     if (data.submitted_at) { showGateState('submitted'); return false; }
