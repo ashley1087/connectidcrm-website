@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashley DePiano · The Handshake Business · Connectid</title>
+  <meta name="description" content="Founder of Connectid and host of The Handshake Business. Helping home service businesses doing $1M+ recover revenue from the customers they already have." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- OG -->
+  <meta property="og:title" content="Ashley DePiano · The Handshake Business" />
+  <meta property="og:description" content="Helping home service businesses doing $1M+ recover revenue from the customers they already have." />
+  <meta property="og:image" content="ashley-headshot.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:           #111111;
+      --navy2:          #1a1a1a;
+      --orange:         #FF1744;
+      --orange-light:   #ff6384;
+      --brand-gradient: linear-gradient(135deg, #FA5E36, #EB3656);
+      --off-white:      #FAF9F8;
+      --gray-200:       #F0EFEE;
+      --gray-600:       #6c757d;
+      --text:           #1a1a1a;
+      --radius:         10px;
+      --shadow:         0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: 'Poppins', -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      max-width: 480px;     /* keeps it phone-feel on desktop too */
+      margin: 0 auto;
+      padding: 0 0 40px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 48px 24px 32px;
+      text-align: center;
+    }
+
+    .hero-photo-wrap {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 20px;
+      border: 3px solid var(--gray-200);
+    }
+    .hero-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .hero-name {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .hero-tagline {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--orange);
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .hero-bio {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.65;
+      max-width: 340px;
+      margin: 0 auto;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--gray-200);
+      margin: 28px 24px;
+    }
+
+    /* ── CTA BUTTONS ── */
+    .cta-stack {
+      padding: 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cta-item {
+      display: block;
+      text-decoration: none;
+    }
+    .cta-item.scroll-cta {
+      cursor: pointer;
+    }
+
+    .cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      min-height: 56px;
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.1px;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      transition: all .18s ease;
+      text-decoration: none;
+    }
+
+    /* Button 1 — primary gradient */
+    .cta-btn-primary {
+      background: var(--brand-gradient);
+      color: white;
+    }
+    .cta-btn-primary:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(235,54,86,0.35); }
+
+    /* Buttons 2 & 3 — outlined dark */
+    .cta-btn-secondary {
+      background: #fff;
+      color: var(--navy);
+      border: 2px solid var(--gray-200);
+    }
+    .cta-btn-secondary:hover { border-color: var(--orange); }
+
+    .cta-btn-label { flex: 1; }
+    .cta-btn-arrow { font-size: 18px; flex-shrink: 0; }
+
+    .cta-sub {
+      font-size: 12px;
+      font-weight: 400;
+      opacity: 0.7;
+      margin-top: 2px;
+      display: block;
+      line-height: 1.4;
+    }
+    /* sub-text color on primary button */
+    .cta-btn-primary .cta-sub { opacity: 0.85; }
+
+    /* ── SOCIAL PROOF ── */
+    .proof {
+      margin: 36px 24px 0;
+      background: var(--off-white);
+      border-radius: var(--radius);
+      padding: 20px 20px;
+    }
+
+    .proof-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--orange);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .proof-guests {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .proof-guest {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .proof-guest-name {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .proof-guest-co {
+      color: var(--gray-600);
+      font-size: 13px;
+    }
+
+    /* ── FORM SECTION ── */
+    .form-section {
+      margin: 36px 0 0;
+      padding: 0 24px;
+      scroll-margin-top: 24px;
+    }
+
+    .form-section-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--orange);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .form-section h2 {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .form-section p {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .podcast-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .field-group input,
+    .field-group select {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: #fff;
+      transition: border-color .15s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .field-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236c757d' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+    .field-group input:focus,
+    .field-group select:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+
+    .form-submit-btn {
+      width: 100%;
+      min-height: 56px;
+      padding: 16px 24px;
+      background: var(--brand-gradient);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .18s ease;
+      margin-top: 4px;
+    }
+    .form-submit-btn:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(235,54,86,0.35); }
+
+    /* Rejection message */
+    .rejection-msg {
+      display: none;
+      background: var(--off-white);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 18px;
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-top: 4px;
+    }
+    .rejection-msg.visible { display: block; }
+
+    /* ── FOOTER ── */
+    footer {
+      margin: 48px 24px 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-200);
+      text-align: center;
+    }
+
+    footer img {
+      height: 24px;
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      max-width: 300px;
+      margin: 0 auto 8px;
+    }
+
+    footer a { color: var(--orange); text-decoration: none; }
+
+    footer .copyright {
+      font-size: 11px;
+      color: #adb5bd;
+      margin-top: 8px;
+    }
+
+    /* ── GA event tracking hook (visual none) ── */
+    [data-track] { /* no style — JS handles */ }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <div class="hero-photo-wrap">
+      <!--
+        PHOTO NEEDED: Drop your IG profile photo into the repo root
+        as "ashley-headshot.jpg" (square crop, ideally 400×400px or larger).
+        Until then this renders a grey circle.
+      -->
+      <img
+        src="ashley-headshot.jpg"
+        alt="Ashley DePiano"
+        onerror="this.style.background='#F0EFEE'; this.style.display='block'; this.removeAttribute('src');"
+      />
+    </div>
+    <h1 class="hero-name">Ashley DePiano</h1>
+    <p class="hero-tagline">Founder, Connectid &nbsp;·&nbsp; Host, The Handshake Business</p>
+    <p class="hero-bio">I help home service businesses doing $1M+ recover the money already in their book — dormant customers, missed calls, unbooked estimates. No ads. No funnels. Real systems.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══ CTA STACK ══ -->
+  <div class="cta-stack">
+
+    <!-- Button 1 — primary: podcast -->
+    <a
+      class="cta-item"
+      href="https://www.youtube.com/playlist?list=PLr8L1iEc1z2p7xEe6jqqBnIRHVekQOInm&utm_source=ig&utm_medium=bio&utm_campaign=link_in_bio&utm_content=podcast"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-track="cta-podcast"
+    >
+      <div class="cta-btn cta-btn-primary">
+        <span class="cta-btn-label">
+          🎙 Listen to The Handshake Business
+          <span class="cta-sub">Real conversations with $1M+ trades owners.</span>
+        </span>
+        <span class="cta-btn-arrow">↗</span>
+      </div>
+    </a>
+
+    <!-- Button 2 — loom walkthrough -->
+    <a
+      class="cta-item"
+      href="https://loom.com/[LOOM_URL]?utm_source=ig&utm_medium=bio&utm_campaign=link_in_bio&utm_content=loom"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-track="cta-loom"
+      id="loom-btn"
+    >
+      <div class="cta-btn cta-btn-secondary">
+        <span class="cta-btn-label">
+          ▶ Watch how Connectid works (5 min)
+          <span class="cta-sub">Loom walk-through of one specific revenue leak being plugged.</span>
+        </span>
+        <span class="cta-btn-arrow">↗</span>
+      </div>
+    </a>
+
+    <!-- Button 3 — scroll to form -->
+    <a
+      class="cta-item scroll-cta"
+      href="#podcast-form"
+      data-track="cta-guest-form"
+    >
+      <div class="cta-btn cta-btn-secondary">
+        <span class="cta-btn-label">
+          🎤 Get on the podcast
+          <span class="cta-sub">$1M+ home service owners only. Free guest spot.</span>
+        </span>
+        <span class="cta-btn-arrow">↓</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ══ SOCIAL PROOF ══ -->
+  <div class="proof">
+    <span class="proof-label">Recent Guests</span>
+    <ul class="proof-guests">
+      <li class="proof-guest">
+        <span class="proof-guest-name">Casarra Cover</span>
+        <span class="proof-guest-co">· Whitaker Garage Doors</span>
+      </li>
+      <li class="proof-guest">
+        <span class="proof-guest-name">Micah Beatty</span>
+        <span class="proof-guest-co">· Division 7 Millwork</span>
+      </li>
+      <li class="proof-guest">
+        <span class="proof-guest-name">Miguel Banuelos</span>
+        <span class="proof-guest-co">· Pristine Concrete Denver</span>
+      </li>
+      <li class="proof-guest">
+        <span class="proof-guest-name">Apollo Arellano</span>
+        <span class="proof-guest-co">· Get Pro Landscaping</span>
+      </li>
+      <li class="proof-guest">
+        <span class="proof-guest-name">Korey Mack</span>
+        <span class="proof-guest-co">· Start the Party</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ══ PODCAST APPLICATION FORM ══ -->
+  <div class="form-section" id="podcast-form">
+    <span class="form-section-label">Apply to Guest</span>
+    <h2>Get on<br/>The Handshake Business</h2>
+    <p>Built for $1M+ home service owners. Honest conversation, no pitch. Takes 60 seconds to apply.</p>
+
+    <!--
+      Netlify Forms: Netlify detects data-netlify="true" at build time.
+      The hidden input ensures form name is forwarded in POST body.
+      action="/ig-thanks.html" redirects on success.
+    -->
+    <form
+      class="podcast-form"
+      id="guest-form"
+      name="podcast-application"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      action="/ig-thanks.html"
+      onsubmit="return handleFormSubmit(event)"
+    >
+      <!-- Netlify hidden fields -->
+      <input type="hidden" name="form-name" value="podcast-application" />
+      <input type="hidden" name="bot-field" style="display:none" aria-hidden="true" />
+
+      <div class="field-group">
+        <label for="ig-name">Your name *</label>
+        <input type="text" id="ig-name" name="name" placeholder="First Last" required autocomplete="name" />
+      </div>
+
+      <div class="field-group">
+        <label for="ig-company">Company name *</label>
+        <input type="text" id="ig-company" name="company" placeholder="ABC Roofing" required autocomplete="organization" />
+      </div>
+
+      <div class="field-group">
+        <label for="ig-trade">Trade *</label>
+        <select id="ig-trade" name="trade" required>
+          <option value="" disabled selected>Select your trade</option>
+          <option value="HVAC">HVAC</option>
+          <option value="Plumbing">Plumbing</option>
+          <option value="Roofing">Roofing</option>
+          <option value="Electrical">Electrical</option>
+          <option value="Landscaping">Landscaping</option>
+          <option value="Garage Doors">Garage Doors</option>
+          <option value="Remodeling">Remodeling</option>
+          <option value="Concrete">Concrete</option>
+          <option value="Pool Service">Pool Service</option>
+          <option value="Tree Service">Tree Service</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label for="ig-revenue">Annual revenue *</label>
+        <select id="ig-revenue" name="annual_revenue" required>
+          <option value="" disabled selected>Select revenue range</option>
+          <option value="Under $1M">Under $1M</option>
+          <option value="$1M-$2M">$1M–$2M</option>
+          <option value="$2M-$5M">$2M–$5M</option>
+          <option value="$5M-$10M">$5M–$10M</option>
+          <option value="$10M+">$10M+</option>
+        </select>
+      </div>
+
+      <!-- Rejection message (shown inline; form stays hidden on submission) -->
+      <div class="rejection-msg" id="rejection-msg" role="alert" aria-live="polite">
+        Thanks for your interest. The show is built for $1M+ owners specifically. We'll keep you on file and reach out if that changes.
+      </div>
+
+      <button type="submit" class="form-submit-btn" data-track="form-submit">
+        Apply for a guest spot →
+      </button>
+
+    </form>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <img src="logo-dark.png" alt="Connectid" />
+    <p>Connectid CRM helps $1M+ home service businesses recover revenue from the customers they already have. <a href="https://connectidcrm.com" target="_blank" rel="noopener">connectidcrm.com</a></p>
+    <p class="copyright">© 2026 Connectid</p>
+  </footer>
+
+  <script>
+    // ── Revenue gate: reject Under $1M before submission ──
+    function handleFormSubmit(e) {
+      const revenueEl = document.getElementById('ig-revenue');
+      const rejMsg    = document.getElementById('rejection-msg');
+      const submitBtn = e.target.querySelector('.form-submit-btn');
+
+      if (revenueEl.value === 'Under $1M') {
+        e.preventDefault();
+        rejMsg.classList.add('visible');
+        // Hide the submit button once rejected so they can't re-try
+        submitBtn.style.display = 'none';
+        // Scroll to message
+        rejMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+      }
+
+      // Make sure rejection message is hidden for qualified submissions
+      rejMsg.classList.remove('visible');
+      return true; // let Netlify take it
+    }
+
+    // ── GA4 click tracking ──
+    document.querySelectorAll('[data-track]').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var evt = el.getAttribute('data-track');
+        if (typeof gtag === 'function') {
+          gtag('event', 'cta_click', {
+            event_category: 'ig_link_in_bio',
+            event_label: evt
+          });
+        }
+      });
+    });
+
+    // ── Smooth scroll for Button 3 (same-page anchor) ──
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
