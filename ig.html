@@ -466,16 +466,10 @@
     <form
       class="podcast-form"
       id="guest-form"
-      name="podcast-application"
       method="POST"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      action="/ig-thanks.html"
+      action="/.netlify/functions/submit-guest"
       onsubmit="return handleFormSubmit(event)"
     >
-      <!-- Netlify hidden fields -->
-      <input type="hidden" name="form-name" value="podcast-application" />
-      <input type="hidden" name="bot-field" style="display:none" aria-hidden="true" />
 
       <div class="field-group">
         <label for="ig-name">Your name *</label>
