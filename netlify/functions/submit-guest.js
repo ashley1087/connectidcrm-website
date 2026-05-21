@@ -2,8 +2,9 @@
 // Receives the podcast application form, gates on revenue,
 // and creates a contact in GoHighLevel with tag "handshake apply".
 
-const GHL_API     = 'https://services.leadconnectorhq.com';
-const LOCATION_ID = 'rZeTsPPOr6CElU2SG1jQ';
+const GHL_API              = 'https://services.leadconnectorhq.com';
+const LOCATION_ID          = 'rZeTsPPOr6CElU2SG1jQ';
+const ANNUAL_REVENUE_FIELD = process.env.GHL_ANNUAL_REVENUE_FIELD_ID || '';
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -18,7 +19,8 @@ exports.handler = async (event) => {
   const revenue = (params.get('annual_revenue') || '').trim();
 
   // ── Server-side revenue gate (backup to the JS check) ──
-  if (!revenue || revenue === 'Under $1M') {
+  const DISQUALIFIED = ['Under $250K', '$250K – $500K', '$500K – $1M'];
+  if (!revenue || DISQUALIFIED.includes(revenue)) {
     return {
       statusCode: 302,
       headers: { Location: '/ig-thanks.html?qualified=false' },
@@ -53,7 +55,10 @@ exports.handler = async (event) => {
         lastName,
         companyName: company,
         source:      'Instagram Link in Bio',
-        tags:        ['handshake apply', `trade: ${trade}`, `revenue: ${revenue}`],
+        tags:        ['handshake apply', `trade: ${trade}`],
+        ...(ANNUAL_REVENUE_FIELD ? {
+          customFields: [{ id: ANNUAL_REVENUE_FIELD, value: revenue }]
+        } : {}),
       }),
     });
 

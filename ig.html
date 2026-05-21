@@ -503,11 +503,13 @@
         <label for="ig-revenue">Annual revenue *</label>
         <select id="ig-revenue" name="annual_revenue" required>
           <option value="" disabled selected>Select revenue range</option>
-          <option value="Under $1M">Under $1M</option>
-          <option value="$1M-$2M">$1M–$2M</option>
-          <option value="$2M-$5M">$2M–$5M</option>
-          <option value="$5M-$10M">$5M–$10M</option>
-          <option value="$10M+">$10M+</option>
+          <option value="Under $250K">Under $250K</option>
+          <option value="$250K – $500K">$250K – $500K</option>
+          <option value="$500K – $1M">$500K – $1M</option>
+          <option value="$1M – $3M">$1M – $3M</option>
+          <option value="$3M – $5M">$3M – $5M</option>
+          <option value="$5M +">$5M +</option>
+          <option value="Prefer not to say">Prefer not to say</option>
         </select>
       </div>
 
@@ -537,7 +539,8 @@
       const rejMsg    = document.getElementById('rejection-msg');
       const submitBtn = e.target.querySelector('.form-submit-btn');
 
-      if (revenueEl.value === 'Under $1M') {
+      const disqualified = ['Under $250K', '$250K – $500K', '$500K – $1M'];
+    if (disqualified.includes(revenueEl.value)) {
         e.preventDefault();
         rejMsg.classList.add('visible');
         // Hide the submit button once rejected so they can't re-try
