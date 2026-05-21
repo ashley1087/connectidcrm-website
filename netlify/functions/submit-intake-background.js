@@ -42,14 +42,14 @@ function ghlHeaders(apiKey) {
   };
 }
 
-async function ghlFindContactByEmail(email, apiKey) {
+async function ghlGetContactIdFromToken(token) {
+  if (!token) return null;
   const res = await fetch(
-    `${GHL_API}/contacts/?locationId=${LOCATION_ID}&query=${encodeURIComponent(email)}`,
-    { headers: ghlHeaders(apiKey) }
+    `${SUPABASE_URL}/rest/v1/intake_invitations?token=eq.${encodeURIComponent(token)}&select=ghl_contact_id&limit=1`,
+    { headers: SB_HEADERS }
   );
-  const data = await res.json();
-  console.log('GHL contact search status:', res.status, 'count:', data?.contacts?.length);
-  return data?.contacts?.[0] || null;
+  const rows = await res.json();
+  return rows?.[0]?.ghl_contact_id || null;
 }
 
 async function ghlGetContact(contactId, apiKey) {
@@ -209,19 +209,13 @@ exports.handler = async (event) => {
     return { statusCode: 202, body: '' };
   }
 
-  // ── 2. Look up GHL contact by email ─────────────────────────────────────
-  const email = payload.contact_email || '';
-  if (!email) {
-    console.error('No contact_email in payload — cannot update GHL');
+  // ── 2. Get GHL contact ID from invitation record ─────────────────────────
+  const contactId = await ghlGetContactIdFromToken(token);
+  if (!contactId) {
+    console.error('No GHL contact ID found for token:', token);
     return { statusCode: 202, body: '' };
   }
-
-  const contact = await ghlFindContactByEmail(email, GHL_KEY);
-  if (!contact) {
-    console.error('GHL contact not found for email:', email);
-    return { statusCode: 202, body: '' };
-  }
-  const contactId = contact.id;
+  console.log('Found GHL contact ID:', contactId);
 
   // ── 3. Add note + tag ────────────────────────────────────────────────────
   const noteBody = formatIntake(payload);

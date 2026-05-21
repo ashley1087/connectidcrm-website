@@ -82,10 +82,11 @@ exports.handler = async (event) => {
             'Prefer': 'return=minimal',
           },
           body: JSON.stringify({
-            token:        token,
-            client_name:  fullName,
-            client_email: email,
-            company_name: company,
+            token:          token,
+            client_name:    fullName,
+            client_email:   email,
+            company_name:   company,
+            ghl_contact_id: contactId,
           }),
         });
         if (!insertRes.ok) {
@@ -105,10 +106,11 @@ exports.handler = async (event) => {
           'Prefer': 'return=minimal',
         },
         body: JSON.stringify({
-          token:        token,
-          client_name:  fullName,
-          client_email: email,
-          company_name: company,
+          token:          token,
+          client_name:    fullName,
+          client_email:   email,
+          company_name:   company,
+          ghl_contact_id: contactId,
         }),
       });
     }
