@@ -2,9 +2,8 @@
 // Receives the podcast application form, gates on revenue,
 // and creates a contact in GoHighLevel with tag "handshake apply".
 
-const GHL_API              = 'https://services.leadconnectorhq.com';
-const LOCATION_ID          = 'rZeTsPPOr6CElU2SG1jQ';
-const ANNUAL_REVENUE_FIELD = process.env.GHL_ANNUAL_REVENUE_FIELD_ID || '';
+const GHL_API     = 'https://services.leadconnectorhq.com';
+const LOCATION_ID = 'rZeTsPPOr6CElU2SG1jQ';
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -56,9 +55,7 @@ exports.handler = async (event) => {
         companyName: company,
         source:      'Instagram Link in Bio',
         tags:        ['handshake apply', `trade: ${trade}`],
-        ...(ANNUAL_REVENUE_FIELD ? {
-          customFields: [{ id: ANNUAL_REVENUE_FIELD, value: revenue }]
-        } : {}),
+        customFields: [{ fieldKey: 'annual_revenue', value: revenue }],
       }),
     });
 
