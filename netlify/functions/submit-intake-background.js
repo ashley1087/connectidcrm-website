@@ -44,10 +44,11 @@ function ghlHeaders(apiKey) {
 
 async function ghlFindContactByEmail(email, apiKey) {
   const res = await fetch(
-    `${GHL_API}/contacts/?locationId=${LOCATION_ID}&email=${encodeURIComponent(email)}`,
+    `${GHL_API}/contacts/?locationId=${LOCATION_ID}&query=${encodeURIComponent(email)}`,
     { headers: ghlHeaders(apiKey) }
   );
   const data = await res.json();
+  console.log('GHL contact search status:', res.status, 'count:', data?.contacts?.length);
   return data?.contacts?.[0] || null;
 }
 
