@@ -673,10 +673,23 @@
       if (payload[k] === '') payload[k] = null;
     });
 
-    const { error } = await sbInsert('strategy_first_intakes', payload);
+    // POST to background function — handles Supabase + GHL note/tag + ClickUp subtask
+    let res;
+    try {
+      res = await fetch('/.netlify/functions/submit-intake-background', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } catch (e) {
+      console.error(e);
+      showError('Something went wrong submitting your intake. Please email ashley@connectidcrm.com and we\'ll sort it out.');
+      btnNext.disabled = false;
+      btnNext.textContent = 'Submit intake';
+      return;
+    }
 
-    if (error) {
-      console.error(error);
+    if (!res.ok && res.status !== 202) {
       showError('Something went wrong submitting your intake. Please email ashley@connectidcrm.com and we\'ll sort it out.');
       btnNext.disabled = false;
       btnNext.textContent = 'Submit intake';
