@@ -120,7 +120,7 @@ function buildEmailHtml(firstName, total, scores, weakestStage) {
             <td style="padding:28px 32px 0;text-align:center;">
               <p style="margin:0 0 6px;font-size:16px;font-weight:800;color:#111;">Want to fix the leaks?</p>
               <p style="margin:0 0 18px;font-size:14px;color:#6c757d;line-height:1.6;">Connectid works with $1M+ home service businesses to recover revenue from the customers they already have. No ads. No funnels.</p>
-              <a href="https://connectidcrm.com/contact?utm_source=audit-email&utm_medium=email&utm_campaign=audit-results"
+              <a href="https://link.connectidcrm.com/widget/booking/rBfjlEMkmCmO5uszg1ET?utm_source=audit-email&utm_medium=email&utm_campaign=audit-results"
                  style="display:inline-block;padding:14px 28px;background:linear-gradient(135deg,#FA5E36,#EB3656);color:#fff;text-decoration:none;border-radius:10px;font-size:15px;font-weight:700;letter-spacing:-0.2px;">
                 Book a free strategy call →
               </a>
