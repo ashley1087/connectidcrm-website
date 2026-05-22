@@ -1,8 +1,75 @@
 // Netlify Function: send-audit-email
 // Called after the Marketing Hourglass Audit email capture.
-// Sends a personalized results email via Resend.
+// 1. Sends a personalized results email via Resend.
+// 2. Creates or updates the contact in GHL and tags them "leak audit taken".
 
-const RESEND_API = 'https://api.resend.com/emails';
+const RESEND_API  = 'https://api.resend.com/emails';
+const GHL_API     = 'https://services.leadconnectorhq.com';
+const LOCATION_ID = 'rZeTsPPOr6CElU2SG1jQ';
+
+// ── GHL helpers ──────────────────────────────────────────────────────────────
+function ghlHeaders(apiKey) {
+  return {
+    Authorization:  `Bearer ${apiKey}`,
+    'Content-Type': 'application/json',
+    Version:        '2021-07-28',
+  };
+}
+
+async function ghlFindOrCreateContact(firstName, email, apiKey) {
+  // 1. Search by email
+  const searchRes = await fetch(
+    `${GHL_API}/contacts/?locationId=${LOCATION_ID}&email=${encodeURIComponent(email)}`,
+    { headers: ghlHeaders(apiKey) }
+  );
+  const searchData = await searchRes.json();
+  const existing   = searchData?.contacts?.[0] || null;
+  if (existing) return existing.id;
+
+  // 2. Not found — create
+  const createRes = await fetch(`${GHL_API}/contacts/`, {
+    method:  'POST',
+    headers: ghlHeaders(apiKey),
+    body:    JSON.stringify({
+      locationId: LOCATION_ID,
+      firstName:  firstName || '',
+      email:      email,
+      source:     'Leak Audit',
+    }),
+  });
+  const createData = await createRes.json();
+  return createData?.contact?.id || null;
+}
+
+async function ghlAddTag(contactId, tag, apiKey) {
+  await fetch(`${GHL_API}/contacts/${contactId}/tags`, {
+    method:  'POST',
+    headers: ghlHeaders(apiKey),
+    body:    JSON.stringify({ tags: [tag] }),
+  });
+}
+
+async function ghlAddNote(contactId, body, apiKey) {
+  await fetch(`${GHL_API}/contacts/${contactId}/notes`, {
+    method:  'POST',
+    headers: ghlHeaders(apiKey),
+    body:    JSON.stringify({ body }),
+  });
+}
+
+function formatAuditNote(firstName, total, scores, weakestStage) {
+  const lines = [
+    '📊 Marketing Hourglass Audit — ' + new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+    `Score: ${total}/28 | Biggest leak: ${weakestStage}`,
+    '',
+  ];
+  const STAGES = ['Know', 'Like', 'Trust', 'Try', 'Buy', 'Repeat', 'Refer'];
+  STAGES.forEach((stage, i) => {
+    const s = scores[i + 1] || scores[String(i + 1)] || 0;
+    lines.push(`${stage}: ${s}/4`);
+  });
+  return lines.join('\n');
+}
 
 const STAGES = ['Know', 'Like', 'Trust', 'Try', 'Buy', 'Repeat', 'Refer'];
 
@@ -170,36 +237,52 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: 'email required' }) };
   }
 
-  const html = buildEmailHtml(firstName, total, scores, weakestStage);
+  const GHL_KEY = process.env.GHL_API_KEY;
 
-  const subject = `Your Marketing Hourglass Score: ${total}/28 (${weakestStage} needs attention)`;
-
-  try {
+  // Run email send + GHL upsert in parallel
+  const emailPromise = (async () => {
+    const html    = buildEmailHtml(firstName, total, scores, weakestStage);
+    const subject = `Your Marketing Hourglass Score: ${total}/28 (${weakestStage} needs attention)`;
     const res = await fetch(RESEND_API, {
       method:  'POST',
-      headers: {
-        Authorization:  `Bearer ${RESEND_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+      headers: { Authorization: `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' },
+      body:    JSON.stringify({
         from:    'Ashley DePiano <ashley@connectidcrm.com>',
         to:      [email],
         subject: subject,
         html:    html,
       }),
     });
-
     const data = await res.json();
-    if (!res.ok) {
-      console.error('Resend error:', JSON.stringify(data));
-      return { statusCode: 200, body: JSON.stringify({ ok: false, error: data }) };
+    if (!res.ok) console.error('Resend error:', JSON.stringify(data));
+    else console.log('Audit email sent to:', email, '| id:', data.id);
+    return data;
+  })();
+
+  const ghlPromise = (async () => {
+    if (!GHL_KEY) {
+      console.log('GHL_API_KEY not set — skipping CRM sync');
+      return;
     }
+    try {
+      const contactId = await ghlFindOrCreateContact(firstName, email, GHL_KEY);
+      if (!contactId) { console.error('Could not find/create GHL contact for:', email); return; }
+      const note = formatAuditNote(firstName, total, scores, weakestStage);
+      await Promise.all([
+        ghlAddTag(contactId, 'leak audit taken', GHL_KEY),
+        ghlAddNote(contactId, note, GHL_KEY),
+      ]);
+      console.log('GHL contact tagged + noted:', contactId);
+    } catch (err) {
+      console.error('GHL sync error:', err.message);
+    }
+  })();
 
-    console.log('Audit email sent to:', email, '| id:', data.id);
-    return { statusCode: 200, body: JSON.stringify({ ok: true, id: data.id }) };
-
+  try {
+    await Promise.all([emailPromise, ghlPromise]);
+    return { statusCode: 200, body: JSON.stringify({ ok: true }) };
   } catch (err) {
-    console.error('Send email exception:', err.message);
+    console.error('Handler exception:', err.message);
     return { statusCode: 200, body: JSON.stringify({ ok: false, error: err.message }) };
   }
 };
