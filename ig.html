@@ -3,172 +3,161 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ashley DePiano · The Handshake Business · Connectid</title>
-  <meta name="description" content="Founder of Connectid and host of The Handshake Business. Helping home service businesses doing $1M+ recover revenue from the customers they already have." />
+  <title>Ashley DePiano · Connectid</title>
   <meta name="robots" content="noindex, nofollow" />
-
-  <!-- OG -->
-  <meta property="og:title" content="Ashley DePiano · The Handshake Business" />
-  <meta property="og:description" content="Helping home service businesses doing $1M+ recover revenue from the customers they already have." />
+  <meta property="og:title" content="Ashley DePiano · Connectid" />
+  <meta property="og:description" content="For trades owners who are tired of working more and making less." />
   <meta property="og:image" content="ashley-headshot.jpg" />
   <meta property="og:type" content="website" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:           #111111;
-      --navy2:          #1a1a1a;
       --orange:         #FF1744;
-      --orange-light:   #ff6384;
       --brand-gradient: linear-gradient(135deg, #FA5E36, #EB3656);
-      --off-white:      #FAF9F8;
+      --navy:           #111111;
       --gray-200:       #F0EFEE;
       --gray-600:       #6c757d;
-      --text:           #1a1a1a;
-      --radius:         10px;
-      --shadow:         0 4px 24px rgba(0,0,0,0.08);
+      --off-white:      #FAF9F8;
+      --radius:         12px;
     }
 
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    html { -webkit-text-size-adjust: 100%; }
 
     body {
       font-family: 'Poppins', -apple-system, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--text);
       background: #fff;
+      color: var(--navy);
       -webkit-font-smoothing: antialiased;
-      max-width: 480px;     /* keeps it phone-feel on desktop too */
+      max-width: 480px;
       margin: 0 auto;
-      padding: 0 0 40px;
+      padding: 0 0 60px;
     }
 
     /* ── HERO ── */
     .hero {
-      padding: 48px 24px 32px;
+      padding: 52px 28px 40px;
       text-align: center;
     }
 
-    .hero-photo-wrap {
-      width: 100px;
-      height: 100px;
+    .hero-photo {
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
       overflow: hidden;
-      margin: 0 auto 20px;
+      margin: 0 auto 24px;
       border: 3px solid var(--gray-200);
+      background: var(--gray-200);
     }
-    .hero-photo-wrap img {
+    .hero-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center top;
+      display: block;
     }
 
-    .hero-name {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 6px;
-    }
-
-    .hero-tagline {
-      font-size: 14px;
+    .hero-identity {
+      font-size: 13px;
       font-weight: 600;
-      color: var(--orange);
-      margin-bottom: 14px;
-      line-height: 1.4;
+      color: var(--gray-600);
+      letter-spacing: 0.3px;
+      margin-bottom: 16px;
     }
 
-    .hero-bio {
-      font-size: 15px;
+    .hero-h1 {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      color: var(--navy);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 500;
       color: var(--gray-600);
-      line-height: 1.65;
-      max-width: 340px;
-      margin: 0 auto;
+      line-height: 1.6;
+      max-width: 320px;
+      margin: 0 auto 32px;
+    }
+
+    /* ── PRIMARY CTA ── */
+    .cta-wrap {
+      padding: 0 28px;
+      text-align: center;
+    }
+
+    .cta-btn {
+      display: block;
+      width: 100%;
+      padding: 18px 24px;
+      background: var(--brand-gradient);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all .18s ease;
+      box-shadow: 0 4px 20px rgba(235,54,86,0.3);
+    }
+    .cta-btn:hover {
+      opacity: 0.93;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(235,54,86,0.4);
+    }
+    .cta-btn:active { transform: translateY(0); }
+
+    .cta-sub {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.5;
     }
 
     /* ── DIVIDER ── */
     .divider {
       height: 1px;
       background: var(--gray-200);
-      margin: 28px 24px;
+      margin: 40px 28px;
     }
 
-    /* ── CTA BUTTONS ── */
-    .cta-stack {
-      padding: 0 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    /* ── ABOUT BLOCK ── */
+    .about {
+      padding: 0 28px;
     }
 
-    .cta-item {
+    .about-eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--orange);
+      margin-bottom: 10px;
       display: block;
-      text-decoration: none;
-    }
-    .cta-item.scroll-cta {
-      cursor: pointer;
     }
 
-    .cta-btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      width: 100%;
-      min-height: 56px;
-      padding: 14px 20px;
-      border-radius: var(--radius);
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: -0.1px;
-      border: none;
-      cursor: pointer;
-      text-align: left;
-      transition: all .18s ease;
-      text-decoration: none;
+    .about-text {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.7;
     }
-
-    /* Button 1 — primary gradient */
-    .cta-btn-primary {
-      background: var(--brand-gradient);
-      color: white;
-    }
-    .cta-btn-primary:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(235,54,86,0.35); }
-
-    /* Buttons 2 & 3 — outlined dark */
-    .cta-btn-secondary {
-      background: #fff;
-      color: var(--navy);
-      border: 2px solid var(--gray-200);
-    }
-    .cta-btn-secondary:hover { border-color: var(--orange); }
-
-    .cta-btn-label { flex: 1; }
-    .cta-btn-arrow { font-size: 18px; flex-shrink: 0; }
-
-    .cta-sub {
-      font-size: 12px;
-      font-weight: 400;
-      opacity: 0.7;
-      margin-top: 2px;
-      display: block;
-      line-height: 1.4;
-    }
-    /* sub-text color on primary button */
-    .cta-btn-primary .cta-sub { opacity: 0.85; }
 
     /* ── SOCIAL PROOF ── */
     .proof {
-      margin: 36px 24px 0;
+      margin: 32px 28px 0;
       background: var(--off-white);
       border-radius: var(--radius);
-      padding: 20px 20px;
+      padding: 20px 22px;
     }
 
     .proof-label {
@@ -181,402 +170,188 @@
       display: block;
     }
 
-    .proof-guests {
+    .proof-list {
       list-style: none;
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
 
-    .proof-guest {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
+    .proof-item {
       font-size: 14px;
       line-height: 1.4;
     }
 
-    .proof-guest-name {
-      font-weight: 700;
-      color: var(--text);
-    }
+    .proof-name { font-weight: 700; color: var(--navy); }
+    .proof-co   { color: var(--gray-600); font-size: 13px; }
 
-    .proof-guest-co {
-      color: var(--gray-600);
-      font-size: 13px;
-    }
-
-    /* ── FORM SECTION ── */
-    .form-section {
-      margin: 36px 0 0;
-      padding: 0 24px;
-      scroll-margin-top: 24px;
-    }
-
-    .form-section-label {
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--orange);
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .form-section h2 {
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: -0.8px;
-      line-height: 1.15;
-      margin-bottom: 8px;
-    }
-
-    .form-section p {
-      font-size: 14px;
-      color: var(--gray-600);
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    .podcast-form {
+    /* ── PODCAST LINK ── */
+    .podcast-link {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 14px;
-    }
-
-    .field-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .field-group label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .field-group input,
-    .field-group select {
-      width: 100%;
-      min-height: 48px;
-      padding: 12px 14px;
-      border: 1.5px solid var(--gray-200);
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 15px;
-      color: var(--text);
-      background: #fff;
-      transition: border-color .15s;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    .field-group select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236c757d' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
-    }
-    .field-group input:focus,
-    .field-group select:focus {
-      outline: none;
-      border-color: var(--orange);
-    }
-
-    .form-submit-btn {
-      width: 100%;
-      min-height: 56px;
-      padding: 16px 24px;
-      background: var(--brand-gradient);
-      color: white;
-      border: none;
-      border-radius: var(--radius);
-      font-family: 'Poppins', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .18s ease;
-      margin-top: 4px;
-    }
-    .form-submit-btn:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(235,54,86,0.35); }
-
-    /* Rejection message */
-    .rejection-msg {
-      display: none;
-      background: var(--off-white);
-      border-left: 3px solid var(--orange);
-      border-radius: 0 8px 8px 0;
+      margin: 28px 28px 0;
       padding: 16px 18px;
-      font-size: 14px;
-      color: var(--gray-600);
-      line-height: 1.6;
-      margin-top: 4px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--navy);
+      transition: border-color .15s;
     }
-    .rejection-msg.visible { display: block; }
+    .podcast-link:hover { border-color: var(--orange); }
+
+    .podcast-icon {
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    .podcast-text { flex: 1; }
+
+    .podcast-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .podcast-desc {
+      font-size: 12px;
+      color: var(--gray-600);
+      line-height: 1.4;
+    }
+
+    .podcast-arrow {
+      font-size: 18px;
+      color: var(--gray-600);
+      flex-shrink: 0;
+    }
 
     /* ── FOOTER ── */
     footer {
-      margin: 48px 24px 0;
-      padding-top: 24px;
+      margin: 44px 28px 0;
+      padding-top: 22px;
       border-top: 1px solid var(--gray-200);
       text-align: center;
     }
 
-    footer img {
-      height: 24px;
-      margin-bottom: 10px;
-    }
+    footer img { height: 22px; margin-bottom: 10px; }
 
     footer p {
       font-size: 12px;
       color: var(--gray-600);
       line-height: 1.6;
       max-width: 300px;
-      margin: 0 auto 8px;
+      margin: 0 auto 6px;
     }
 
     footer a { color: var(--orange); text-decoration: none; }
 
-    footer .copyright {
+    .copyright {
       font-size: 11px;
       color: #adb5bd;
       margin-top: 8px;
     }
-
-    /* ── GA event tracking hook (visual none) ── */
-    [data-track] { /* no style — JS handles */ }
   </style>
-  <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="apple-touch-icon" href="favicon.png" />
 </head>
 <body>
 
   <!-- ══ HERO ══ -->
   <div class="hero">
-    <div class="hero-photo-wrap">
-      <!--
-        PHOTO NEEDED: Drop your IG profile photo into the repo root
-        as "ashley-headshot.jpg" (square crop, ideally 400×400px or larger).
-        Until then this renders a grey circle.
-      -->
+
+    <div class="hero-photo">
       <img
         src="ashley-headshot.jpg"
         alt="Ashley DePiano"
-        onerror="this.style.background='#F0EFEE'; this.style.display='block'; this.removeAttribute('src');"
+        onerror="this.style.display='none'"
       />
     </div>
-    <h1 class="hero-name">Ashley DePiano</h1>
-    <p class="hero-tagline">Founder, Connectid &nbsp;·&nbsp; Host, The Handshake Business</p>
-    <p class="hero-bio">I help home service businesses doing $1M+ recover the money already in their book — dormant customers, missed calls, unbooked estimates. No ads. No funnels. Real systems.</p>
+
+    <p class="hero-identity">Ashley DePiano &nbsp;·&nbsp; Founder, Connectid &nbsp;·&nbsp; Host, The Handshake Business</p>
+
+    <h1 class="hero-h1">For trades owners who are tired of working more and making less.</h1>
+
+    <p class="hero-sub">The free audit that shows you the dollars already sitting in your customer book.</p>
+
+  </div>
+
+  <!-- ══ PRIMARY CTA ══ -->
+  <div class="cta-wrap">
+    <a
+      class="cta-btn"
+      href="/audit.html?utm_source=ig&utm_medium=bio&utm_campaign=link_in_bio"
+      data-track="cta-audit"
+    >
+      Show me my leaks →
+    </a>
+    <p class="cta-sub">15 minutes. For $1M+ home service owners. No fluff.</p>
   </div>
 
   <div class="divider"></div>
 
-  <!-- ══ CTA STACK ══ -->
-  <div class="cta-stack">
-
-    <!-- Button 1 — primary: podcast -->
-    <a
-      class="cta-item"
-      href="https://www.youtube.com/playlist?list=PLr8L1iEc1z2p7xEe6jqqBnIRHVekQOInm&utm_source=ig&utm_medium=bio&utm_campaign=link_in_bio&utm_content=podcast"
-      target="_blank"
-      rel="noopener noreferrer"
-      data-track="cta-podcast"
-    >
-      <div class="cta-btn cta-btn-primary">
-        <span class="cta-btn-label">
-          🎙 Listen to The Handshake Business
-          <span class="cta-sub">Real conversations with $1M+ trades owners.</span>
-        </span>
-        <span class="cta-btn-arrow">↗</span>
-      </div>
-    </a>
-
-    <!-- Button 2 — loom walkthrough -->
-    <a
-      class="cta-item"
-      href="https://loom.com/[LOOM_URL]?utm_source=ig&utm_medium=bio&utm_campaign=link_in_bio&utm_content=loom"
-      target="_blank"
-      rel="noopener noreferrer"
-      data-track="cta-loom"
-      id="loom-btn"
-    >
-      <div class="cta-btn cta-btn-secondary">
-        <span class="cta-btn-label">
-          ▶ Watch how Connectid works (5 min)
-          <span class="cta-sub">Loom walk-through of one specific revenue leak being plugged.</span>
-        </span>
-        <span class="cta-btn-arrow">↗</span>
-      </div>
-    </a>
-
-    <!-- Button 3 — scroll to form -->
-    <a
-      class="cta-item scroll-cta"
-      href="#podcast-form"
-      data-track="cta-guest-form"
-    >
-      <div class="cta-btn cta-btn-secondary">
-        <span class="cta-btn-label">
-          🎤 Get on the podcast
-          <span class="cta-sub">$1M+ home service owners only. Free guest spot.</span>
-        </span>
-        <span class="cta-btn-arrow">↓</span>
-      </div>
-    </a>
-
+  <!-- ══ ABOUT ══ -->
+  <div class="about">
+    <span class="about-eyebrow">About Connectid</span>
+    <p class="about-text">We help $1M+ home service businesses recover the revenue already in their book — dormant customers, missed calls, unbooked estimates. No paid ads. No funnels. Real systems.</p>
   </div>
 
   <!-- ══ SOCIAL PROOF ══ -->
   <div class="proof">
-    <span class="proof-label">Recent Guests</span>
-    <ul class="proof-guests">
-      <li class="proof-guest">
-        <span class="proof-guest-name">Casarra Cover</span>
-        <span class="proof-guest-co">· Whitaker Garage Doors</span>
+    <span class="proof-label">Podcast Guests</span>
+    <ul class="proof-list">
+      <li class="proof-item">
+        <span class="proof-name">Casarra Cover</span>
+        <span class="proof-co"> · Whitaker Garage Doors</span>
       </li>
-      <li class="proof-guest">
-        <span class="proof-guest-name">Micah Beatty</span>
-        <span class="proof-guest-co">· Division 7 Millwork</span>
+      <li class="proof-item">
+        <span class="proof-name">Micah Beatty</span>
+        <span class="proof-co"> · Division 7 Millwork</span>
       </li>
-      <li class="proof-guest">
-        <span class="proof-guest-name">Miguel Banuelos</span>
-        <span class="proof-guest-co">· Pristine Concrete Denver</span>
+      <li class="proof-item">
+        <span class="proof-name">Miguel Banuelos</span>
+        <span class="proof-co"> · Pristine Concrete Denver</span>
       </li>
-      <li class="proof-guest">
-        <span class="proof-guest-name">Apollo Arellano</span>
-        <span class="proof-guest-co">· Get Pro Landscaping</span>
+      <li class="proof-item">
+        <span class="proof-name">Apollo Arellano</span>
+        <span class="proof-co"> · Get Pro Landscaping</span>
       </li>
-      <li class="proof-guest">
-        <span class="proof-guest-name">Korey Mack</span>
-        <span class="proof-guest-co">· Start the Party</span>
+      <li class="proof-item">
+        <span class="proof-name">Korey Mack</span>
+        <span class="proof-co"> · Start the Party</span>
       </li>
     </ul>
   </div>
 
-  <!-- ══ PODCAST APPLICATION FORM ══ -->
-  <div class="form-section" id="podcast-form">
-    <span class="form-section-label">Apply to Guest</span>
-    <h2>Get on<br/>The Handshake Business</h2>
-    <p>Built for $1M+ home service owners. Honest conversation, no pitch. Takes 60 seconds to apply.</p>
-
-    <!--
-      Netlify Forms: Netlify detects data-netlify="true" at build time.
-      The hidden input ensures form name is forwarded in POST body.
-      action="/ig-thanks.html" redirects on success.
-    -->
-    <form
-      class="podcast-form"
-      id="guest-form"
-      method="POST"
-      action="/.netlify/functions/submit-guest"
-      onsubmit="return handleFormSubmit(event)"
-    >
-
-      <div class="field-group">
-        <label for="ig-name">Your name *</label>
-        <input type="text" id="ig-name" name="name" placeholder="First Last" required autocomplete="name" />
-      </div>
-
-      <div class="field-group">
-        <label for="ig-company">Company name *</label>
-        <input type="text" id="ig-company" name="company" placeholder="ABC Roofing" required autocomplete="organization" />
-      </div>
-
-      <div class="field-group">
-        <label for="ig-trade">Trade *</label>
-        <select id="ig-trade" name="trade" required>
-          <option value="" disabled selected>Select your trade</option>
-          <option value="HVAC">HVAC</option>
-          <option value="Plumbing">Plumbing</option>
-          <option value="Roofing">Roofing</option>
-          <option value="Electrical">Electrical</option>
-          <option value="Landscaping">Landscaping</option>
-          <option value="Garage Doors">Garage Doors</option>
-          <option value="Remodeling">Remodeling</option>
-          <option value="Concrete">Concrete</option>
-          <option value="Pool Service">Pool Service</option>
-          <option value="Tree Service">Tree Service</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div class="field-group">
-        <label for="ig-revenue">Annual revenue *</label>
-        <select id="ig-revenue" name="annual_revenue" required>
-          <option value="" disabled selected>Select revenue range</option>
-          <option value="Under $250K">Under $250K</option>
-          <option value="$250K – $500K">$250K – $500K</option>
-          <option value="$500K – $1M">$500K – $1M</option>
-          <option value="$1M – $3M">$1M – $3M</option>
-          <option value="$3M - $5M">$3M - $5M</option>
-          <option value="$5M +">$5M +</option>
-          <option value="Prefer not to say">Prefer not to say</option>
-        </select>
-      </div>
-
-      <!-- Rejection message (shown inline; form stays hidden on submission) -->
-      <div class="rejection-msg" id="rejection-msg" role="alert" aria-live="polite">
-        Thanks for your interest. The show is built for $1M+ owners specifically. We'll keep you on file and reach out if that changes.
-      </div>
-
-      <button type="submit" class="form-submit-btn" data-track="form-submit">
-        Apply for a guest spot →
-      </button>
-
-    </form>
-  </div>
+  <!-- ══ PODCAST LINK ══ -->
+  <a
+    class="podcast-link"
+    href="https://www.youtube.com/playlist?list=PLr8L1iEc1z2p7xEe6jqqBnIRHVekQOInm&utm_source=ig&utm_medium=bio&utm_campaign=link_in_bio&utm_content=podcast"
+    target="_blank"
+    rel="noopener noreferrer"
+    data-track="cta-podcast"
+  >
+    <span class="podcast-icon">🎙</span>
+    <span class="podcast-text">
+      <span class="podcast-title">The Handshake Business</span>
+      <span class="podcast-desc">Real conversations with $1M+ trades owners. No sponsors.</span>
+    </span>
+    <span class="podcast-arrow">↗</span>
+  </a>
 
   <!-- ══ FOOTER ══ -->
   <footer>
     <img src="logo-dark.png" alt="Connectid" />
-    <p>Connectid CRM helps $1M+ home service businesses recover revenue from the customers they already have. <a href="https://connectidcrm.com" target="_blank" rel="noopener">connectidcrm.com</a></p>
+    <p>CRM + done-with-you service for home service businesses. <a href="https://connectidcrm.com" target="_blank" rel="noopener">connectidcrm.com</a></p>
     <p class="copyright">© 2026 Connectid</p>
   </footer>
 
   <script>
-    // ── Revenue gate: reject Under $1M before submission ──
-    function handleFormSubmit(e) {
-      const revenueEl = document.getElementById('ig-revenue');
-      const rejMsg    = document.getElementById('rejection-msg');
-      const submitBtn = e.target.querySelector('.form-submit-btn');
-
-      const disqualified = ['Under $250K', '$250K – $500K', '$500K – $1M'];
-    if (disqualified.includes(revenueEl.value)) {
-        e.preventDefault();
-        rejMsg.classList.add('visible');
-        // Hide the submit button once rejected so they can't re-try
-        submitBtn.style.display = 'none';
-        // Scroll to message
-        rejMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return false;
-      }
-
-      // Make sure rejection message is hidden for qualified submissions
-      rejMsg.classList.remove('visible');
-      return true; // let Netlify take it
-    }
-
-    // ── GA4 click tracking ──
+    // GA4 click tracking
     document.querySelectorAll('[data-track]').forEach(function(el) {
       el.addEventListener('click', function() {
-        var evt = el.getAttribute('data-track');
         if (typeof gtag === 'function') {
           gtag('event', 'cta_click', {
             event_category: 'ig_link_in_bio',
-            event_label: evt
+            event_label: el.getAttribute('data-track')
           });
-        }
-      });
-    });
-
-    // ── Smooth scroll for Button 3 (same-page anchor) ──
-    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-      a.addEventListener('click', function(e) {
-        var target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });

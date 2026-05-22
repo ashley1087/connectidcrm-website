@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marketing Hourglass Audit · Connectid</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:         #FF1744;
+      --brand-gradient: linear-gradient(135deg, #FA5E36, #EB3656);
+      --navy:           #111111;
+      --gray-100:       #F7F6F5;
+      --gray-200:       #F0EFEE;
+      --gray-600:       #6c757d;
+      --radius:         12px;
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: 'Poppins', -apple-system, sans-serif;
+      background: #fff;
+      color: var(--navy);
+      -webkit-font-smoothing: antialiased;
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-wrap {
+      padding: 20px 24px 0;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .progress-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-600);
+      letter-spacing: 0.3px;
+    }
+
+    .progress-stage {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--orange);
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--brand-gradient);
+      border-radius: 4px;
+      transition: width .4s ease;
+    }
+
+    /* ── QUESTION SCREEN ── */
+    .screen {
+      display: none;
+      padding: 32px 24px 24px;
+      animation: fadeIn .25s ease;
+    }
+    .screen.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Intro screen */
+    .intro-screen {
+      text-align: center;
+      padding: 52px 28px 32px;
+    }
+
+    .intro-badge {
+      display: inline-block;
+      background: var(--gray-100);
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 22px;
+    }
+
+    .intro-h1 {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.6px;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .intro-sub {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.65;
+      margin-bottom: 10px;
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .intro-time {
+      font-size: 13px;
+      color: var(--gray-600);
+      margin-bottom: 32px;
+    }
+
+    .intro-time strong {
+      color: var(--navy);
+    }
+
+    /* Question header */
+    .q-eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--orange);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .q-text {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      line-height: 1.25;
+      margin-bottom: 24px;
+      color: var(--navy);
+    }
+
+    /* Answer cards */
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .answer-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .answer-card:hover { border-color: #d4d0ce; }
+    .answer-card.selected {
+      border-color: var(--orange);
+      background: #fff5f5;
+    }
+
+    .answer-letter {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-200);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gray-600);
+      transition: border-color .15s, background .15s, color .15s;
+      margin-top: 1px;
+    }
+    .answer-card.selected .answer-letter {
+      border-color: var(--orange);
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .answer-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    /* Next button */
+    .next-btn {
+      display: block;
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--brand-gradient);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .18s ease;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .next-btn.enabled {
+      opacity: 1;
+      pointer-events: auto;
+      box-shadow: 0 4px 20px rgba(235,54,86,0.3);
+    }
+    .next-btn.enabled:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(235,54,86,0.4);
+    }
+    .next-btn.enabled:active { transform: translateY(0); }
+
+    /* ── EMAIL CAPTURE SCREEN ── */
+    .email-screen {
+      text-align: center;
+      padding: 40px 28px 32px;
+    }
+
+    .email-icon { font-size: 48px; margin-bottom: 18px; }
+
+    .email-h2 {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .email-sub {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .email-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .email-form input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      color: var(--navy);
+      background: #fff;
+      transition: border-color .15s;
+      -webkit-appearance: none;
+    }
+    .email-form input:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+    .email-form input::placeholder { color: #adb5bd; }
+
+    .email-submit-btn {
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--brand-gradient);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .18s ease;
+      box-shadow: 0 4px 20px rgba(235,54,86,0.3);
+      margin-top: 4px;
+    }
+    .email-submit-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(235,54,86,0.4);
+    }
+    .email-submit-btn:disabled {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+
+    .email-privacy {
+      font-size: 11px;
+      color: var(--gray-600);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* Honeypot */
+    .hp-field { display: none !important; }
+
+    /* ── RESULTS SCREEN ── */
+    .results-screen {
+      padding: 32px 24px 40px;
+    }
+
+    .results-eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--orange);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .score-hero {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .score-number {
+      font-size: 60px;
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 1;
+      color: var(--navy);
+    }
+
+    .score-denom {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gray-600);
+    }
+
+    .score-tier {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .tier-early   { background: #fff1f0; color: #c0392b; }
+    .tier-growing { background: #fff8e1; color: #e67e22; }
+    .tier-strong  { background: #e8f8f0; color: #27ae60; }
+
+    .results-intro {
+      font-size: 15px;
+      color: var(--gray-600);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    /* Weakest stage highlight */
+    .leak-box {
+      background: #fff5f5;
+      border: 1.5px solid #ffd5d5;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 28px;
+    }
+
+    .leak-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--orange);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .leak-stage {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+
+    .leak-rec {
+      font-size: 14px;
+      color: var(--navy);
+      line-height: 1.6;
+    }
+
+    /* Stage breakdown */
+    .breakdown-title {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--gray-600);
+      margin-bottom: 14px;
+    }
+
+    .stage-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .stage-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stage-name {
+      font-size: 13px;
+      font-weight: 700;
+      width: 64px;
+      flex-shrink: 0;
+      color: var(--navy);
+    }
+
+    .stage-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .stage-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: var(--brand-gradient);
+      transition: width .6s ease;
+    }
+
+    .stage-score {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-600);
+      width: 28px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* CTA after results */
+    .results-cta {
+      text-align: center;
+    }
+
+    .results-cta-h3 {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+
+    .results-cta-p {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .results-cta-btn {
+      display: block;
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--brand-gradient);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all .18s ease;
+      box-shadow: 0 4px 20px rgba(235,54,86,0.3);
+    }
+    .results-cta-btn:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+    }
+
+    .results-back {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--gray-600);
+      text-align: center;
+    }
+    .results-back a {
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    /* ── LOADING STATE ── */
+    .loading-screen {
+      text-align: center;
+      padding: 80px 28px;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--gray-200);
+      border-top-color: var(--orange);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text {
+      font-size: 15px;
+      color: var(--gray-600);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── PROGRESS BAR (hidden on intro/email/results) ── -->
+  <div class="progress-wrap" id="progress-wrap" style="display:none">
+    <div class="progress-header">
+      <span class="progress-label" id="progress-label">Question 1 of 7</span>
+      <span class="progress-stage" id="progress-stage">KNOW</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width:14%"></div>
+    </div>
+  </div>
+
+  <!-- ══ INTRO SCREEN ══ -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-screen">
+      <span class="intro-badge">Free · 7 Questions</span>
+      <h1 class="intro-h1">Marketing Hourglass Audit</h1>
+      <p class="intro-sub">Find out exactly where your marketing system is leaking — and what to fix first.</p>
+      <p class="intro-time"><strong>7 questions.</strong> Under 3 minutes. You'll see your results instantly.</p>
+      <button class="next-btn enabled" onclick="startAudit()">Start the audit →</button>
+    </div>
+  </div>
+
+  <!-- ══ QUESTION SCREENS (Q1–Q7) ══ -->
+
+  <!-- Q1: KNOW -->
+  <div class="screen" id="screen-q1">
+    <span class="q-eyebrow">Stage 1 · Know</span>
+    <h2 class="q-text">How do new customers typically first hear about you?</h2>
+    <div class="answers">
+      <div class="answer-card" data-q="1" data-score="1" onclick="selectAnswer(this)">
+        <span class="answer-letter">A</span>
+        <span class="answer-text">Mostly random — we rely on whoever happens to find us</span>
+      </div>
+      <div class="answer-card" data-q="1" data-score="2" onclick="selectAnswer(this)">
+        <span class="answer-letter">B</span>
+        <span class="answer-text">Word of mouth, but it's unpredictable — good months and dead months</span>
+      </div>
+      <div class="answer-card" data-q="1" data-score="3" onclick="selectAnswer(this)">
+        <span class="answer-letter">C</span>
+        <span class="answer-text">Google, referrals, and some social — steady but not fully intentional</span>
+      </div>
+      <div class="answer-card" data-q="1" data-score="4" onclick="selectAnswer(this)">
+        <span class="answer-letter">D</span>
+        <span class="answer-text">Consistent, multi-channel visibility — we know exactly where leads come from</span>
+      </div>
+    </div>
+    <button class="next-btn" id="next-q1" onclick="goToNext(2)">Next →</button>
+  </div>
+
+  <!-- Q2: LIKE -->
+  <div class="screen" id="screen-q2">
+    <span class="q-eyebrow">Stage 2 · Like</span>
+    <h2 class="q-text">When a prospect looks you up, what do they see?</h2>
+    <div class="answers">
+      <div class="answer-card" data-q="2" data-score="1" onclick="selectAnswer(this)">
+        <span class="answer-letter">A</span>
+        <span class="answer-text">Outdated website or no real online presence</span>
+      </div>
+      <div class="answer-card" data-q="2" data-score="2" onclick="selectAnswer(this)">
+        <span class="answer-letter">B</span>
+        <span class="answer-text">Basic website — it exists but doesn't really sell us</span>
+      </div>
+      <div class="answer-card" data-q="2" data-score="3" onclick="selectAnswer(this)">
+        <span class="answer-letter">C</span>
+        <span class="answer-text">Professional site with good reviews and some social proof</span>
+      </div>
+      <div class="answer-card" data-q="2" data-score="4" onclick="selectAnswer(this)">
+        <span class="answer-letter">D</span>
+        <span class="answer-text">Compelling brand, clear messaging, strong reviews, and proof of results</span>
+      </div>
+    </div>
+    <button class="next-btn" id="next-q2" onclick="goToNext(3)">Next →</button>
+  </div>
+
+  <!-- Q3: TRUST -->
+  <div class="screen" id="screen-q3">
+    <span class="q-eyebrow">Stage 3 · Trust</span>
+    <h2 class="q-text">How do you build trust with a prospect before they hire you?</h2>
+    <div class="answers">
+      <div class="answer-card" data-q="3" data-score="1" onclick="selectAnswer(this)">
+        <span class="answer-letter">A</span>
+        <span class="answer-text">We show up, do good work, and hope they trust us</span>
+      </div>
+      <div class="answer-card" data-q="3" data-score="2" onclick="selectAnswer(this)">
+        <span class="answer-letter">B</span>
+        <span class="answer-text">We have reviews and try to follow up on quotes, but no real system</span>
+      </div>
+      <div class="answer-card" data-q="3" data-score="3" onclick="selectAnswer(this)">
+        <span class="answer-letter">C</span>
+        <span class="answer-text">Strong review system, case studies, and consistent follow-up</span>
+      </div>
+      <div class="answer-card" data-q="3" data-score="4" onclick="selectAnswer(this)">
+        <span class="answer-letter">D</span>
+        <span class="answer-text">Reviews, case studies, educational content, and an automated nurture process</span>
+      </div>
+    </div>
+    <button class="next-btn" id="next-q3" onclick="goToNext(4)">Next →</button>
+  </div>
+
+  <!-- Q4: TRY -->
+  <div class="screen" id="screen-q4">
+    <span class="q-eyebrow">Stage 4 · Try</span>
+    <h2 class="q-text">How easy is it for someone to take a small first step with you?</h2>
+    <div class="answers">
+      <div class="answer-card" data-q="4" data-score="1" onclick="selectAnswer(this)">
+        <span class="answer-letter">A</span>
+        <span class="answer-text">Call us and we'll give you a price — that's the only option</span>
+      </div>
+      <div class="answer-card" data-q="4" data-score="2" onclick="selectAnswer(this)">
+        <span class="answer-letter">B</span>
+        <span class="answer-text">We offer free estimates but don't do much to follow them up</span>
+      </div>
+      <div class="answer-card" data-q="4" data-score="3" onclick="selectAnswer(this)">
+        <span class="answer-letter">C</span>
+        <span class="answer-text">Free estimate plus follow-up texts or calls to close the deal</span>
+      </div>
+      <div class="answer-card" data-q="4" data-score="4" onclick="selectAnswer(this)">
+        <span class="answer-letter">D</span>
+        <span class="answer-text">Multiple entry points (call, online booking, chat) with automated nurture sequences</span>
+      </div>
+    </div>
+    <button class="next-btn" id="next-q4" onclick="goToNext(5)">Next →</button>
+  </div>
+
+  <!-- Q5: BUY -->
+  <div class="screen" id="screen-q5">
+    <span class="q-eyebrow">Stage 5 · Buy</span>
+    <h2 class="q-text">What's your process when someone is ready to hire you?</h2>
+    <div class="answers">
+      <div class="answer-card" data-q="5" data-score="1" onclick="selectAnswer(this)">
+        <span class="answer-letter">A</span>
+        <span class="answer-text">They call, we quote, they decide — no real follow-up system</span>
+      </div>
+      <div class="answer-card" data-q="5" data-score="2" onclick="selectAnswer(this)">
+        <span class="answer-letter">B</span>
+        <span class="answer-text">We send proposals but close rates are inconsistent</span>
+      </div>
+      <div class="answer-card" data-q="5" data-score="3" onclick="selectAnswer(this)">
+        <span class="answer-letter">C</span>
+        <span class="answer-text">Structured sales process with follow-up and a decent close rate</span>
+      </div>
+      <div class="answer-card" data-q="5" data-score="4" onclick="selectAnswer(this)">
+        <span class="answer-letter">D</span>
+        <span class="answer-text">Repeatable system with automated follow-up and consistently high close rates</span>
+      </div>
+    </div>
+    <button class="next-btn" id="next-q5" onclick="goToNext(6)">Next →</button>
+  </div>
+
+  <!-- Q6: REPEAT -->
+  <div class="screen" id="screen-q6">
+    <span class="q-eyebrow">Stage 6 · Repeat</span>
+    <h2 class="q-text">What do you do to bring past customers back?</h2>
+    <div class="answers">
+      <div class="answer-card" data-q="6" data-score="1" onclick="selectAnswer(this)">
+        <span class="answer-letter">A</span>
+        <span class="answer-text">Nothing specific — we wait for them to call us again</span>
+      </div>
+      <div class="answer-card" data-q="6" data-score="2" onclick="selectAnswer(this)">
+        <span class="answer-letter">B</span>
+        <span class="answer-text">We reach out occasionally but it's not a real system</span>
+      </div>
+      <div class="answer-card" data-q="6" data-score="3" onclick="selectAnswer(this)">
+        <span class="answer-letter">C</span>
+        <span class="answer-text">Seasonal reminders or reactivation campaigns that run a few times a year</span>
+      </div>
+      <div class="answer-card" data-q="6" data-score="4" onclick="selectAnswer(this)">
+        <span class="answer-letter">D</span>
+        <span class="answer-text">Automated reactivation system — dormant customers get re-engaged consistently</span>
+      </div>
+    </div>
+    <button class="next-btn" id="next-q6" onclick="goToNext(7)">Next →</button>
+  </div>
+
+  <!-- Q7: REFER -->
+  <div class="screen" id="screen-q7">
+    <span class="q-eyebrow">Stage 7 · Refer</span>
+    <h2 class="q-text">How do you generate referrals from happy customers?</h2>
+    <div class="answers">
+      <div class="answer-card" data-q="7" data-score="1" onclick="selectAnswer(this)">
+        <span class="answer-letter">A</span>
+        <span class="answer-text">We hope satisfied customers tell their friends</span>
+      </div>
+      <div class="answer-card" data-q="7" data-score="2" onclick="selectAnswer(this)">
+        <span class="answer-letter">B</span>
+        <span class="answer-text">We ask sometimes, but there's no consistent process</span>
+      </div>
+      <div class="answer-card" data-q="7" data-score="3" onclick="selectAnswer(this)">
+        <span class="answer-letter">C</span>
+        <span class="answer-text">We ask every customer and have some kind of referral incentive</span>
+      </div>
+      <div class="answer-card" data-q="7" data-score="4" onclick="selectAnswer(this)">
+        <span class="answer-letter">D</span>
+        <span class="answer-text">Automated referral system that consistently generates qualified new leads</span>
+      </div>
+    </div>
+    <button class="next-btn" id="next-q7" onclick="goToEmail()">See my results →</button>
+  </div>
+
+  <!-- ══ EMAIL CAPTURE SCREEN ══ -->
+  <div class="screen" id="screen-email">
+    <div class="email-screen">
+      <div class="email-icon">📊</div>
+      <h2 class="email-h2">Your results are ready.</h2>
+      <p class="email-sub">Enter your email and we'll show you your score, your biggest leak, and exactly what to fix first.</p>
+
+      <!--
+        Netlify Forms: Netlify reads data-netlify at build time.
+        We submit via JS (fetch) so we can show results inline.
+      -->
+      <form
+        class="email-form"
+        name="audit-leads"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        id="email-form"
+        onsubmit="submitEmail(event)"
+      >
+        <input type="hidden" name="form-name" value="audit-leads" />
+        <!-- Honeypot -->
+        <p class="hp-field">
+          <label>Don't fill this out: <input name="bot-field" /></label>
+        </p>
+
+        <input
+          type="text"
+          name="first_name"
+          id="first-name"
+          placeholder="First name"
+          autocomplete="given-name"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          id="email-input"
+          placeholder="Email address"
+          autocomplete="email"
+          required
+        />
+        <input type="hidden" name="scores" id="hidden-scores" />
+        <input type="hidden" name="total_score" id="hidden-total" />
+        <input type="hidden" name="weakest_stage" id="hidden-weakest" />
+
+        <button type="submit" class="email-submit-btn" id="email-submit-btn">
+          Show me my results →
+        </button>
+        <p class="email-privacy">No spam. No pitches. Just your audit results.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ══ LOADING SCREEN ══ -->
+  <div class="screen" id="screen-loading">
+    <div class="loading-screen">
+      <div class="spinner"></div>
+      <p class="loading-text">Calculating your results…</p>
+    </div>
+  </div>
+
+  <!-- ══ RESULTS SCREEN ══ -->
+  <div class="screen" id="screen-results">
+    <div class="results-screen">
+
+      <span class="results-eyebrow" id="results-eyebrow">Your Marketing Hourglass Score</span>
+
+      <div class="score-hero">
+        <span class="score-number" id="results-score">--</span>
+        <span class="score-denom">/ 28</span>
+      </div>
+      <span class="score-tier" id="results-tier">—</span>
+
+      <p class="results-intro" id="results-intro"></p>
+
+      <!-- Biggest Leak -->
+      <div class="leak-box" id="leak-box">
+        <span class="leak-label">Your Biggest Leak</span>
+        <p class="leak-stage" id="leak-stage"></p>
+        <p class="leak-rec" id="leak-rec"></p>
+      </div>
+
+      <!-- Stage Breakdown -->
+      <p class="breakdown-title">Full Breakdown</p>
+      <div class="stage-rows" id="stage-rows"></div>
+
+      <!-- CTA -->
+      <div class="results-cta">
+        <h3 class="results-cta-h3">Want to fix the leaks?</h3>
+        <p class="results-cta-p">Connectid helps $1M+ home service businesses recover the revenue already in their book. No ads. No funnels.</p>
+        <a
+          class="results-cta-btn"
+          href="https://connectidcrm.com/contact?utm_source=audit&utm_medium=results"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Book a free strategy call →
+        </a>
+        <p class="results-back">Check your email — we sent you a copy of these results.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // ── Stage metadata ──────────────────────────────────────────────────────
+    const STAGES = [
+      { name: 'Know',   label: 'KNOW' },
+      { name: 'Like',   label: 'LIKE' },
+      { name: 'Trust',  label: 'TRUST' },
+      { name: 'Try',    label: 'TRY' },
+      { name: 'Buy',    label: 'BUY' },
+      { name: 'Repeat', label: 'REPEAT' },
+      { name: 'Refer',  label: 'REFER' },
+    ];
+
+    const RECOMMENDATIONS = {
+      Know:   'You need a more intentional visibility strategy. Focus on Google Business Profile, consistent social posts, and asking every happy customer to leave a review.',
+      Like:   'Your first impression is losing you jobs. Update your website with real proof — before/after photos, specific client outcomes, and a clear reason why you\'re the right call.',
+      Trust:  'Prospects don\'t trust you yet when they say no. Build a review system that runs on autopilot, and add one or two client case studies to your site.',
+      Try:    'You\'re making it too hard to say yes to a small first step. Add a simple online booking or "text us" option and follow up every estimate within 24 hours automatically.',
+      Buy:    'You\'re losing deals after the quote. Implement a 5-touch follow-up sequence for every open estimate — most jobs go to whoever follows up first.',
+      Repeat: 'You have a goldmine of past customers you\'re not talking to. Set up a simple reactivation campaign — even a quarterly text blast will recover dormant revenue.',
+      Refer:  'Happy customers aren\'t sending you new ones because you\'re not asking systematically. Create a referral ask that fires automatically after every completed job.',
+    };
+
+    const TIER_COPY = {
+      early:   { label: 'Foundation Stage',  css: 'tier-early',   intro: 'Your marketing system has major gaps across multiple stages. The good news: plugging even one or two leaks will have an immediate impact on revenue. Start with your lowest-scoring stage.' },
+      growing: { label: 'Building Momentum', css: 'tier-growing',  intro: 'You have some systems working, but there are clear gaps costing you customers at critical handoff points. Focus on the weakest stage first — it\'s likely where the most revenue is leaking.' },
+      strong:  { label: 'Well-Built System', css: 'tier-strong',   intro: 'Strong foundation. Your systems are working across most of the hourglass. The next level is tightening the weakest stage and building consistency into the ones that already perform.' },
+    };
+
+    // ── State ───────────────────────────────────────────────────────────────
+    const scores = {}; // { 1: score, 2: score, ... }
+
+    // ── Progress bar ─────────────────────────────────────────────────────────
+    function updateProgress(qNum) {
+      const pct = Math.round((qNum / 7) * 100);
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-label').textContent = 'Question ' + qNum + ' of 7';
+      document.getElementById('progress-stage').textContent = STAGES[qNum - 1].label;
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-' + id).classList.add('active');
+
+      const showProgress = id.startsWith('q');
+      document.getElementById('progress-wrap').style.display = showProgress ? 'block' : 'none';
+
+      // Scroll to top on each screen change
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── Navigation ───────────────────────────────────────────────────────────
+    function startAudit() {
+      updateProgress(1);
+      showScreen('q1');
+    }
+
+    function selectAnswer(card) {
+      const q = card.getAttribute('data-q');
+      const score = parseInt(card.getAttribute('data-score'), 10);
+
+      // Deselect others in same question
+      document.querySelectorAll('.answer-card[data-q="' + q + '"]').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+
+      scores[q] = score;
+
+      // Enable next button
+      const nextBtn = document.getElementById('next-q' + q);
+      if (nextBtn) nextBtn.classList.add('enabled');
+    }
+
+    function goToNext(nextQ) {
+      updateProgress(nextQ);
+      showScreen('q' + nextQ);
+    }
+
+    function goToEmail() {
+      showScreen('email');
+    }
+
+    // ── Email submission ─────────────────────────────────────────────────────
+    async function submitEmail(e) {
+      e.preventDefault();
+
+      const firstName = document.getElementById('first-name').value.trim();
+      const email     = document.getElementById('email-input').value.trim();
+
+      if (!firstName || !email) return;
+
+      // Fill hidden fields
+      const total = Object.values(scores).reduce((a, b) => a + b, 0);
+      const weakestQ = Object.entries(scores).sort((a, b) => a[1] - b[1])[0][0];
+      const weakestStage = STAGES[parseInt(weakestQ, 10) - 1].name;
+
+      document.getElementById('hidden-scores').value   = JSON.stringify(scores);
+      document.getElementById('hidden-total').value    = total;
+      document.getElementById('hidden-weakest').value  = weakestStage;
+
+      const btn = document.getElementById('email-submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      showScreen('loading');
+
+      // Submit to Netlify Forms
+      try {
+        const formData = new FormData(document.getElementById('email-form'));
+        await fetch('/', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body:    new URLSearchParams(formData).toString(),
+        });
+      } catch (err) {
+        console.warn('Netlify form submit error (non-fatal):', err);
+      }
+
+      // Fire email function (non-blocking — don't await)
+      fetch('/.netlify/functions/send-audit-email', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ firstName, email, scores, total, weakestStage }),
+      }).catch(err => console.warn('Email function error (non-fatal):', err));
+
+      // Render results after a short pause for the loading animation
+      setTimeout(() => renderResults(firstName, total, weakestStage), 1200);
+    }
+
+    // ── Results rendering ────────────────────────────────────────────────────
+    function renderResults(firstName, total, weakestStage) {
+      // Score & tier
+      let tier;
+      if      (total <= 14) tier = 'early';
+      else if (total <= 21) tier = 'growing';
+      else                  tier = 'strong';
+
+      const tierData = TIER_COPY[tier];
+
+      document.getElementById('results-score').textContent = total;
+      const tierEl = document.getElementById('results-tier');
+      tierEl.textContent  = tierData.label;
+      tierEl.className    = 'score-tier ' + tierData.css;
+      document.getElementById('results-intro').textContent =
+        (firstName ? 'Hey ' + firstName + ' — ' : '') + tierData.intro;
+
+      // Weakest stage
+      document.getElementById('leak-stage').textContent = weakestStage + ' stage';
+      document.getElementById('leak-rec').textContent   = RECOMMENDATIONS[weakestStage];
+
+      // Stage breakdown bars
+      const rowsEl = document.getElementById('stage-rows');
+      rowsEl.innerHTML = '';
+      STAGES.forEach((stage, i) => {
+        const q     = i + 1;
+        const s     = scores[q] || 0;
+        const pct   = Math.round((s / 4) * 100);
+        const row   = document.createElement('div');
+        row.className = 'stage-row';
+        row.innerHTML = `
+          <span class="stage-name">${stage.name}</span>
+          <div class="stage-bar-wrap">
+            <div class="stage-bar-fill" style="width:0%" data-target="${pct}%"></div>
+          </div>
+          <span class="stage-score">${s}/4</span>
+        `;
+        rowsEl.appendChild(row);
+      });
+
+      showScreen('results');
+
+      // Animate bars after paint
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.querySelectorAll('.stage-bar-fill').forEach(bar => {
+            bar.style.width = bar.getAttribute('data-target');
+          });
+        });
+      });
+
+      // GA4 event
+      if (typeof gtag === 'function') {
+        gtag('event', 'audit_complete', {
+          event_category: 'audit',
+          score: total,
+          tier: tier,
+          weakest: weakestStage,
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>
