@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marketing Hourglass Interactive Worksheet</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent:       #FF1744;
+    --accent-light: #ff6384;
+    --gradient:     linear-gradient(135deg, #FA5E36, #EB3656);
+    --dark:         #111111;
+    --dark2:        #1a1a1a;
+    --dark3:        #222222;
+    --off-white:    #FAF9F8;
+    --light-gray:   #F0EFEE;
+    --gray-200:     #F0EFEE;
+    --gray-400:     #ADB5BD;
+    --gray-600:     #6C757D;
+    --gray-800:     #343A40;
+    --text:         #1a1a1a;
+    --text-sub:     #6c757d;
+    --red:          #EB3656;
+    --radius:       10px;
+    --shadow:       0 4px 24px rgba(0,0,0,0.08);
+    --shadow-sm:    0 2px 8px rgba(0,0,0,0.04);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .gradient-bar { height: 4px; background: var(--gradient); }
+
+  /* ── PAGE NAV ── */
+  .page-nav {
+    background: var(--dark2);
+    padding: 0 6vw;
+    display: flex; gap: 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    overflow-x: auto;
+  }
+  .page-btn {
+    background: none; border: none; cursor: pointer;
+    padding: 14px 18px;
+    font: inherit; font-size: 13px; font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: color .15s, border-color .15s, background .15s;
+  }
+  .page-btn:hover { color: white; background: rgba(255,255,255,0.03); }
+  .page-btn.active { color: white; border-bottom-color: var(--accent); }
+  .page-btn svg { opacity: .7; }
+
+  .page { display: none; }
+  .page.active { display: block; animation: fadeIn .25s ease; }
+
+  /* ── HEADER ── */
+  header.app-header {
+    background: var(--dark);
+    color: white;
+    padding: 32px 6vw 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.app-header::before {
+    content: '';
+    position: absolute; top: -200px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,23,68,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-label {
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--accent); margin-bottom: 12px;
+  }
+  .header-title {
+    font-size: clamp(28px, 4.5vw, 44px); font-weight: 900;
+    color: white; letter-spacing: -1px; line-height: 1.05;
+    margin-bottom: 12px; max-width: 800px;
+  }
+  .header-title em { font-style: normal; color: var(--accent); }
+  .header-sub {
+    font-size: 15px; color: rgba(255,255,255,0.7);
+    max-width: 640px; line-height: 1.6;
+  }
+
+  /* ── COMPANY BAR ── */
+  .company-bar {
+    background: white;
+    border-bottom: 1px solid var(--light-gray);
+    padding: 20px 6vw;
+    display: flex; gap: 16px; flex-wrap: wrap;
+    align-items: center;
+    position: sticky; top: 0; z-index: 50;
+    box-shadow: var(--shadow-sm);
+  }
+  .company-field {
+    flex: 1; min-width: 220px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .company-field label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--gray-400);
+  }
+  .company-field input {
+    border: none;
+    border-bottom: 1.5px solid var(--light-gray);
+    padding: 6px 0; font: inherit; font-weight: 500;
+    background: transparent; color: var(--text);
+    outline: none; transition: border-color .15s;
+  }
+  .company-field input:focus { border-bottom-color: var(--accent); }
+  .company-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    border: none; cursor: pointer; font: inherit; font-weight: 600;
+    padding: 10px 18px; border-radius: var(--radius);
+    font-size: 13px; letter-spacing: 0.3px;
+    display: inline-flex; align-items: center; gap: 6px;
+    transition: transform .1s, box-shadow .15s, background .15s;
+  }
+  .btn-primary {
+    background: var(--gradient); color: white;
+    box-shadow: 0 2px 8px rgba(235,54,86,0.25);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(235,54,86,0.35); }
+  .btn-ghost {
+    background: var(--light-gray); color: var(--gray-800);
+  }
+  .btn-ghost:hover { background: var(--gray-200); }
+  .btn-danger-ghost {
+    background: transparent; color: var(--gray-600);
+    border: 1px solid var(--light-gray);
+  }
+  .btn-danger-ghost:hover { background: #fdecef; color: var(--red); border-color: var(--red); }
+
+  /* ── TABS ── */
+  .tabs-bar {
+    background: white;
+    border-bottom: 1px solid var(--light-gray);
+    padding: 0 6vw;
+    overflow-x: auto;
+    display: flex; gap: 4px;
+    position: sticky; top: 80px; z-index: 49;
+    box-shadow: var(--shadow-sm);
+  }
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    padding: 16px 14px 14px;
+    font: inherit; font-size: 13px; font-weight: 600;
+    color: var(--gray-600);
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+    transition: color .15s, border-color .15s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn .tab-num {
+    background: var(--light-gray); color: var(--gray-600);
+    width: 22px; height: 22px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    transition: background .15s, color .15s;
+  }
+  .tab-btn.active .tab-num { background: var(--gradient); color: white; }
+  .tab-btn .tab-progress {
+    font-size: 10px; color: var(--gray-400); font-weight: 600;
+    margin-left: 2px;
+  }
+  .tab-btn.active .tab-progress { color: var(--accent); }
+
+  /* ── MAIN ── */
+  main { padding: 0; }
+  #panels, #profitable-content { padding: 36px 6vw 80px; }
+  .panel { display: none; }
+  .panel.active { display: block; animation: fadeIn .25s ease; }
+  @keyframes fadeIn { from {opacity:0; transform: translateY(4px);} to {opacity:1; transform: none;} }
+
+  .panel-header {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .panel-label {
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .panel-title {
+    font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 900; letter-spacing: -0.8px;
+    line-height: 1.1; margin-bottom: 12px;
+  }
+  .panel-intro {
+    font-size: 15px; color: var(--text-sub); line-height: 1.65;
+    max-width: 760px;
+  }
+
+  /* ── PROGRESS METER ── */
+  .progress-meter {
+    margin-top: 18px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .progress-track {
+    flex: 1; max-width: 320px;
+    height: 6px; background: var(--light-gray);
+    border-radius: 3px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: var(--gradient);
+    width: 0%; transition: width .25s ease;
+  }
+  .progress-text {
+    font-size: 12px; color: var(--gray-600); font-weight: 600;
+  }
+
+  /* ── CATEGORY CARDS ── */
+  .categories { display: grid; gap: 20px; }
+  .category {
+    background: white; border-radius: var(--radius);
+    padding: 24px; box-shadow: var(--shadow-sm);
+    border: 1px solid var(--light-gray);
+    page-break-inside: avoid;
+  }
+  .category-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; margin-bottom: 18px;
+    padding-bottom: 14px; border-bottom: 1px solid var(--light-gray);
+  }
+  .category-title {
+    font-size: 16px; font-weight: 700; letter-spacing: -0.2px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .category-title::before {
+    content: ''; width: 8px; height: 8px; border-radius: 2px;
+    background: var(--gradient);
+  }
+  .category-count {
+    font-size: 11px; color: var(--gray-400); font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px 18px;
+    margin-bottom: 18px;
+  }
+  .item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 10px; border-radius: 6px;
+    cursor: pointer; user-select: none;
+    transition: background .12s;
+  }
+  .item:hover { background: var(--off-white); }
+  .item input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 18px; height: 18px; min-width: 18px;
+    border: 1.5px solid var(--gray-400);
+    border-radius: 4px; cursor: pointer;
+    position: relative; margin-top: 1px;
+    transition: all .15s;
+    background: white;
+  }
+  .item input[type="checkbox"]:checked {
+    background: var(--gradient);
+    border-color: transparent;
+  }
+  .item input[type="checkbox"]:checked::after {
+    content: ''; position: absolute;
+    left: 5px; top: 1px;
+    width: 5px; height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .item-label {
+    font-size: 13.5px; color: var(--text); line-height: 1.45;
+  }
+  .item input:checked ~ .item-label {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .notes-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  }
+  .note-field {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .note-field label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--gray-400);
+  }
+  .note-field textarea {
+    border: 1px solid var(--light-gray);
+    border-radius: 8px; padding: 10px 12px;
+    font: inherit; font-size: 13px;
+    background: var(--off-white);
+    resize: vertical; min-height: 64px;
+    outline: none; transition: border-color .15s, background .15s;
+  }
+  .note-field textarea:focus {
+    border-color: var(--accent);
+    background: white;
+  }
+
+  @media (max-width: 700px) {
+    .notes-row { grid-template-columns: 1fr; }
+    .items { grid-template-columns: 1fr; }
+    .company-bar { position: static; }
+    .tabs-bar { top: 0; }
+  }
+
+  /* ── MATRIX (Profitable Customers) ── */
+  .matrix-intro {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--light-gray);
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px; align-items: center;
+  }
+  .matrix-intro p { font-size: 14px; color: var(--text); line-height: 1.55; }
+  .matrix-legend {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    font-size: 11px; color: var(--gray-600);
+  }
+  .matrix-legend-item { display: inline-flex; align-items: center; gap: 6px; }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 2px;
+    background: var(--gradient);
+  }
+  .legend-dot.muted { background: var(--gray-400); }
+
+  .matrix {
+    display: grid;
+    grid-template-columns: 36px 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr 32px;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .matrix-axis-top { grid-column: 2 / span 2; display: flex; justify-content: space-between; }
+  .matrix-axis-y { grid-column: 1; grid-row: 2 / span 2;
+    display: flex; flex-direction: column; justify-content: space-between;
+    align-items: center;
+    writing-mode: vertical-rl; transform: rotate(180deg);
+  }
+  .matrix-axis-y span,
+  .matrix-axis-top span {
+    font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gray-400);
+  }
+  .matrix-axis-bottom { grid-column: 2 / span 2; display: flex; justify-content: space-between;
+    padding-top: 4px;
+  }
+  .matrix-axis-bottom span {
+    font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gray-400);
+  }
+
+  .quadrant {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--light-gray);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+    display: flex; flex-direction: column; gap: 12px;
+    page-break-inside: avoid;
+  }
+  .quadrant-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 12px;
+  }
+  .quadrant-title {
+    font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .quadrant-sub {
+    font-size: 11px; color: var(--gray-600);
+    font-weight: 500; line-height: 1.4;
+    margin-top: 2px;
+  }
+  .quadrant-badge {
+    font-size: 9px; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 8px; border-radius: 4px;
+    background: var(--light-gray); color: var(--gray-600);
+    white-space: nowrap;
+  }
+  .quadrant.ideal {
+    border-color: transparent;
+    box-shadow: 0 0 0 2px var(--accent), 0 6px 22px rgba(235,54,86,0.18);
+  }
+  .quadrant.ideal .quadrant-badge {
+    background: var(--gradient); color: white;
+  }
+  .quadrant.ideal .quadrant-title::before {
+    content: ''; width: 8px; height: 8px; border-radius: 2px;
+    background: var(--gradient);
+  }
+  .quadrant.muted { background: var(--off-white); }
+
+  .quad-field { display: flex; flex-direction: column; gap: 5px; }
+  .quad-field label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--gray-400);
+  }
+  .quad-field textarea {
+    border: 1px solid var(--light-gray);
+    border-radius: 8px; padding: 10px 12px;
+    font: inherit; font-size: 13px;
+    background: var(--off-white);
+    resize: vertical;
+    outline: none; transition: border-color .15s, background .15s;
+    line-height: 1.5;
+  }
+  .quad-field textarea.customers { min-height: 96px; }
+  .quad-field textarea.notes { min-height: 60px; }
+  .quad-field textarea:focus { border-color: var(--accent); background: white; }
+
+  @media (max-width: 800px) {
+    .matrix {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+    .matrix-axis-top, .matrix-axis-y, .matrix-axis-bottom { display: none; }
+  }
+
+  /* PDF mode for matrix */
+  body.pdf-export .matrix-intro {
+    box-shadow: none !important;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+  }
+  body.pdf-export .matrix-intro p { font-size: 11px; }
+  body.pdf-export .matrix {
+    gap: 10px;
+    grid-template-columns: 28px 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr 22px;
+  }
+  body.pdf-export .matrix-axis-top span,
+  body.pdf-export .matrix-axis-y span,
+  body.pdf-export .matrix-axis-bottom span { font-size: 9px; letter-spacing: 1.2px; }
+  body.pdf-export .quadrant {
+    padding: 12px 14px;
+    box-shadow: none !important;
+    border: 1px solid #d6d6d6;
+    gap: 8px;
+  }
+  body.pdf-export .quadrant.ideal {
+    box-shadow: none !important;
+    border: 2px solid var(--accent);
+  }
+  body.pdf-export .quadrant-title { font-size: 12.5px; }
+  body.pdf-export .quadrant-sub { font-size: 10px; }
+  body.pdf-export .quadrant-badge { font-size: 8px; padding: 3px 6px; }
+  body.pdf-export .quad-field label { font-size: 8px; }
+  body.pdf-export .quad-field textarea {
+    font-size: 10.5px; padding: 6px 8px;
+    background: white;
+  }
+  body.pdf-export .quad-field textarea.customers { min-height: 60px; }
+  body.pdf-export .quad-field textarea.notes { min-height: 36px; }
+
+  /* ── FOOTER / CREDIT ── */
+  .credit {
+    text-align: center; padding: 32px 6vw 24px;
+    font-size: 11px; color: var(--gray-400);
+    letter-spacing: 0.5px;
+    border-top: 1px solid var(--light-gray);
+    background: white;
+  }
+  .credit strong { color: var(--gray-600); font-weight: 600; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--dark); color: white;
+    padding: 12px 20px; border-radius: var(--radius);
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s, transform .2s;
+    z-index: 200;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ──────────── PDF EXPORT MODE ──────────── */
+  /* Renders at fixed 820px so the canvas → PDF page mapping is predictable.
+     Layout is tightened: 2-column items, smaller type, smaller gaps, less padding. */
+  body.pdf-export {
+    background: white !important;
+    width: 820px;
+    margin: 0 auto;
+    color: var(--text);
+  }
+  body.pdf-export .tabs-bar,
+  body.pdf-export .company-actions,
+  body.pdf-export .toast,
+  body.pdf-export .progress-meter,
+  body.pdf-export .gradient-bar,
+  body.pdf-export .page-nav,
+  body.pdf-export .company-bar {
+    display: none !important;
+  }
+  body.pdf-export #panels,
+  body.pdf-export #profitable-content {
+    padding: 0;
+  }
+  body.pdf-export .pdf-quad-display {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 10.5px;
+    line-height: 1.45;
+    background: white;
+    white-space: pre-wrap;
+    color: var(--text);
+  }
+  body.pdf-export .pdf-quad-display.customers { min-height: 60px; }
+  body.pdf-export .pdf-quad-display.notes { min-height: 36px; }
+  body.pdf-export .pdf-quad-display:empty::before {
+    content: '\00a0';
+    color: transparent;
+  }
+  body.pdf-export textarea[data-quad] { display: none !important; }
+  body.pdf-export .matrix .quadrant { page-break-inside: avoid; }
+
+  /* Each panel starts a new page, but the layout is dense enough most fit on 1 page */
+  body.pdf-export .panel {
+    display: block !important;
+    page-break-before: always;
+    break-before: page;
+    padding: 16px 28px 0;
+  }
+  body.pdf-export .panel:first-of-type {
+    page-break-before: avoid;
+    break-before: auto;
+    padding-top: 14px;
+  }
+
+  /* Header (cover) */
+  body.pdf-export header.app-header {
+    padding: 22px 28px 18px;
+  }
+  body.pdf-export header.app-header::before { display: none; }
+  body.pdf-export .header-label { font-size: 10px; margin-bottom: 8px; }
+  body.pdf-export .header-title { font-size: 30px; letter-spacing: -0.8px; margin-bottom: 8px; }
+  body.pdf-export .header-sub { font-size: 12.5px; line-height: 1.55; }
+
+  /* Company bar */
+  body.pdf-export .company-bar {
+    position: static;
+    box-shadow: none;
+    padding: 10px 28px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  body.pdf-export .company-field {
+    flex: 1 1 140px;
+    min-width: 0;
+    gap: 2px;
+  }
+  body.pdf-export .company-field label { font-size: 8.5px; letter-spacing: 0.8px; }
+  body.pdf-export .company-field input {
+    border-bottom: none;
+    font-weight: 600;
+    font-size: 11.5px;
+    padding: 2px 0;
+  }
+
+  /* Panel header (per stage) */
+  body.pdf-export .panel-header {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  body.pdf-export .panel-label { font-size: 9px; letter-spacing: 1.2px; margin-bottom: 4px; }
+  body.pdf-export .panel-title { font-size: 20px; letter-spacing: -0.5px; margin-bottom: 4px; line-height: 1.15; }
+  body.pdf-export .panel-intro { font-size: 11px; line-height: 1.5; max-width: none; }
+
+  /* Categories tight stack */
+  body.pdf-export .categories { gap: 8px; }
+  body.pdf-export .category {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    box-shadow: none !important;
+    border: 1px solid #d6d6d6;
+    border-radius: 6px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  body.pdf-export .category-head {
+    margin-bottom: 6px;
+    padding-bottom: 5px;
+  }
+  body.pdf-export .category-title { font-size: 12.5px; gap: 7px; }
+  body.pdf-export .category-title::before { width: 6px; height: 6px; }
+  body.pdf-export .category-count { font-size: 9px; }
+
+  /* Items in 2 columns, very compact */
+  body.pdf-export .items {
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 14px;
+    margin-bottom: 8px;
+  }
+  body.pdf-export .item { padding: 2px 4px; gap: 7px; }
+  body.pdf-export .item input[type="checkbox"] {
+    width: 13px; height: 13px; min-width: 13px;
+    margin-top: 1px;
+  }
+  body.pdf-export .item input[type="checkbox"]:checked::after {
+    left: 3px; top: 0;
+    width: 4px; height: 7px;
+    border-width: 0 1.5px 1.5px 0;
+  }
+  body.pdf-export .item-label { font-size: 10.5px; line-height: 1.35; }
+
+  /* Notes — replaced with .pdf-note-display divs at export time */
+  body.pdf-export textarea[data-note] { display: none !important; }
+  body.pdf-export .notes-row { gap: 10px; }
+  body.pdf-export .note-field { gap: 3px; }
+  body.pdf-export .note-field label { font-size: 8px; letter-spacing: 0.8px; }
+  body.pdf-export .pdf-note-display {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 10.5px;
+    line-height: 1.45;
+    background: white;
+    min-height: 24px;
+    white-space: pre-wrap;
+    color: var(--text);
+  }
+  body.pdf-export .pdf-note-display:empty::before {
+    content: '\00a0';
+    color: transparent;
+  }
+
+  /* Credit */
+  body.pdf-export .credit {
+    padding: 12px 28px;
+    font-size: 9px;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  /* ──────────── PRINT (kept as fallback) ──────────── */
+  @media print {
+    @page { size: letter; margin: 0.5in; }
+    body { background: white !important; font-size: 11pt; }
+    header.app-header {
+      background: var(--dark) !important;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      padding: 20px 24px 16px;
+    }
+    .company-bar {
+      position: static; box-shadow: none;
+      border-bottom: 2px solid var(--accent);
+      padding: 12px 24px;
+    }
+    .company-field input {
+      border: none !important; font-weight: 600;
+    }
+    .company-actions, .tabs-bar { display: none !important; }
+    main { padding: 16px 0 0; }
+    .panel { display: block !important; page-break-before: always; }
+    .panel:first-of-type { page-break-before: avoid; }
+    .panel-header {
+      padding: 0 24px 12px;
+      margin-bottom: 16px;
+    }
+    .progress-meter { display: none; }
+    .categories { padding: 0 24px; }
+    .category {
+      box-shadow: none !important;
+      border: 1px solid #d6d6d6;
+      page-break-inside: avoid;
+      margin-bottom: 14px;
+      padding: 14px 16px;
+    }
+    .category-head { margin-bottom: 12px; padding-bottom: 8px; }
+    .item:hover { background: transparent; }
+    .item input[type="checkbox"] {
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+    }
+    .item input[type="checkbox"]:checked {
+      background: var(--accent) !important;
+    }
+    .item input:checked ~ .item-label {
+      color: var(--text);
+      font-weight: 700;
+    }
+    .note-field textarea {
+      background: white !important;
+      border: 1px solid #e0e0e0 !important;
+      min-height: 36px;
+    }
+    .credit {
+      padding: 16px 24px;
+      border-top: 1px solid #ccc;
+    }
+    .toast { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-label">Interactive Worksheet</div>
+  <h1 class="header-title" id="header-title">Marketing <em>Hourglass</em></h1>
+  <p class="header-sub" id="header-sub">Audit your customer journey across 7 stages plus key metrics. Check what you're already doing, capture what to add, and export the whole worksheet as a PDF.</p>
+</header>
+<div class="gradient-bar"></div>
+
+<nav class="page-nav" id="page-nav">
+  <button class="page-btn active" data-page="hourglass">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h12v6l-4 4 4 4v6H6v-6l4-4-4-4V2z"/></svg>
+    Marketing Hourglass
+  </button>
+  <button class="page-btn" data-page="profitable">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
+    Profitable Customers
+  </button>
+</nav>
+
+<div class="company-bar">
+  <div class="company-field" style="flex: 2 1 320px;">
+    <label for="contact-id">GHL Contact ID</label>
+    <input id="contact-id" type="text" placeholder="Paste ID or full GHL contact URL" spellcheck="false" autocapitalize="off" autocorrect="off" />
+  </div>
+  <div class="company-actions">
+    <button class="btn btn-primary" id="btn-send" title="Send to GoHighLevel">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      Send to CRM
+    </button>
+    <button class="btn btn-ghost" id="btn-export" title="Export as PDF">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export PDF
+    </button>
+    <button class="btn btn-danger-ghost" id="btn-reset" title="Clear all answers">Reset</button>
+  </div>
+</div>
+
+<main>
+  <section class="page active" id="page-hourglass">
+    <nav class="tabs-bar" id="tabs-bar"></nav>
+    <div id="panels" style="padding: 36px 6vw 80px;"></div>
+  </section>
+  <section class="page" id="page-profitable">
+    <div id="profitable-content" style="padding: 36px 6vw 80px;"></div>
+  </section>
+</main>
+
+<div class="credit">
+  Worksheet content from the <strong>Duct Tape Marketing Consultant Network — Marketing Hourglass</strong> framework. Interactive tool delivered by Connectid.
+</div>
+
+<div class="toast" id="toast">Saved</div>
+
+<script>
+/* ─────────────────────────────────────────────
+   DATA — 8 worksheets
+   Each: { id, num, title, subtitle, intro, categories: [{ name, items: [] }] }
+   ───────────────────────────────────────────── */
+const WORKSHEETS = [
+  {
+    id: 'know', num: 1, title: 'Know',
+    subtitle: 'How prospects first discover you',
+    intro: 'What are all of the ways in which a prospect becomes aware of your business, products, and services? Audit what you do now in the left notes, then capture how you could enhance each in the action plan on the right.',
+    categories: [
+      { name: 'Advertising', items: ['Online – Social or display ads', 'Offline – Print ads'] },
+      { name: 'Search Marketing', items: ['SEO – earned search traffic', 'PPC – paid search traffic'] },
+      { name: 'Content', items: ['Blog posts', 'Podcasts', 'Video', 'eBooks / PDFs', 'Webinars', 'Email outreach'] },
+      { name: 'Social Media', items: ['Facebook', 'Twitter / X', 'LinkedIn', 'Instagram', 'Other'] },
+      { name: 'Community', items: ['Sponsorships', 'Workshops', 'Charitable contributions', 'Industry / Chamber'] },
+      { name: 'Referrals', items: ['Promotions', 'Strategic partner', 'Customer referrals', 'Co-marketing'] },
+      { name: 'Sales Outreach', items: ['Networking', 'Cold calls', 'Cold email'] }
+    ]
+  },
+  {
+    id: 'like', num: 2, title: 'Like',
+    subtitle: 'First impressions that earn a second look',
+    intro: 'What are the ways a prospect who becomes aware of you begins to decide if they like what they see and want to know more? (Usually these are first impressions.)',
+    categories: [
+      { name: 'Message', items: ['Problem solving focused', 'Personas present'] },
+      { name: 'Brand Elements (persona match)', items: ['Consistency', 'Style', 'Voice'] },
+      { name: 'Content', items: ['Consistency', 'Story connection', 'Image match', 'Problem focused', 'Persona focused', 'Useful vs. sales only'] },
+      { name: 'Social Media', items: ['Branded profiles', 'Human touches vs. promotion only', 'Consistency', 'Frequency'] },
+      { name: 'User Experience', items: ['Site speed', 'Ease of navigation', 'Contact ease'] }
+    ]
+  },
+  {
+    id: 'trust', num: 3, title: 'Trust',
+    subtitle: 'Signals that build credibility',
+    intro: 'What are the ways you can intentionally build and support a prospect’s desire to trust your business as part of their decision-making process?',
+    categories: [
+      { name: 'Visual Cues', items: ['Association badges', 'Certifications', 'Client logos', 'Media mentions', '3rd party reviews (Google)'] },
+      { name: 'Content', items: ['Useful resources', 'Downloadable content', 'Case studies', 'Testimonials', 'Story videos', 'Staff videos', 'Customer generated content'] },
+      { name: 'Email Marketing', items: ['Confirmation emails', 'Welcome value series', 'Consistent follow-up', 'Newsletter'] }
+    ]
+  },
+  {
+    id: 'try', num: 4, title: 'Try',
+    subtitle: 'Low-risk ways to experience your work',
+    intro: 'What are all of the ways a prospect could experience what it might be like to work with you or acquire your products or services? The goal is to add to the experience and exceed expectations from this point forward.',
+    categories: [
+      { name: 'Contacts', items: ['Phone', 'Web forms', 'Email', 'In person', 'Video'] },
+      { name: 'Content', items: ['Free content', 'Gated content', 'Webinar / speaking', 'Personalized content', 'Recommendation'] },
+      { name: 'Trials', items: ['Evaluation', 'Free sample', 'Free session / consultation', 'Audit / review', 'Trial period', 'Quote process', 'Proposal process', 'Demo', 'Low-cost version'] }
+    ]
+  },
+  {
+    id: 'buy', num: 5, title: 'Buy',
+    subtitle: 'Make the act of buying remarkable',
+    intro: 'What are all of the ways the act of buying from you could be a remarkable experience? The goal is to add to the experience and exceed expectations from this point forward.',
+    categories: [
+      { name: 'Transaction', items: ['Agreements', 'Delivery process', 'Terms explanation'] },
+      { name: 'Onboarding', items: ['Orientation process', 'New customer kit', 'Unexpected upgrade'] },
+      { name: 'Communication', items: ['Agreement review', 'Expectation’s review', 'Appreciation expression', 'CEO call', 'Progress updates', 'Ongoing support'] },
+      { name: 'Content', items: ['Customer training', 'Video outreach', 'Decision affirmation (case study)'] },
+      { name: 'Results Proof', items: ['Reporting process'] }
+    ]
+  },
+  {
+    id: 'repeat', num: 6, title: 'Repeat',
+    subtitle: 'Deliver value worth coming back for',
+    intro: 'What are all of the ways a client can experience so much value that they want to remain a client for the long term and perhaps buy even more or more often?',
+    categories: [
+      { name: 'Retention', items: ['Measurement', 'Results reviews', 'Reactivation'] },
+      { name: 'Cross-Promotion', items: ['Training', 'Upsell', 'Downsell'] },
+      { name: 'Discovery', items: ['Client interviews', 'Product / service dev'] }
+    ]
+  },
+  {
+    id: 'refer', num: 7, title: 'Refer',
+    subtitle: 'Make it easy for fans to share',
+    intro: 'What are all of the ways you could intentionally make it easy for your happy clients and strategic partners to share your business and refer others effectively?',
+    categories: [
+      { name: 'Clients', items: ['Part of agreement', 'Routine contact', 'Promotions'] },
+      { name: 'Champion Clients', items: ['Networking', 'Events', 'Premium content', 'Appreciation activity', 'Teach referral generation'] },
+      { name: 'Partners', items: ['Recruitment', 'Guest webinars', 'Guest blog posts', 'Podcast interviews', 'Video interviews', 'Co-marketing', 'Co-sponsored events', 'Referral club'] }
+    ]
+  },
+  {
+    id: 'metrics', num: 8, title: 'Key Metrics',
+    subtitle: 'What to track at each stage',
+    intro: 'When determining which metrics to track, look at your customer journey and define metrics for each of the key stages. Check the metrics you should focus on tracking.',
+    metricsMode: true,
+    categories: [
+      { name: 'Know — Advertising', items: ['Conversions', 'Conversion rate', 'Cost per conversion', 'Click-through rate', 'Clicks', 'Total cost'] },
+      { name: 'Know — Direct Mail', items: ['# of pieces sent', '# of calls received', 'Conversion rate'] },
+      { name: 'Know — Search Engine Optimization', items: ['Organic traffic', 'Keyword ranking', 'Bounce rate', 'Website authority over time', 'Backlinks', 'Page speed', 'Time spent on a page', 'Conversion rate'] },
+      { name: 'Know — Social Media', items: ['# of followers'] },
+      { name: 'Know — Sales Outreach', items: ['# of outbound emails sent', '# of calls booked from an outbound campaign', '# of network events attended', '# of calls booked from networking event'] },
+      { name: 'Like & Trust — Website', items: ['# of conversions'] },
+      { name: 'Like & Trust — Social Media', items: ['# of social media shares and likes', '# of comments'] },
+      { name: 'Like & Trust — Social Proof', items: ['# of reviews', '# of case studies'] },
+      { name: 'Like & Trust — SEO', items: ['# of calls received', 'Conversion rate'] },
+      { name: 'Like & Trust — Email Marketing', items: ['# of new email newsletter opt-ins', 'Email open rate', 'Click-through rate', 'Conversion rate', '# of unsubscribes'] },
+      { name: 'Try — Consultation', items: ['# of consultations booked'] },
+      { name: 'Try — Phone Calls', items: ['# of phone calls booked'] },
+      { name: 'Try — Free Trials', items: ['# of free trials booked'] },
+      { name: 'Buy — Agreements', items: ['# of conversions'] },
+      { name: 'Buy — New Clients', items: ['# of new clients', '# of new client onboarding completed'] },
+      { name: 'Repeat — Clients', items: ['Retention rate', 'Existing client revenue growth rate', '# of repeat clients', 'Daily, weekly, and monthly active users', 'Customer lifetime value', 'Product return rate', 'Net promoter score'] },
+      { name: 'Refer — Client Referrals', items: ['# of participants (Advocates)', '# of strategic partner referrals', '# of co-content opportunities w/ strategic partners', 'Conversion rate'] }
+    ]
+  }
+];
+
+/* ─────────────────────────────────────────────
+   QUADRANTS — Profitable Customers matrix
+   Grid order: top-left, top-right, bottom-left, bottom-right
+   ───────────────────────────────────────────── */
+const QUADRANTS = [
+  {
+    id: 'profit-no-refer',
+    title: 'Profitable / Quiet',
+    sub: 'They pay well but rarely send referrals.',
+    badge: 'Nurture',
+    position: 'top-left'
+  },
+  {
+    id: 'profit-refer',
+    title: 'Refer & Profit',
+    sub: 'Profitable AND refers — your ideal client profile lives here.',
+    badge: 'Ideal',
+    position: 'top-right',
+    ideal: true
+  },
+  {
+    id: 'unprofit-no-refer',
+    title: 'Detractors',
+    sub: 'Unprofitable and silent — costs more than they return.',
+    badge: 'Exit',
+    position: 'bottom-left'
+  },
+  {
+    id: 'unprofit-refer',
+    title: 'Costly Advocates',
+    sub: 'They refer, but the work isn’t profitable as-is.',
+    badge: 'Reprice',
+    position: 'bottom-right'
+  }
+];
+
+const PAGE_META = {
+  hourglass: {
+    title: 'Marketing <em>Hourglass</em>',
+    sub: "Audit your customer journey across 7 stages plus key metrics. Check what you're already doing, capture what to add, and export the whole worksheet as a PDF.",
+    tag: 'marketing-hourglass-audit',
+    source: 'Marketing Hourglass Interactive Worksheet'
+  },
+  profitable: {
+    title: 'Profitable <em>Customers</em>',
+    sub: 'Map your clients into four quadrants to find the ones who are both profitable AND refer — that’s your ideal client profile.',
+    tag: 'profitable-customers',
+    source: 'Profitable Customers Worksheet'
+  }
+};
+
+/* ─────────────────────────────────────────────
+   STATE — localStorage
+   ───────────────────────────────────────────── */
+const STORAGE_KEY = 'connectid-marketing-hourglass-v1';
+const CRM_ENDPOINT = '/.netlify/functions/send-to-ghl';
+const state = loadState();
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      parsed.contact = parsed.contact || { name: '', email: '', id: '' };
+      if (typeof parsed.contact.id !== 'string') parsed.contact.id = '';
+      parsed.company = parsed.company || { name: '', url: '', date: '' };
+      parsed.checks = parsed.checks || {};
+      parsed.notes = parsed.notes || {};
+      parsed.quadrants = parsed.quadrants || {};
+      parsed.currentPage = parsed.currentPage || 'hourglass';
+      return parsed;
+    }
+  } catch (e) {}
+  return {
+    contact: { name: '', email: '', id: '' },
+    company: { name: '', url: '', date: '' },
+    checks: {}, notes: {}, quadrants: {},
+    currentPage: 'hourglass'
+  };
+}
+
+function extractContactId(input) {
+  if (!input) return '';
+  let s = String(input).trim();
+  if (!s) return '';
+  // Strip query string + fragment first
+  s = s.split('?')[0].split('#')[0];
+  // If it looks like a URL/path, take the last non-empty path segment
+  if (s.includes('/')) {
+    const parts = s.split('/').filter(Boolean);
+    s = parts[parts.length - 1] || s;
+  }
+  return s;
+}
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  catch (e) {}
+}
+let saveTimer;
+function saveSoon(showToast = false) {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    saveState();
+    if (showToast) flashToast('Saved');
+  }, 200);
+}
+function flashToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(flashToast._t);
+  flashToast._t = setTimeout(() => t.classList.remove('show'), 1400);
+}
+
+/* ─────────────────────────────────────────────
+   RENDER
+   ───────────────────────────────────────────── */
+function buildKey(wsId, catIdx, itemIdx) { return `${wsId}|${catIdx}|${itemIdx}`; }
+function noteKey(wsId, catIdx, kind) { return `${wsId}|${catIdx}|${kind}`; }
+
+function renderTabs() {
+  const tabs = document.getElementById('tabs-bar');
+  tabs.innerHTML = WORKSHEETS.map((w, i) => `
+    <button class="tab-btn ${i===0?'active':''}" data-tab="${w.id}">
+      <span class="tab-num">${w.num}</span>
+      <span>${w.title}</span>
+      <span class="tab-progress" data-progress-for="${w.id}">0%</span>
+    </button>
+  `).join('');
+  tabs.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+  });
+}
+
+function renderPanels() {
+  const panels = document.getElementById('panels');
+  panels.innerHTML = WORKSHEETS.map((w, wi) => `
+    <section class="panel ${wi===0?'active':''}" id="panel-${w.id}" data-ws="${w.id}">
+      <div class="panel-header">
+        <div class="panel-label">Stage ${w.num} · ${w.metricsMode ? 'Audit' : 'Worksheet'}</div>
+        <h2 class="panel-title">${w.title}<span style="color:var(--gray-400); font-weight:500;"> — ${w.subtitle}</span></h2>
+        <p class="panel-intro">${w.intro}</p>
+        <div class="progress-meter">
+          <div class="progress-track"><div class="progress-fill" data-fill-for="${w.id}"></div></div>
+          <span class="progress-text" data-counter-for="${w.id}">0 of 0 checked</span>
+        </div>
+      </div>
+      <div class="categories">
+        ${w.categories.map((cat, ci) => `
+          <div class="category">
+            <div class="category-head">
+              <div class="category-title">${cat.name}</div>
+              <div class="category-count">${cat.items.length} item${cat.items.length===1?'':'s'}</div>
+            </div>
+            <div class="items">
+              ${cat.items.map((item, ii) => {
+                const k = buildKey(w.id, ci, ii);
+                const checked = state.checks[k] ? 'checked' : '';
+                return `
+                  <label class="item">
+                    <input type="checkbox" data-key="${k}" data-ws="${w.id}" ${checked} />
+                    <span class="item-label">${item}</span>
+                  </label>
+                `;
+              }).join('')}
+            </div>
+            ${w.metricsMode ? '' : `
+              <div class="notes-row">
+                <div class="note-field">
+                  <label>Stage Audit — current activity</label>
+                  <textarea data-note="${noteKey(w.id, ci, 'audit')}" placeholder="What are you doing here today?">${escapeAttr(state.notes[noteKey(w.id, ci, 'audit')] || '')}</textarea>
+                </div>
+                <div class="note-field">
+                  <label>Stage Action Plan — what to add or enhance</label>
+                  <textarea data-note="${noteKey(w.id, ci, 'action')}" placeholder="What could you add or improve?">${escapeAttr(state.notes[noteKey(w.id, ci, 'action')] || '')}</textarea>
+                </div>
+              </div>
+            `}
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  `).join('');
+
+  panels.querySelectorAll('input[type="checkbox"]').forEach(box => {
+    box.addEventListener('change', () => {
+      state.checks[box.dataset.key] = box.checked;
+      saveSoon();
+      updateProgress(box.dataset.ws);
+    });
+  });
+  panels.querySelectorAll('textarea[data-note]').forEach(ta => {
+    ta.addEventListener('input', () => {
+      state.notes[ta.dataset.note] = ta.value;
+      saveSoon();
+    });
+  });
+}
+
+function escapeAttr(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+/* ─────────────────────────────────────────────
+   RENDER — Profitable Customers
+   ───────────────────────────────────────────── */
+function renderProfitable() {
+  const wrap = document.getElementById('profitable-content');
+  wrap.innerHTML = `
+    <div class="panel-header">
+      <div class="panel-label">Worksheet</div>
+      <h2 class="panel-title">Profitable Customers<span style="color:var(--gray-400); font-weight:500;"> — find your ideal client profile</span></h2>
+      <p class="panel-intro">List your clients in each quadrant. The top-right cell — clients who are both profitable AND refer — is where your ideal client profile lives. Use the patterns you see there to shape acquisition, messaging, and onboarding.</p>
+    </div>
+
+    <div class="matrix-intro">
+      <p><strong>How to use it:</strong> Drop client names into the cell that best describes them today. Add notes about what makes that group tick — industry, deal size, fit, behavior. The patterns in the Ideal cell become your filter for everything else: who you target, how you price, what you say.</p>
+      <div class="matrix-legend">
+        <div class="matrix-legend-item"><span class="legend-dot"></span>Ideal client zone</div>
+        <div class="matrix-legend-item"><span class="legend-dot muted"></span>Action needed</div>
+      </div>
+    </div>
+
+    <div class="matrix">
+      <div class="matrix-axis-top"><span>← Doesn't refer</span><span>Refers →</span></div>
+      <div class="matrix-axis-y"><span>↑ Profitable</span><span>Unprofitable ↓</span></div>
+      ${QUADRANTS.map(q => {
+        const cust = (state.quadrants[q.id] && state.quadrants[q.id].customers) || '';
+        const notes = (state.quadrants[q.id] && state.quadrants[q.id].notes) || '';
+        return `
+          <div class="quadrant ${q.ideal ? 'ideal' : ''}" data-quadrant="${q.id}">
+            <div class="quadrant-head">
+              <div>
+                <div class="quadrant-title">${q.title}</div>
+                <div class="quadrant-sub">${q.sub}</div>
+              </div>
+              <div class="quadrant-badge">${q.badge}</div>
+            </div>
+            <div class="quad-field">
+              <label>Clients in this quadrant</label>
+              <textarea class="customers" data-quad="${q.id}" data-field="customers" placeholder="One client per line…">${escapeAttr(cust)}</textarea>
+            </div>
+            <div class="quad-field">
+              <label>What do they have in common?</label>
+              <textarea class="notes" data-quad="${q.id}" data-field="notes" placeholder="Industry, deal size, behavior, fit signals…">${escapeAttr(notes)}</textarea>
+            </div>
+          </div>
+        `;
+      }).join('')}
+      <div class="matrix-axis-bottom"><span>Avoid</span><span>Reprice or systematize</span></div>
+    </div>
+  `;
+
+  wrap.querySelectorAll('textarea[data-quad]').forEach(ta => {
+    ta.addEventListener('input', () => {
+      const id = ta.dataset.quad;
+      const field = ta.dataset.field;
+      state.quadrants[id] = state.quadrants[id] || { customers: '', notes: '' };
+      state.quadrants[id][field] = ta.value;
+      saveSoon();
+    });
+  });
+}
+
+/* ─────────────────────────────────────────────
+   PAGE SWITCHING
+   ───────────────────────────────────────────── */
+function activatePage(pageId) {
+  state.currentPage = pageId;
+  saveSoon();
+  document.querySelectorAll('.page-btn').forEach(b => b.classList.toggle('active', b.dataset.page === pageId));
+  document.querySelectorAll('.page').forEach(p => p.classList.toggle('active', p.id === `page-${pageId}`));
+  const meta = PAGE_META[pageId];
+  document.getElementById('header-title').innerHTML = meta.title;
+  document.getElementById('header-sub').textContent = meta.sub;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function wirePageNav() {
+  document.querySelectorAll('.page-btn').forEach(btn => {
+    btn.addEventListener('click', () => activatePage(btn.dataset.page));
+  });
+}
+
+function activateTab(wsId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === wsId));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.ws === wsId));
+  window.scrollTo({ top: document.querySelector('.tabs-bar').offsetTop + 60, behavior: 'smooth' });
+}
+
+function updateProgress(wsId) {
+  const ws = WORKSHEETS.find(w => w.id === wsId);
+  if (!ws) return;
+  let total = 0, done = 0;
+  ws.categories.forEach((cat, ci) => {
+    cat.items.forEach((_, ii) => {
+      total++;
+      if (state.checks[buildKey(ws.id, ci, ii)]) done++;
+    });
+  });
+  const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+  const fill = document.querySelector(`[data-fill-for="${wsId}"]`);
+  const counter = document.querySelector(`[data-counter-for="${wsId}"]`);
+  const tabPct = document.querySelector(`[data-progress-for="${wsId}"]`);
+  if (fill) fill.style.width = pct + '%';
+  if (counter) counter.textContent = `${done} of ${total} checked`;
+  if (tabPct) tabPct.textContent = pct + '%';
+}
+
+function updateAllProgress() {
+  WORKSHEETS.forEach(w => updateProgress(w.id));
+}
+
+/* ─────────────────────────────────────────────
+   COMPANY FIELDS
+   ───────────────────────────────────────────── */
+function wireCompanyFields() {
+  const contactId = document.getElementById('contact-id');
+  contactId.value = state.contact.id || '';
+  // Date auto-set to today; used in the note + PDF filename.
+  state.company.date = new Date().toISOString().slice(0, 10);
+  saveState();
+  contactId.addEventListener('paste', (e) => {
+    const pasted = (e.clipboardData || window.clipboardData).getData('text');
+    if (pasted && pasted.includes('/')) {
+      e.preventDefault();
+      const id = extractContactId(pasted);
+      contactId.value = id;
+      state.contact.id = id;
+      saveSoon();
+      flashToast('Contact ID extracted');
+    }
+  });
+  contactId.addEventListener('input', () => {
+    state.contact.id = extractContactId(contactId.value);
+    if (state.contact.id !== contactId.value) contactId.value = state.contact.id;
+    saveSoon();
+  });
+}
+
+/* ─────────────────────────────────────────────
+   GHL WEBHOOK PAYLOAD
+   ───────────────────────────────────────────── */
+function splitName(full) {
+  const parts = (full || '').trim().split(/\s+/);
+  if (parts.length === 0 || parts[0] === '') return { first: '', last: '' };
+  if (parts.length === 1) return { first: parts[0], last: '' };
+  return { first: parts[0], last: parts.slice(1).join(' ') };
+}
+
+function buildHourglassNote() {
+  const lines = [];
+  const date = state.company.date || new Date().toISOString().slice(0, 10);
+
+  let totalItems = 0, totalChecked = 0;
+  WORKSHEETS.forEach(w => {
+    w.categories.forEach((cat, ci) => {
+      cat.items.forEach((_, ii) => {
+        totalItems++;
+        if (state.checks[buildKey(w.id, ci, ii)]) totalChecked++;
+      });
+    });
+  });
+  const pct = totalItems === 0 ? 0 : Math.round((totalChecked / totalItems) * 100);
+
+  lines.push(`MARKETING HOURGLASS AUDIT`);
+  lines.push(`Date: ${date}`);
+  lines.push(`Completion: ${totalChecked} of ${totalItems} items (${pct}%)`);
+  lines.push('');
+
+  WORKSHEETS.forEach(w => {
+    let wTotal = 0, wDone = 0;
+    w.categories.forEach((cat, ci) => {
+      cat.items.forEach((_, ii) => {
+        wTotal++;
+        if (state.checks[buildKey(w.id, ci, ii)]) wDone++;
+      });
+    });
+    const wPct = wTotal === 0 ? 0 : Math.round((wDone / wTotal) * 100);
+    lines.push('');
+    lines.push(`=== STAGE ${w.num}: ${w.title.toUpperCase()} (${wDone}/${wTotal}, ${wPct}%) ===`);
+    w.categories.forEach((cat, ci) => {
+      lines.push('');
+      lines.push(`- ${cat.name} -`);
+      cat.items.forEach((item, ii) => {
+        const checked = state.checks[buildKey(w.id, ci, ii)] ? '[x]' : '[ ]';
+        lines.push(`  ${checked} ${item}`);
+      });
+      if (!w.metricsMode) {
+        const audit = (state.notes[noteKey(w.id, ci, 'audit')] || '').trim();
+        const action = (state.notes[noteKey(w.id, ci, 'action')] || '').trim();
+        if (audit) lines.push(`  Audit: ${audit}`);
+        if (action) lines.push(`  Action: ${action}`);
+      }
+    });
+  });
+
+  return { text: lines.join('\n'), totalItems, totalChecked, pct };
+}
+
+function buildProfitableNote() {
+  const lines = [];
+  const date = state.company.date || new Date().toISOString().slice(0, 10);
+
+  lines.push(`PROFITABLE CUSTOMERS WORKSHEET`);
+  lines.push(`Date: ${date}`);
+  lines.push('');
+
+  QUADRANTS.forEach(q => {
+    const data = state.quadrants[q.id] || { customers: '', notes: '' };
+    const cust = (data.customers || '').trim();
+    const notes = (data.notes || '').trim();
+    lines.push('');
+    lines.push(`=== ${q.title.toUpperCase()}${q.ideal ? ' (IDEAL)' : ''} ===`);
+    lines.push(`(${q.sub})`);
+    if (cust) {
+      lines.push(`Clients:`);
+      cust.split('\n').forEach(c => { if (c.trim()) lines.push(`  - ${c.trim()}`); });
+    } else {
+      lines.push(`Clients: (none listed)`);
+    }
+    if (notes) {
+      lines.push(`Common patterns: ${notes}`);
+    }
+  });
+
+  return { text: lines.join('\n') };
+}
+
+function buildPayload() {
+  const page = state.currentPage;
+  const meta = PAGE_META[page];
+  const date = state.company.date || new Date().toISOString().slice(0, 10);
+  const base = {
+    audit_date: date,
+    tags: [meta.tag],
+    source: meta.source
+  };
+
+  if (page === 'hourglass') {
+    const summary = buildHourglassNote();
+    const stageData = {};
+    WORKSHEETS.forEach(w => {
+      const items = [];
+      const auditNotes = [];
+      const actionNotes = [];
+      w.categories.forEach((cat, ci) => {
+        cat.items.forEach((item, ii) => {
+          if (state.checks[buildKey(w.id, ci, ii)]) {
+            items.push(`${cat.name}: ${item}`);
+          }
+        });
+        if (!w.metricsMode) {
+          const a = (state.notes[noteKey(w.id, ci, 'audit')] || '').trim();
+          const p = (state.notes[noteKey(w.id, ci, 'action')] || '').trim();
+          if (a) auditNotes.push(`${cat.name}: ${a}`);
+          if (p) actionNotes.push(`${cat.name}: ${p}`);
+        }
+      });
+      stageData[`stage_${w.num}_${w.id}_checked`] = items.join('\n');
+      if (!w.metricsMode) {
+        stageData[`stage_${w.num}_${w.id}_audit`] = auditNotes.join('\n');
+        stageData[`stage_${w.num}_${w.id}_action`] = actionNotes.join('\n');
+      }
+    });
+    return {
+      ...base,
+      completion_percent: summary.pct,
+      items_checked: summary.totalChecked,
+      items_total: summary.totalItems,
+      note: summary.text,
+      ...stageData
+    };
+  }
+
+  // page === 'profitable'
+  const summary = buildProfitableNote();
+  const quadFields = {};
+  QUADRANTS.forEach(q => {
+    const d = state.quadrants[q.id] || { customers: '', notes: '' };
+    const key = q.id.replace(/-/g, '_');
+    quadFields[`pc_${key}_customers`] = (d.customers || '').trim();
+    quadFields[`pc_${key}_notes`] = (d.notes || '').trim();
+  });
+  return { ...base, note: summary.text, ...quadFields };
+}
+
+async function sendToGHL() {
+  const contactId = (state.contact.id || '').trim();
+  if (!contactId) {
+    flashToast('Enter the GHL Contact ID first');
+    document.getElementById('contact-id').focus();
+    return;
+  }
+  const btn = document.getElementById('btn-send');
+  const originalHTML = btn.innerHTML;
+  btn.disabled = true;
+
+  // 1. Build PDF (best-effort — if it fails, still send note + tag)
+  btn.innerHTML = 'Building PDF…';
+  let pdfBase64 = null, pdfName = null;
+  try {
+    const blob = await generatePDFBlob();
+    pdfBase64 = await blobToBase64(blob);
+    pdfName = pdfFilename();
+  } catch (e) {
+    console.error('PDF build failed:', e);
+  }
+
+  // 2. Send everything to the function
+  btn.innerHTML = 'Sending…';
+  try {
+    const full = buildPayload();
+    const body = {
+      contactId,
+      note: full.note,
+      tags: full.tags || [],
+      pdfBase64,
+      pdfFilename: pdfName
+    };
+    const res = await fetch(CRM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    let data = null;
+    try { data = await res.json(); } catch {}
+    if (res.ok && data && data.ok) {
+      const pdfOk = data.pdf && data.pdf.ok;
+      if (pdfBase64 && pdfOk) flashToast('Sent + PDF uploaded ✓');
+      else if (pdfBase64 && !pdfOk) { flashToast('Sent — PDF upload failed (see console)'); console.error('PDF upload error:', data.pdf); }
+      else flashToast('Sent to CRM ✓');
+    } else if (res.status === 404) {
+      flashToast('Function not deployed yet — push the site to Netlify');
+    } else {
+      const detail = data && (data.error || data.detail) || `HTTP ${res.status}`;
+      console.error('Send failed:', data || res.status);
+      flashToast(`Send failed: ${typeof detail === 'string' ? detail : 'see console'}`);
+    }
+  } catch (err) {
+    console.error(err);
+    flashToast('Network error — check connection');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalHTML;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   PDF generation (shared by Export + Send to CRM)
+   ───────────────────────────────────────────── */
+function pdfFilename() {
+  const pageLabel = state.currentPage === 'profitable' ? 'Profitable-Customers' : 'Marketing-Hourglass';
+  const date = state.company.date || new Date().toISOString().slice(0, 10);
+  return `${pageLabel}-${date}.pdf`;
+}
+
+function pdfOptions(filename) {
+  return {
+    margin: [0.35, 0.35, 0.4, 0.35],
+    filename,
+    image: { type: 'jpeg', quality: 0.95 },
+    html2canvas: {
+      scale: 2, useCORS: true, logging: false,
+      windowWidth: 820, width: 820, backgroundColor: '#ffffff'
+    },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait', compress: true },
+    pagebreak: { mode: ['css', 'avoid-all'], before: '.panel', avoid: '.category' }
+  };
+}
+
+// Wraps html2pdf with the textarea→div swap and pdf-export mode toggle.
+// `runner` receives the configured worker; return its promise (save() or outputPdf(...)).
+async function runPdfPipeline(runner) {
+  const replacements = [];
+  document.querySelectorAll('textarea[data-note], textarea[data-quad]').forEach(ta => {
+    const div = document.createElement('div');
+    if (ta.hasAttribute('data-quad')) {
+      div.className = 'pdf-quad-display';
+      if (ta.classList.contains('customers')) div.classList.add('customers');
+      if (ta.classList.contains('notes')) div.classList.add('notes');
+    } else {
+      div.className = 'pdf-note-display';
+    }
+    div.textContent = ta.value || ' ';
+    ta.parentNode.insertBefore(div, ta);
+    replacements.push({ ta, div });
+  });
+  document.body.classList.add('pdf-export');
+  window.scrollTo(0, 0);
+  try {
+    const worker = html2pdf().set(pdfOptions(pdfFilename())).from(document.body);
+    return await runner(worker);
+  } finally {
+    replacements.forEach(({ ta, div }) => div.remove());
+    document.body.classList.remove('pdf-export');
+  }
+}
+
+async function generatePDFBlob() {
+  return await runPdfPipeline(w => w.outputPdf('blob'));
+}
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => {
+      const result = r.result || '';
+      const idx = result.indexOf(',');
+      resolve(idx >= 0 ? result.slice(idx + 1) : result);
+    };
+    r.onerror = () => reject(r.error);
+    r.readAsDataURL(blob);
+  });
+}
+
+/* ─────────────────────────────────────────────
+   ACTIONS
+   ───────────────────────────────────────────── */
+async function exportPDF() {
+  const btn = document.getElementById('btn-export');
+  const originalHTML = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Building PDF…';
+  try {
+    await runPdfPipeline(w => w.save());
+    flashToast('PDF downloaded ✓');
+  } catch (err) {
+    console.error(err);
+    flashToast('Export failed — try again');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalHTML;
+  }
+}
+
+function wireActions() {
+  document.getElementById('btn-send').addEventListener('click', sendToGHL);
+  document.getElementById('btn-export').addEventListener('click', exportPDF);
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    if (!confirm('Clear all checks and notes? This cannot be undone.')) return;
+    state.checks = {};
+    state.notes = {};
+    saveState();
+    document.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
+    document.querySelectorAll('textarea[data-note]').forEach(t => t.value = '');
+    updateAllProgress();
+    flashToast('Cleared');
+  });
+}
+
+/* ─────────────────────────────────────────────
+   INIT
+   ───────────────────────────────────────────── */
+function init() {
+  renderTabs();
+  renderPanels();
+  renderProfitable();
+  wireCompanyFields();
+  wireActions();
+  wirePageNav();
+  updateAllProgress();
+  activatePage(state.currentPage || 'hourglass');
+}
+init();
+</script>
+
+</body>
+</html>
