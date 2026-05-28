@@ -254,6 +254,33 @@
         <p class="hint">e.g. booked jobs, average ticket, callbacks, capacity, repeat customers, sales conversions.</p>
         <textarea name="kpis_tracked" rows="3"></textarea>
       </div>
+
+      <label style="display:block; font-size:14px; font-weight:700; color:var(--navy); margin: 28px 0 4px;">Performance metrics</label>
+      <p class="hint" style="margin-bottom: 14px;">Best estimates are fine. Ranges work too ("25–30%" or "$5k–$15k").</p>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Conversion rate: inquiry → booked job</label>
+          <input type="text" name="conversion_rate_inquiry_to_booked" placeholder="e.g. 35%" />
+        </div>
+        <div class="field">
+          <label>Average project value</label>
+          <input type="text" name="average_project_value" placeholder="e.g. $8,500" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Repeat client rate</label>
+          <p class="hint">% of revenue from repeat customers.</p>
+          <input type="text" name="repeat_client_rate" placeholder="e.g. 40%" />
+        </div>
+        <div class="field">
+          <label>Referral rate</label>
+          <p class="hint">% of new clients from referrals.</p>
+          <input type="text" name="referral_rate" placeholder="e.g. 25%" />
+        </div>
+      </div>
     </section>
 
     <!-- STEP 3: Marketing Assessment -->
@@ -279,11 +306,6 @@
       </div>
 
       <div class="field">
-        <label>Customer retention / repeat process</label>
-        <textarea name="retention_process" rows="3"></textarea>
-      </div>
-
-      <div class="field">
         <label>Your #1 marketing challenge today <span class="required">*</span></label>
         <textarea name="top_marketing_challenge" rows="3" required></textarea>
       </div>
@@ -301,7 +323,8 @@
       </div>
 
       <div class="field">
-        <label>Your core message / differentiator</label>
+        <label>Your core message</label>
+        <p class="hint">The single headline statement you'd put on your homepage. Different from your differentiators above — this is one sentence.</p>
         <textarea name="core_message" rows="3"></textarea>
       </div>
 
