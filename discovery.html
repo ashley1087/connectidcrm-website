@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discovery | A Marketing System Built For You — Connectid</title>
+  <meta name="description" content="Answer a few quick questions about your business and we'll walk you through our Strategy First marketing system — personalized to your industry, stage, and goals." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #111111;
+      --navy2: #1a1a1a;
+      --navy3: #222222;
+      --orange: #FA5E36;
+      --red: #EB3656;
+      --brand-gradient: linear-gradient(135deg, #FA5E36, #EB3656);
+      --brand-gradient-soft: linear-gradient(135deg, rgba(250,94,54,.15), rgba(235,54,86,.15));
+      --white: #ffffff;
+      --gray-100: #FAF9F8;
+      --gray-200: #F0EFEE;
+      --gray-300: #e2e0de;
+      --gray-400: #adb5bd;
+      --gray-600: #6c757d;
+      --text: #1a1a1a;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-lg: 0 24px 80px rgba(0,0,0,0.18);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--navy);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; letter-spacing: -0.5px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 8px;
+      font-size: 15px; font-weight: 700;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: all .18s ease; font-family: 'Poppins', sans-serif;
+    }
+    .btn-primary { background: var(--brand-gradient); color: white; }
+    .btn-primary:hover { opacity: .92; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(235,54,86,0.4); }
+    .btn-outline { background: transparent; border: 2px solid rgba(255,255,255,.25); color: white; }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,.06); }
+    .btn-lg { padding: 18px 36px; font-size: 17px; }
+    .btn-sm { padding: 9px 18px; font-size: 13px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: rgba(17,17,17,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px; max-width: 1200px; margin: 0 auto;
+    }
+    .nav-logo img { height: 28px; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .nav-links a:hover, .nav-links a.active { color: white; }
+
+    /* ────────────────────────────────────────
+       INTAKE GATE
+    ──────────────────────────────────────── */
+    #intake {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      padding: 100px 20px 60px;
+      position: relative;
+    }
+    #intake::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(250,94,54,.10) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(235,54,86,.08) 0%, transparent 50%);
+    }
+    .intake-card {
+      position: relative; z-index: 2;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      max-width: 620px; width: 100%;
+      padding: 48px 44px;
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-lg);
+    }
+    .intake-eyebrow {
+      display: inline-block;
+      background: rgba(250,94,54,.12);
+      border: 1px solid rgba(250,94,54,.3);
+      color: var(--orange);
+      padding: 6px 14px; border-radius: 30px;
+      font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; margin-bottom: 20px;
+    }
+    .intake-title {
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 900; color: white; line-height: 1.1; margin-bottom: 14px;
+    }
+    .intake-title em { font-style: normal; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .intake-sub {
+      color: rgba(255,255,255,.6); font-size: 15px; line-height: 1.65; margin-bottom: 32px;
+    }
+    .intake-progress {
+      height: 4px; background: rgba(255,255,255,.08); border-radius: 4px;
+      margin-bottom: 28px; overflow: hidden;
+    }
+    .intake-progress-bar {
+      height: 100%; background: var(--brand-gradient); width: 0%;
+      transition: width .3s ease;
+    }
+    .intake-step { display: none; }
+    .intake-step.active { display: block; animation: fadeIn .3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .intake-label {
+      display: block;
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+      color: rgba(255,255,255,.5); margin-bottom: 10px;
+    }
+    .intake-q {
+      font-size: 22px; font-weight: 800; color: white; line-height: 1.3; margin-bottom: 20px;
+    }
+    .intake-input, .intake-select {
+      width: 100%; padding: 14px 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px; color: white;
+      font-family: 'Poppins', sans-serif; font-size: 15px;
+      transition: all .15s;
+    }
+    .intake-input::placeholder { color: rgba(255,255,255,.3); }
+    .intake-input:focus, .intake-select:focus { outline: none; border-color: var(--orange); background: rgba(255,255,255,.06); }
+    .intake-select option { background: var(--navy); color: white; }
+
+    .intake-options {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .intake-option {
+      padding: 14px 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px; color: white;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      text-align: left; transition: all .15s;
+      font-family: 'Poppins', sans-serif;
+    }
+    .intake-option:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.25); }
+    .intake-option.selected {
+      background: rgba(250,94,54,.12);
+      border-color: var(--orange);
+      color: white;
+    }
+
+    .intake-controls {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 28px; gap: 12px;
+    }
+    .intake-back {
+      background: transparent; border: none; color: rgba(255,255,255,.5);
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+    .intake-back:hover { color: white; }
+    .intake-back:disabled { opacity: 0; pointer-events: none; }
+    .intake-next {
+      background: var(--brand-gradient); color: white;
+      border: none; padding: 12px 28px; border-radius: 8px;
+      font-size: 14px; font-weight: 700; cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+    .intake-next:hover { opacity: .92; transform: translateY(-1px); }
+    .intake-next:disabled { opacity: .4; pointer-events: none; transform: none; }
+    .step-counter {
+      font-size: 12px; color: rgba(255,255,255,.4); font-weight: 600;
+      letter-spacing: .5px;
+    }
+
+    /* ────────────────────────────────────────
+       DECK — scroll-snap slides
+    ──────────────────────────────────────── */
+    #deck { display: none; }
+    #deck.active { display: block; }
+    .deck-container {
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+    .slide {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      padding: 100px 24px 60px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .slide-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      position: relative; z-index: 2;
+    }
+    .slide-dark { background: var(--navy); color: white; }
+    .slide-gray { background: var(--gray-100); color: var(--text); }
+    .slide-white { background: white; color: var(--text); }
+    .slide-gradient {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a1414 100%);
+      color: white;
+    }
+
+    .slide-eyebrow {
+      display: inline-block;
+      font-size: 11px; font-weight: 800; letter-spacing: 1.8px;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: 18px;
+    }
+    .slide-dark .slide-eyebrow, .slide-gradient .slide-eyebrow { color: var(--orange); }
+    .slide h2.slide-title {
+      font-size: clamp(34px, 5.5vw, 64px);
+      font-weight: 900; line-height: 1.05; letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+    .slide-dark .slide-title em, .slide-gradient .slide-title em {
+      font-style: normal;
+      background: var(--brand-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .slide-white .slide-title em, .slide-gray .slide-title em {
+      font-style: normal; color: var(--red);
+    }
+    .slide-lede {
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.65; max-width: 720px;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 32px;
+    }
+    .slide-white .slide-lede, .slide-gray .slide-lede { color: var(--gray-600); }
+
+    /* slide nav indicator */
+    .slide-nav {
+      position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+      z-index: 100; display: flex; flex-direction: column; gap: 10px;
+    }
+    .slide-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.25); cursor: pointer;
+      transition: all .2s; border: none; padding: 0;
+    }
+    .slide-dot:hover { background: rgba(255,255,255,.5); }
+    .slide-dot.active {
+      background: var(--orange); width: 10px; height: 10px;
+      box-shadow: 0 0 12px rgba(250,94,54,.6);
+    }
+    .slide-dot.dark { background: rgba(0,0,0,.2); }
+    .slide-dot.dark:hover { background: rgba(0,0,0,.4); }
+
+    /* slide counter */
+    .slide-counter {
+      position: fixed; bottom: 24px; left: 24px;
+      z-index: 100;
+      font-size: 12px; font-weight: 700;
+      color: rgba(255,255,255,.5); letter-spacing: 1px;
+      background: rgba(17,17,17,.7); backdrop-filter: blur(8px);
+      padding: 6px 12px; border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    /* scroll hint */
+    .scroll-hint {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(255,255,255,.4);
+      animation: bounce 2s ease infinite;
+    }
+    .slide-white .scroll-hint, .slide-gray .scroll-hint { color: var(--gray-400); }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── Slide 1: TITLE ── */
+    .title-slide {
+      background: var(--navy);
+      text-align: center;
+    }
+    .title-slide::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(250,94,54,.18) 0%, transparent 55%),
+        radial-gradient(circle at 70% 80%, rgba(235,54,86,.12) 0%, transparent 55%);
+    }
+    .title-slide .slide-inner { text-align: center; }
+    .title-mega {
+      font-size: clamp(40px, 7vw, 84px);
+      font-weight: 900; line-height: 1; letter-spacing: -2px;
+      color: white; margin-bottom: 24px;
+    }
+    .title-mega em {
+      font-style: normal;
+      background: var(--brand-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .title-sub {
+      font-size: clamp(18px, 2.2vw, 22px);
+      color: rgba(255,255,255,.65); max-width: 680px; margin: 0 auto 40px;
+      line-height: 1.5;
+    }
+    .title-built-for {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+      padding: 10px 20px; border-radius: 30px;
+      font-size: 13px; color: rgba(255,255,255,.7); font-weight: 500;
+    }
+    .title-built-for strong { color: white; font-weight: 700; }
+
+    /* ── Slide 2: BELIEF ── */
+    .belief-slide { text-align: center; }
+    .belief-quote {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800; line-height: 1.15; letter-spacing: -1px;
+      color: white; max-width: 920px; margin: 0 auto 32px;
+    }
+    .belief-quote em {
+      font-style: normal;
+      background: var(--brand-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .belief-attribution {
+      font-size: 13px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: rgba(255,255,255,.4);
+    }
+
+    /* ── Slide 3: PROBLEM ── */
+    .problem-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .problem-quote {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 900; line-height: 1.05; letter-spacing: -1.5px;
+    }
+    .problem-quote em {
+      font-style: normal;
+      background: var(--brand-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .problem-detail {
+      font-size: 17px; line-height: 1.7; color: var(--gray-600);
+    }
+    .problem-detail strong { color: var(--text); font-weight: 700; }
+
+    /* ── Slide 4: 6 ELEMENTS HEXAGON ── */
+    .hex-wrap {
+      display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center;
+    }
+    .hex-grid {
+      position: relative; width: 100%; max-width: 520px; aspect-ratio: 1.1 / 1;
+      margin: 0 auto;
+    }
+    .hex {
+      position: absolute; width: 32%; aspect-ratio: 1 / 1.155;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: white; text-align: center; padding: 8%;
+      transition: transform .2s;
+    }
+    .hex:hover { transform: scale(1.04); }
+    .hex-num {
+      font-size: 11px; font-weight: 800; opacity: .8;
+      letter-spacing: 1px; margin-bottom: 3px;
+    }
+    .hex-label {
+      font-size: 11px; font-weight: 800; line-height: 1.15;
+      text-transform: uppercase; letter-spacing: .3px;
+    }
+    .hex.h1 { background: #2C5C9E; top: 0; left: 34%; }
+    .hex.h2 { background: #4A89BD; top: 22%; left: 65%; }
+    .hex.h3 { background: #6FA8B7; top: 56%; left: 65%; }
+    .hex.h4 { background: #4FBFA8; top: 78%; left: 34%; }
+    .hex.h5 { background: #8BC34A; top: 56%; left: 3%; }
+    .hex.h6 { background: #F5B528; top: 22%; left: 3%; }
+    .hex.center {
+      background: white; color: var(--navy);
+      top: 39%; left: 34%;
+      box-shadow: 0 8px 32px rgba(0,0,0,.4);
+    }
+    .hex.center .hex-label { color: var(--navy); font-size: 13px; }
+    .hex.center .hex-num { color: var(--red); }
+    .elements-text h3 {
+      font-size: 13px; font-weight: 800; color: var(--orange);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .elements-text p {
+      font-size: 16px; line-height: 1.65; color: rgba(255,255,255,.7);
+      margin-bottom: 14px;
+    }
+    .elements-text p strong { color: white; font-weight: 700; }
+
+    /* ── Slide 5: HOURGLASS ── */
+    .hg-wrap {
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center;
+    }
+    .hg-stages {
+      display: flex; flex-direction: column; gap: 8px;
+      max-width: 480px; margin: 0 auto;
+    }
+    .hg-stage {
+      display: flex; align-items: center; gap: 16px;
+      transition: all .2s;
+    }
+    .hg-stage:hover { transform: translateX(4px); }
+    .hg-stage-tag {
+      width: 96px; padding: 10px 14px;
+      border-radius: 6px; color: white;
+      font-size: 13px; font-weight: 800;
+      text-align: center; letter-spacing: .5px;
+      flex-shrink: 0;
+    }
+    .hg-stage-desc {
+      font-size: 14px; color: rgba(255,255,255,.7); line-height: 1.5;
+    }
+    .hg-s1 { background: #111; }
+    .hg-s2 { background: #1d3a8a; }
+    .hg-s3 { background: #3b5bdb; }
+    .hg-s4 { background: #5c7cfa; }
+    .hg-s5 { background: #2BB3A3; }
+    .hg-s6 { background: #94C754; }
+    .hg-s7 { background: #F5B528; }
+
+    /* ── Slide 6: LEAD GEN SYSTEM ── */
+    .system-flow {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+      margin-top: 40px;
+    }
+    .flow-node {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 12px; padding: 22px 16px; text-align: center;
+      position: relative;
+    }
+    .flow-node::after {
+      content: '→'; position: absolute; right: -18px; top: 50%; transform: translateY(-50%);
+      color: var(--orange); font-size: 20px; font-weight: 700;
+    }
+    .flow-node:last-child::after { display: none; }
+    .flow-icon {
+      width: 44px; height: 44px;
+      background: var(--brand-gradient); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px; font-size: 20px;
+    }
+    .flow-label {
+      font-size: 12px; font-weight: 800; color: white;
+      text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px;
+    }
+    .flow-desc { font-size: 11px; color: rgba(255,255,255,.55); line-height: 1.4; }
+    .flow-sources {
+      display: flex; gap: 10px; justify-content: center; margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .flow-source {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+      padding: 8px 14px; border-radius: 30px;
+      font-size: 12px; color: rgba(255,255,255,.7); font-weight: 600;
+    }
+
+    /* ── Slide 7: 6-STEP PROCESS ── */
+    .process-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      margin-top: 40px;
+    }
+    .process-step {
+      background: white; border: 1px solid var(--gray-200);
+      border-radius: 14px; padding: 28px; position: relative;
+      transition: all .2s;
+    }
+    .process-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .process-step-num {
+      width: 36px; height: 36px;
+      background: var(--brand-gradient); color: white;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 900; margin-bottom: 16px;
+    }
+    .process-step h4 {
+      font-size: 17px; font-weight: 800; margin-bottom: 8px; color: var(--text);
+    }
+    .process-step p {
+      font-size: 14px; color: var(--gray-600); line-height: 1.6;
+    }
+
+    /* ── Slide 8: SCOPE ── */
+    .scope-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+      margin-top: 40px;
+    }
+    .scope-card {
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px; padding: 32px 26px;
+      transition: all .2s;
+    }
+    .scope-card:hover { border-color: rgba(250,94,54,.4); transform: translateY(-4px); }
+    .scope-card-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px;
+      background: rgba(250,94,54,.15); color: var(--orange);
+      border-radius: 8px; font-size: 13px; font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .scope-card h4 {
+      font-size: 18px; font-weight: 800; color: white; margin-bottom: 10px;
+    }
+    .scope-card p {
+      font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.65;
+    }
+
+    /* ── Slide 9: WHY THIS WORKS FOR YOU ── */
+    .fit-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+    }
+    .fit-stat {
+      background: white; border-radius: 18px; padding: 36px;
+      box-shadow: var(--shadow);
+    }
+    .fit-stat-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 0; border-bottom: 1px solid var(--gray-200);
+    }
+    .fit-stat-row:last-child { border-bottom: none; }
+    .fit-stat-label { font-size: 13px; font-weight: 600; color: var(--gray-600); }
+    .fit-stat-value { font-size: 15px; font-weight: 800; color: var(--text); text-align: right; }
+    .fit-text h3 { color: white; }
+    .fit-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+    .fit-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      color: rgba(255,255,255,.75); font-size: 15px; line-height: 1.55;
+    }
+    .fit-list li::before {
+      content: '✓'; flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: var(--brand-gradient); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: white; margin-top: 1px;
+    }
+
+    /* ── Slide 10: CTA ── */
+    .cta-slide {
+      background: linear-gradient(135deg, #1a0a0a 0%, #2a1414 50%, #1a0a0a 100%);
+      text-align: center; position: relative;
+    }
+    .cta-slide::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(250,94,54,.15) 0%, transparent 60%);
+    }
+    .cta-mega {
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 900; color: white; line-height: 1.05; letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+    .cta-mega em {
+      font-style: normal;
+      background: var(--brand-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .cta-sub {
+      font-size: 18px; color: rgba(255,255,255,.7);
+      max-width: 600px; margin: 0 auto 40px; line-height: 1.6;
+    }
+    .cta-btns {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .cta-trust {
+      display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+      color: rgba(255,255,255,.4); font-size: 13px; font-weight: 500;
+    }
+    .cta-trust span::before { content: '✓ '; color: var(--orange); margin-right: 4px; }
+
+    /* ────────────────────────────────────────
+       RESPONSIVE
+    ──────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links li:not(:last-child) { display: none; }
+      .problem-row, .hex-wrap, .hg-wrap, .fit-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .system-flow { grid-template-columns: 1fr 1fr; }
+      .flow-node::after { display: none; }
+      .process-grid, .scope-grid { grid-template-columns: 1fr; }
+      .intake-options { grid-template-columns: 1fr; }
+      .intake-card { padding: 36px 28px; }
+      .hex-grid { max-width: 360px; }
+      .slide-nav { display: none; }
+      .slide { padding: 80px 20px 50px; }
+    }
+
+    /* hide scrollbar in deck */
+    .deck-container::-webkit-scrollbar { display: none; }
+    .deck-container { scrollbar-width: none; -ms-overflow-style: none; }
+  </style>
+  <link rel="icon" type="image/png" href="favicon.png" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo-light.png" alt="Connectid" /></a>
+    <ul class="nav-links">
+      <li><a href="strategy-first.html">Strategy First</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="strategy-first-guide.html">Our Process</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="discovery.html" class="active">Discovery</a></li>
+      <li><a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ──────────────────────────────────────── INTAKE GATE ──────────────────────────────────────── -->
+<section id="intake">
+  <div class="intake-card">
+    <span class="intake-eyebrow">Personalized Strategy Walkthrough</span>
+    <h1 class="intake-title">Let's build you a <em>marketing system</em> — starting with a few quick questions.</h1>
+    <p class="intake-sub">Answer 5 questions about your business and we'll walk you through our Strategy First system, personalized to your industry and stage. Takes about 60 seconds.</p>
+
+    <div class="intake-progress"><div class="intake-progress-bar" id="progressBar"></div></div>
+
+    <!-- Hidden Netlify form for build-time detection -->
+    <form name="discovery-intake" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="bot-field" />
+      <input type="text" name="businessName" />
+      <input type="text" name="industry" />
+      <input type="text" name="revenue" />
+      <input type="text" name="challenge" />
+      <input type="text" name="goal" />
+      <input type="email" name="email" />
+    </form>
+
+    <!-- Step 1: Business name -->
+    <div class="intake-step active" data-step="1">
+      <span class="intake-label">Question 1 of 5</span>
+      <h2 class="intake-q">What's your business called?</h2>
+      <input type="text" class="intake-input" id="q-businessName" placeholder="e.g. Acme Plumbing" />
+    </div>
+
+    <!-- Step 2: Industry -->
+    <div class="intake-step" data-step="2">
+      <span class="intake-label">Question 2 of 5</span>
+      <h2 class="intake-q">What industry are you in?</h2>
+      <div class="intake-options" data-field="industry">
+        <button type="button" class="intake-option" data-value="Home Services">Home Services</button>
+        <button type="button" class="intake-option" data-value="Professional Services">Professional Services</button>
+        <button type="button" class="intake-option" data-value="Healthcare">Healthcare</button>
+        <button type="button" class="intake-option" data-value="SaaS / Tech">SaaS / Tech</button>
+        <button type="button" class="intake-option" data-value="E-commerce">E-commerce</button>
+        <button type="button" class="intake-option" data-value="Real Estate">Real Estate</button>
+        <button type="button" class="intake-option" data-value="Restaurant / Hospitality">Restaurant / Hospitality</button>
+        <button type="button" class="intake-option" data-value="Something Else">Something Else</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Revenue -->
+    <div class="intake-step" data-step="3">
+      <span class="intake-label">Question 3 of 5</span>
+      <h2 class="intake-q">What's your annual revenue range?</h2>
+      <div class="intake-options" data-field="revenue">
+        <button type="button" class="intake-option" data-value="Under $500K">Under $500K</button>
+        <button type="button" class="intake-option" data-value="$500K – $2M">$500K – $2M</button>
+        <button type="button" class="intake-option" data-value="$2M – $5M">$2M – $5M</button>
+        <button type="button" class="intake-option" data-value="$5M – $10M">$5M – $10M</button>
+        <button type="button" class="intake-option" data-value="$10M+">$10M+</button>
+        <button type="button" class="intake-option" data-value="Pre-revenue">Pre-revenue</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Challenge -->
+    <div class="intake-step" data-step="4">
+      <span class="intake-label">Question 4 of 5</span>
+      <h2 class="intake-q">What's your biggest marketing challenge right now?</h2>
+      <div class="intake-options" data-field="challenge">
+        <button type="button" class="intake-option" data-value="not enough leads">Not enough leads</button>
+        <button type="button" class="intake-option" data-value="leads aren't qualified">Leads aren't qualified</button>
+        <button type="button" class="intake-option" data-value="no clear message">No clear message</button>
+        <button type="button" class="intake-option" data-value="no marketing strategy">No marketing strategy</button>
+        <button type="button" class="intake-option" data-value="poor website conversion">Poor website conversion</button>
+        <button type="button" class="intake-option" data-value="stuck at a revenue plateau">Stuck at a revenue plateau</button>
+      </div>
+    </div>
+
+    <!-- Step 5: Goal + email -->
+    <div class="intake-step" data-step="5">
+      <span class="intake-label">Question 5 of 5</span>
+      <h2 class="intake-q">What's your top growth goal in the next 12 months?</h2>
+      <input type="text" class="intake-input" id="q-goal" placeholder="e.g. Hit $3M in revenue, double our lead volume, expand to a 2nd location" style="margin-bottom: 16px;" />
+      <input type="email" class="intake-input" id="q-email" placeholder="Your email (so we can save your walkthrough)" />
+    </div>
+
+    <div class="intake-controls">
+      <button type="button" class="intake-back" id="backBtn" disabled>← Back</button>
+      <span class="step-counter" id="stepCounter">1 / 5</span>
+      <button type="button" class="intake-next" id="nextBtn">Continue →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────────────────────────────────── DECK ──────────────────────────────────────── -->
+<div id="deck">
+  <div class="deck-container" id="deckScroll">
+
+    <!-- Slide 1: TITLE -->
+    <section class="slide title-slide" data-slide="1">
+      <div class="slide-inner">
+        <h1 class="title-mega">A marketing system<br />built for <em data-bind="businessName">your business</em>.</h1>
+        <p class="title-sub">Based on what you told us about <span data-bind="industry">your industry</span> and your goal to <span data-bind="goal">grow predictably</span> — here's how we'd think about it.</p>
+        <div class="title-built-for">
+          Personalized for <strong data-bind="businessName">your business</strong> · <span data-bind="industry">Your industry</span>
+        </div>
+      </div>
+      <div class="scroll-hint">Scroll ↓</div>
+    </section>
+
+    <!-- Slide 2: BELIEF -->
+    <section class="slide slide-dark belief-slide" data-slide="2">
+      <div class="slide-inner">
+        <span class="slide-eyebrow">What we believe</span>
+        <p class="belief-quote">Marketing is a <em>system of tactics</em><br />driven by <em>strategy</em>.</p>
+        <p class="belief-attribution">— The Strategy First Operating Principle</p>
+        <p style="margin-top: 40px; color: rgba(255,255,255,.55); font-size: 16px; max-width: 660px; margin-left: auto; margin-right: auto; line-height: 1.7;">
+          Effective tactics are aligned with the customer journey. Our marketing campaigns educate and gently bring prospects through that journey — until they become your customer.
+        </p>
+      </div>
+    </section>
+
+    <!-- Slide 3: PROBLEM -->
+    <section class="slide slide-white" data-slide="3">
+      <div class="slide-inner">
+        <span class="slide-eyebrow">The truth most marketers miss</span>
+        <div class="problem-row">
+          <div>
+            <p class="problem-quote">Nobody wants <em>what you sell.</em></p>
+            <p class="problem-quote" style="margin-top: 16px;">They want their <em>problems solved.</em></p>
+          </div>
+          <div>
+            <p class="problem-detail">
+              For <strong data-bind="businessName">your business</strong>, that means your <span data-bind="industry">industry</span> customers aren't buying a service line item — they're buying relief from <strong data-bind="challengePhrase">a problem they want gone</strong>.
+            </p>
+            <p class="problem-detail" style="margin-top: 16px;">
+              Every page, ad, email, and conversation has to reflect that truth. <strong>Strategy First</strong> is how we make sure it does.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: 6 ELEMENTS HEXAGON -->
+    <section class="slide slide-dark" data-slide="4">
+      <div class="slide-inner">
+        <span class="slide-eyebrow">The foundation</span>
+        <h2 class="slide-title">The <em>6 Elements</em> of a Small Business Marketing System.</h2>
+        <div class="hex-wrap" style="margin-top: 40px;">
+          <div class="hex-grid">
+            <div class="hex h1"><div class="hex-num">1</div><div class="hex-label">Website That Builds Trust</div></div>
+            <div class="hex h2"><div class="hex-num">2</div><div class="hex-label">Content Platform</div></div>
+            <div class="hex h3"><div class="hex-num">3</div><div class="hex-label">Search Engine Optimization</div></div>
+            <div class="hex h4"><div class="hex-num">4</div><div class="hex-label">Social Media Engagement</div></div>
+            <div class="hex h5"><div class="hex-num">5</div><div class="hex-label">Email Marketing</div></div>
+            <div class="hex h6"><div class="hex-num">6</div><div class="hex-label">Pay-Per-Click Ads</div></div>
+            <div class="hex center"><div class="hex-num">CENTER</div><div class="hex-label">Strategy<br />Ideal Client<br />Message · Story</div></div>
+          </div>
+          <div class="elements-text">
+            <h3>Strategy at the center</h3>
+            <p>The 6 outer tactics only compound when they're connected by one core strategy — your <strong>ideal client</strong>, your <strong>core message</strong>, and your <strong>story</strong>.</p>
+            <p>Without that center, each channel runs on its own. Money goes out, leads don't come in. With it, every channel reinforces the next.</p>
+            <p style="margin-top: 24px; padding: 16px; background: rgba(250,94,54,.08); border-left: 3px solid var(--orange); border-radius: 6px; font-size: 14px;">
+              We'll diagnose where <strong data-bind="businessName">your business</strong> is strong, weak, and missing — and rebuild the system around your strategy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: HOURGLASS -->
+    <section class="slide slide-gradient" data-slide="5">
+      <div class="slide-inner">
+        <span class="slide-eyebrow">The customer journey</span>
+        <h2 class="slide-title">The <em>Marketing Hourglass</em> — aligned with how people actually buy.</h2>
+        <div class="hg-wrap" style="margin-top: 40px;">
+          <div>
+            <p class="slide-lede" style="max-width: 100%;">Every prospect moves through 7 stages — from "who are you?" to "I'd happily refer you." Most businesses optimize for two of them and ignore the rest. We design across all seven.</p>
+          </div>
+          <div class="hg-stages">
+            <div class="hg-stage"><div class="hg-stage-tag hg-s1">KNOW</div><div class="hg-stage-desc">Message, ads, referrals, networking, earned media</div></div>
+            <div class="hg-stage"><div class="hg-stage-tag hg-s2">LIKE</div><div class="hg-stage-desc">Website, blog, social media, podcast, articles</div></div>
+            <div class="hg-stage"><div class="hg-stage-tag hg-s3">TRUST</div><div class="hg-stage-desc">SEO, webinars, marketing materials, white papers</div></div>
+            <div class="hg-stage"><div class="hg-stage-tag hg-s4">TRY</div><div class="hg-stage-desc">Workshops, evaluations, demos, starter offers</div></div>
+            <div class="hg-stage"><div class="hg-stage-tag hg-s5">BUY</div><div class="hg-stage-desc">Service team, new customer kit, onboarding</div></div>
+            <div class="hg-stage"><div class="hg-stage-tag hg-s6">REPEAT</div><div class="hg-stage-desc">Project reviews, cross-selling, customer events</div></div>
+            <div class="hg-stage"><div class="hg-stage-tag hg-s7">REFER</div><div class="hg-stage-desc">Champion events, partner intros, peer roundtables</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: LEAD GEN SYSTEM -->
+    <section class="slide slide-dark" data-slide="6">
+      <div class="slide-inner">
+        <span class="slide-eyebrow">The campaign engine</span>
+        <h2 class="slide-title">How traffic becomes <em>customers</em>, not just clicks.</h2>
+        <p class="slide-lede">Traffic without a nurture path is wasted spend. Every channel — paid, organic, social, email — feeds the same opt-in / nurture / sales engine.</p>
+
+        <div class="system-flow">
+          <div class="flow-node">
+            <div class="flow-icon">📡</div>
+            <div class="flow-label">Traffic Sources</div>
+            <div class="flow-desc">Search · Social · Ads · Referral</div>
+          </div>
+          <div class="flow-node">
+            <div class="flow-icon">📄</div>
+            <div class="flow-label">Landing Page</div>
+            <div class="flow-desc">High-intent opt-in offer</div>
+          </div>
+          <div class="flow-node">
+            <div class="flow-icon">✉️</div>
+            <div class="flow-label">Nurture Sequence</div>
+            <div class="flow-desc">3–7 emails that build trust</div>
+          </div>
+          <div class="flow-node">
+            <div class="flow-icon">📞</div>
+            <div class="flow-label">Consultation</div>
+            <div class="flow-desc">Sales conversation</div>
+          </div>
+          <div class="flow-node">
+            <div class="flow-icon">💰</div>
+            <div class="flow-label">Customer</div>
+            <div class="flow-desc">Buy · Repeat · Refer</div>
+          </div>
+        </div>
+
+        <div class="flow-sources" style="margin-top: 48px;">
+          <span style="font-size: 12px; color: rgba(255,255,255,.4); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-right: 8px; align-self: center;">Common sources:</span>
+          <span class="flow-source">Google Search</span>
+          <span class="flow-source">LinkedIn</span>
+          <span class="flow-source">Instagram</span>
+          <span class="flow-source">Email Newsletter</span>
+          <span class="flow-source">Webinars</span>
+          <span class="flow-source">Podcast</span>
+          <span class="flow-source">Paid Ads</span>
+          <span class="flow-source">Referrals</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7: PROCESS -->
+    <section class="slide slide-gray" data-slide="7">
+      <div class="slide-inner">
+        <span class="slide-eyebrow">Our process</span>
+        <h2 class="slide-title">How we build <em data-bind="businessName">your</em> marketing strategy.</h2>
+        <p class="slide-lede" style="color: var(--gray-600);">Six structured steps. Roughly 30–45 days. You walk away with a complete, documented marketing plan and a 90-day execution calendar.</p>
+
+        <div class="process-grid">
+          <div class="process-step">
+            <div class="process-step-num">1</div>
+            <h4>Kickoff Meeting</h4>
+            <p>Align on scope, fees, timeline, and the people we'll need to talk to inside and outside your company.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">2</div>
+            <h4>Internal & Client Interviews</h4>
+            <p>We talk to your team and your best customers. Why they bought. Why they stayed. What almost stopped them.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">3</div>
+            <h4>Online Presence Audit</h4>
+            <p>Website, SEO, social, reviews, content, and competitors — scored honestly against what a buyer would see.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">4</div>
+            <h4>Brand Message Creation</h4>
+            <p>Your core message, talking points, and the way you describe what you do — built from what customers actually said.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">5</div>
+            <h4>Marketing Plan Development</h4>
+            <p>A documented strategy with personas, customer journey, content pillars, channels, and a 90-day calendar.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step-num">6</div>
+            <h4>Coordinate Implementation</h4>
+            <p>Walkthrough with your team and a clear handoff — whether you run it internally or we run it for you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8: SCOPE -->
+    <section class="slide slide-dark" data-slide="8">
+      <div class="slide-inner">
+        <span class="slide-eyebrow">What we do in the first 30 days</span>
+        <h2 class="slide-title">The <em>engagement</em> — clear, contained, no surprises.</h2>
+        <p class="slide-lede">No black box. No 60-page proposal nobody reads. Three concrete deliverables in the first month that prove the strategy before we touch tactics.</p>
+
+        <div class="scope-grid">
+          <div class="scope-card">
+            <div class="scope-card-num">01</div>
+            <h4>Agree to scope and fees</h4>
+            <p>Fixed scope. Fixed fee. Written agreement on what's in, what's out, and what success looks like at the end of the engagement.</p>
+          </div>
+          <div class="scope-card">
+            <div class="scope-card-num">02</div>
+            <h4>Determine clients to interview</h4>
+            <p>We pick 5–8 of your best customers together, schedule the calls, and run the interviews. You see every transcript.</p>
+          </div>
+          <div class="scope-card">
+            <div class="scope-card-num">03</div>
+            <h4>Conduct online presence audit</h4>
+            <p>Website, SEO, GBP, reviews, social, and 3 competitors — scored, screenshotted, and turned into a fix-it list ranked by impact.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9: WHY THIS FITS YOU -->
+    <section class="slide slide-gray" data-slide="9">
+      <div class="slide-inner">
+        <span class="slide-eyebrow">Why this fits</span>
+        <h2 class="slide-title">Why this works for <em data-bind="businessName">your business</em>.</h2>
+        <div class="fit-wrap" style="margin-top: 40px;">
+          <div class="fit-stat">
+            <div class="fit-stat-row">
+              <span class="fit-stat-label">Business</span>
+              <span class="fit-stat-value" data-bind="businessName">—</span>
+            </div>
+            <div class="fit-stat-row">
+              <span class="fit-stat-label">Industry</span>
+              <span class="fit-stat-value" data-bind="industry">—</span>
+            </div>
+            <div class="fit-stat-row">
+              <span class="fit-stat-label">Stage</span>
+              <span class="fit-stat-value" data-bind="revenue">—</span>
+            </div>
+            <div class="fit-stat-row">
+              <span class="fit-stat-label">Top Challenge</span>
+              <span class="fit-stat-value" data-bind="challenge">—</span>
+            </div>
+            <div class="fit-stat-row">
+              <span class="fit-stat-label">12-Month Goal</span>
+              <span class="fit-stat-value" data-bind="goal">—</span>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 12px;">What our process will fix for you</h3>
+            <p style="color: var(--gray-600); font-size: 15px; line-height: 1.7;">Given your stage and your top challenge, here's how Strategy First moves the needle:</p>
+            <ul class="fit-list" style="color: var(--text);">
+              <li style="color: var(--text);"><span>A documented, written marketing plan you control — not stuck in an agency's head</span></li>
+              <li style="color: var(--text);"><span>A core message your team uses on every call, every page, every ad</span></li>
+              <li style="color: var(--text);"><span>A 90-day execution calendar that fixes <strong data-bind="challengePhrase">your top issue</strong> first</span></li>
+              <li style="color: var(--text);"><span>Clarity on which of the 6 elements to invest in next — and which to ignore</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 10: CTA -->
+    <section class="slide cta-slide" data-slide="10">
+      <div class="slide-inner">
+        <h2 class="cta-mega">Ready to put a <em>real strategy</em> behind your marketing?</h2>
+        <p class="cta-sub">Book a 30-minute discovery call. We'll walk through what we saw, what we'd recommend for <strong data-bind="businessName">your business</strong>, and whether Strategy First is the right next step.</p>
+        <div class="cta-btns">
+          <a href="contact.html" class="btn btn-primary btn-lg">Book Your Discovery Call →</a>
+          <a href="strategy-first.html" class="btn btn-outline btn-lg">See Full Engagement Details</a>
+        </div>
+        <div class="cta-trust">
+          <span>30-minute call</span>
+          <span>No sales pressure</span>
+          <span>Walk away with one actionable insight</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- slide nav dots + counter -->
+  <div class="slide-nav" id="slideNav"></div>
+  <div class="slide-counter" id="slideCounter">01 / 10</div>
+</div>
+
+<script>
+  // ── INTAKE STATE ──
+  const state = { businessName: '', industry: '', revenue: '', challenge: '', goal: '', email: '' };
+  let currentStep = 1;
+  const totalSteps = 5;
+
+  const progressBar = document.getElementById('progressBar');
+  const backBtn = document.getElementById('backBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const stepCounter = document.getElementById('stepCounter');
+
+  function updateProgress() {
+    progressBar.style.width = ((currentStep - 1) / totalSteps * 100) + '%';
+    stepCounter.textContent = currentStep + ' / ' + totalSteps;
+    backBtn.disabled = currentStep === 1;
+    nextBtn.textContent = currentStep === totalSteps ? 'See Your Walkthrough →' : 'Continue →';
+    validateStep();
+  }
+
+  function showStep(n) {
+    document.querySelectorAll('.intake-step').forEach(s => s.classList.remove('active'));
+    document.querySelector(`.intake-step[data-step="${n}"]`).classList.add('active');
+    currentStep = n;
+    updateProgress();
+  }
+
+  function validateStep() {
+    let ok = false;
+    if (currentStep === 1) ok = document.getElementById('q-businessName').value.trim().length > 0;
+    else if (currentStep === 2) ok = !!state.industry;
+    else if (currentStep === 3) ok = !!state.revenue;
+    else if (currentStep === 4) ok = !!state.challenge;
+    else if (currentStep === 5) {
+      const goal = document.getElementById('q-goal').value.trim();
+      const email = document.getElementById('q-email').value.trim();
+      ok = goal.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    nextBtn.disabled = !ok;
+  }
+
+  // text inputs
+  ['q-businessName', 'q-goal', 'q-email'].forEach(id => {
+    document.getElementById(id).addEventListener('input', validateStep);
+    document.getElementById(id).addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !nextBtn.disabled) { e.preventDefault(); nextBtn.click(); }
+    });
+  });
+
+  // option buttons
+  document.querySelectorAll('.intake-options').forEach(group => {
+    const field = group.dataset.field;
+    group.querySelectorAll('.intake-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.intake-option').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        state[field] = btn.dataset.value;
+        validateStep();
+      });
+    });
+  });
+
+  backBtn.addEventListener('click', () => { if (currentStep > 1) showStep(currentStep - 1); });
+
+  nextBtn.addEventListener('click', () => {
+    // capture text-field values for this step
+    if (currentStep === 1) state.businessName = document.getElementById('q-businessName').value.trim();
+    if (currentStep === 5) {
+      state.goal = document.getElementById('q-goal').value.trim();
+      state.email = document.getElementById('q-email').value.trim();
+    }
+    if (currentStep < totalSteps) {
+      showStep(currentStep + 1);
+    } else {
+      submitAndShowDeck();
+    }
+  });
+
+  // ── SUBMIT + REVEAL DECK ──
+  function submitAndShowDeck() {
+    // post to Netlify form (fire-and-forget; don't block the user)
+    const formData = new URLSearchParams();
+    formData.append('form-name', 'discovery-intake');
+    Object.entries(state).forEach(([k, v]) => formData.append(k, v));
+    fetch('/', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: formData.toString() }).catch(() => {});
+
+    personalizeDeck();
+    document.getElementById('intake').style.display = 'none';
+    document.body.style.overflow = 'hidden';
+    const deck = document.getElementById('deck');
+    deck.classList.add('active');
+    buildSlideNav();
+    // scroll to top of deck
+    document.getElementById('deckScroll').scrollTop = 0;
+  }
+
+  // ── PERSONALIZE DECK COPY ──
+  function personalizeDeck() {
+    // challenge → readable phrase
+    const challengePhraseMap = {
+      'not enough leads': 'the lead volume gap',
+      "leads aren't qualified": 'the unqualified-lead problem',
+      'no clear message': 'unclear messaging',
+      'no marketing strategy': 'the lack of a real strategy',
+      'poor website conversion': 'website conversion',
+      'stuck at a revenue plateau': 'the revenue plateau'
+    };
+    const personalized = {
+      ...state,
+      challengePhrase: challengePhraseMap[state.challenge] || state.challenge || 'your biggest growth blocker'
+    };
+
+    document.querySelectorAll('[data-bind]').forEach(el => {
+      const key = el.dataset.bind;
+      if (personalized[key]) el.textContent = personalized[key];
+    });
+  }
+
+  // ── SLIDE NAV DOTS ──
+  function buildSlideNav() {
+    const nav = document.getElementById('slideNav');
+    const slides = document.querySelectorAll('.slide');
+    nav.innerHTML = '';
+    slides.forEach((slide, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'slide-dot';
+      if (i === 0) dot.classList.add('active');
+      dot.title = 'Slide ' + (i + 1);
+      dot.addEventListener('click', () => slide.scrollIntoView({ behavior: 'smooth' }));
+      nav.appendChild(dot);
+    });
+  }
+
+  // ── TRACK CURRENT SLIDE ──
+  const counter = document.getElementById('slideCounter');
+  document.getElementById('deckScroll').addEventListener('scroll', () => {
+    const container = document.getElementById('deckScroll');
+    const slides = document.querySelectorAll('.slide');
+    const scrollTop = container.scrollTop;
+    const idx = Math.round(scrollTop / window.innerHeight);
+    const clamped = Math.max(0, Math.min(idx, slides.length - 1));
+    document.querySelectorAll('.slide-dot').forEach((d, i) => d.classList.toggle('active', i === clamped));
+    counter.textContent = String(clamped + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+
+    // adjust dot color based on slide background
+    const currentSlide = slides[clamped];
+    const isLight = currentSlide.classList.contains('slide-white') || currentSlide.classList.contains('slide-gray');
+    document.querySelectorAll('.slide-dot').forEach(d => d.classList.toggle('dark', isLight));
+    counter.style.color = isLight ? 'var(--gray-600)' : 'rgba(255,255,255,.5)';
+    counter.style.background = isLight ? 'rgba(255,255,255,.7)' : 'rgba(17,17,17,.7)';
+  });
+
+  // keyboard nav (deck only)
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('deck').classList.contains('active')) return;
+    const container = document.getElementById('deckScroll');
+    const slides = document.querySelectorAll('.slide');
+    const idx = Math.round(container.scrollTop / window.innerHeight);
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      if (idx + 1 < slides.length) slides[idx + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (idx > 0) slides[idx - 1].scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  // init
+  updateProgress();
+</script>
+
+</body>
+</html>
