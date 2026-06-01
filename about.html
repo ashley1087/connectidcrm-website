@@ -31,7 +31,7 @@
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(17,17,17,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.06); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; max-width: 1100px; margin: 0 auto; }
     .nav-logo img { height: 32px; display: block; }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none;  margin-left: auto; }
     .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .15s; }
     .nav-links a:hover, .nav-links a.active { color: white; }
     .btn-sm { padding: 9px 20px; font-size: 13px; }
@@ -120,14 +120,14 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img src="logo-light.png" alt="Connectid" /></a>
-    <ul class="nav-links">
-      <li><a href="strategy-first.html">Strategy First</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="strategy-first-guide.html">Our Process</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="blog.html">Blog</a></li>
-      <li><a href="#" onclick="openBooking(); return false;" class="btn btn-primary btn-sm">Book a Strategy Call</a></li>
-    </ul>
+          <ul class="nav-links">
+        <li><a href="strategy-first.html">Strategy First</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="strategy-first-guide.html">Our Process</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="https://link.connectidcrm.com/widget/booking/rBfjlEMkmCmO5uszg1ET" class="btn btn-primary btn-sm">Book a Call</a></li>
+      </ul>
   </div>
 </nav>
 
