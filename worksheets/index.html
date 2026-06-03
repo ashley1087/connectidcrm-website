@@ -184,7 +184,7 @@
 
   /* ── MAIN ── */
   main { padding: 0; }
-  #panels, #profitable-content { padding: 36px 6vw 80px; }
+  #panels, #profitable-content, #ideal-content { padding: 36px 6vw 80px; }
   .panel { display: none; }
   .panel.active { display: block; animation: fadeIn .25s ease; }
   @keyframes fadeIn { from {opacity:0; transform: translateY(4px);} to {opacity:1; transform: none;} }
@@ -479,6 +479,128 @@
   body.pdf-export .quad-field textarea.customers { min-height: 60px; }
   body.pdf-export .quad-field textarea.notes { min-height: 36px; }
 
+  /* ── ICB (Ideal Customer Behavior) — 3-column comparison ── */
+  .icb-intro {
+    background: white;
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--light-gray);
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .icb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .icb-col {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--light-gray);
+    padding: 18px 18px 20px;
+    box-shadow: var(--shadow-sm);
+    display: flex; flex-direction: column;
+    page-break-inside: avoid;
+  }
+  .icb-col.ideal {
+    border-color: transparent;
+    box-shadow: 0 0 0 2px var(--accent), 0 6px 22px rgba(235,54,86,0.15);
+  }
+  .icb-col-head { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--light-gray); }
+  .icb-col-tag {
+    font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gray-400);
+    margin-bottom: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .icb-col.ideal .icb-col-tag { color: var(--accent); }
+  .icb-col-tag-badge {
+    font-size: 9px; padding: 3px 8px; border-radius: 4px;
+    background: var(--light-gray); color: var(--gray-600);
+    letter-spacing: 0.8px;
+  }
+  .icb-col.ideal .icb-col-tag-badge {
+    background: var(--gradient); color: white;
+  }
+  .icb-col-title { font-size: 17px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 4px; }
+  .icb-col-sub { font-size: 12px; color: var(--gray-600); line-height: 1.45; }
+
+  .icb-items { display: flex; flex-direction: column; gap: 2px; margin-bottom: 14px; }
+  .icb-item {
+    display: flex; align-items: flex-start; gap: 9px;
+    padding: 6px 8px; border-radius: 6px; cursor: pointer; user-select: none;
+    transition: background .12s;
+  }
+  .icb-item:hover { background: var(--off-white); }
+  .icb-item input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 17px; height: 17px; min-width: 17px;
+    border: 1.5px solid var(--gray-400); border-radius: 4px;
+    cursor: pointer; position: relative; margin-top: 1px;
+    transition: all .15s; background: white;
+  }
+  .icb-item input[type="checkbox"]:checked {
+    background: var(--gradient); border-color: transparent;
+  }
+  .icb-item input[type="checkbox"]:checked::after {
+    content: ''; position: absolute;
+    left: 5px; top: 1px; width: 4px; height: 9px;
+    border: solid white; border-width: 0 2px 2px 0; transform: rotate(45deg);
+  }
+  .icb-item-label { font-size: 13px; color: var(--text); line-height: 1.4; }
+  .icb-item input:checked ~ .icb-item-label { color: var(--text); font-weight: 700; }
+
+  .icb-custom { display: flex; flex-direction: column; gap: 5px; margin-top: auto; }
+  .icb-custom label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--gray-400);
+  }
+  .icb-custom textarea {
+    border: 1px solid var(--light-gray); border-radius: 8px;
+    padding: 9px 10px; font: inherit; font-size: 12.5px;
+    background: var(--off-white); resize: vertical;
+    min-height: 70px; line-height: 1.45;
+    outline: none; transition: border-color .15s, background .15s;
+  }
+  .icb-custom textarea:focus { border-color: var(--accent); background: white; }
+
+  @media (max-width: 800px) {
+    .icb-grid { grid-template-columns: 1fr; }
+  }
+
+  /* PDF mode for ICB */
+  body.pdf-export .icb-intro {
+    box-shadow: none !important; padding: 10px 14px; margin-bottom: 12px;
+    font-size: 11px;
+  }
+  body.pdf-export .icb-grid { gap: 8px; margin-bottom: 14px; }
+  body.pdf-export .icb-col { padding: 12px 14px; box-shadow: none !important; border: 1px solid #d6d6d6; }
+  body.pdf-export .icb-col.ideal { box-shadow: none !important; border: 2px solid var(--accent); }
+  body.pdf-export .icb-col-head { margin-bottom: 8px; padding-bottom: 6px; }
+  body.pdf-export .icb-col-tag { font-size: 8.5px; margin-bottom: 4px; }
+  body.pdf-export .icb-col-tag-badge { font-size: 8px; padding: 2px 5px; }
+  body.pdf-export .icb-col-title { font-size: 13px; }
+  body.pdf-export .icb-col-sub { font-size: 10px; }
+  body.pdf-export .icb-item { padding: 2px 4px; gap: 6px; }
+  body.pdf-export .icb-item input[type="checkbox"] { width: 12px; height: 12px; min-width: 12px; }
+  body.pdf-export .icb-item input[type="checkbox"]:checked::after {
+    left: 3px; top: 0; width: 3px; height: 6px; border-width: 0 1.5px 1.5px 0;
+  }
+  body.pdf-export .icb-item-label { font-size: 10px; line-height: 1.3; }
+  body.pdf-export .icb-custom label { font-size: 8px; }
+  body.pdf-export .icb-custom textarea,
+  body.pdf-export .pdf-icb-display {
+    font-size: 10px; padding: 5px 7px; min-height: 36px;
+    background: white; border: 1px solid #e6e6e6; border-radius: 5px;
+    white-space: pre-wrap; line-height: 1.4;
+  }
+  body.pdf-export textarea[data-icb] { display: none !important; }
+  body.pdf-export .pdf-icb-display:empty::before { content: '\00a0'; color: transparent; }
+
   /* ── FOOTER / CREDIT ── */
   .credit {
     text-align: center; padding: 32px 6vw 24px;
@@ -741,6 +863,10 @@
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
     Profitable Customers
   </button>
+  <button class="page-btn" data-page="ideal">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg>
+    Ideal Customer
+  </button>
 </nav>
 
 <div class="company-bar">
@@ -768,6 +894,9 @@
   </section>
   <section class="page" id="page-profitable">
     <div id="profitable-content" style="padding: 36px 6vw 80px;"></div>
+  </section>
+  <section class="page" id="page-ideal">
+    <div id="ideal-content" style="padding: 36px 6vw 80px;"></div>
   </section>
 </main>
 
@@ -936,8 +1065,77 @@ const PAGE_META = {
     sub: 'Map your clients into four quadrants to find the ones who are both profitable AND refer — that’s your ideal client profile.',
     tag: 'profitable-customers',
     source: 'Profitable Customers Worksheet'
+  },
+  ideal: {
+    title: 'Ideal Customer <em>Behavior</em>',
+    sub: 'Build the most complete picture of your ideal customer — from must-have demographics to the behaviors that make them perfect to work with.',
+    tag: 'ideal-customer-behavior',
+    source: 'Ideal Customer Behavior Worksheet'
   }
 };
+
+/* ─────────────────────────────────────────────
+   ICB COLUMNS — Ideal Customer Behavior
+   3 columns: non-negotiables, preferred traits, mindset
+   ───────────────────────────────────────────── */
+const ICB_COLUMNS = [
+  {
+    id: 'must',
+    title: 'Must Have',
+    tag: 'Non-negotiables',
+    badge: 'Filter',
+    sub: 'The baseline demographics and firmographics — without these, they\'re not a fit.',
+    items: [
+      'Right age, income, or life stage',
+      'Right industry or vertical',
+      'Right company size',
+      'Right buyer role (decision-maker)',
+      'Has the specific problem you solve',
+      'Located in your service area',
+      'Realistic budget for what you offer'
+    ]
+  },
+  {
+    id: 'nice',
+    title: 'Nice To Have',
+    tag: 'Preferred Traits',
+    badge: 'Bonus',
+    sub: 'Operational signals that make the relationship easier and more profitable.',
+    items: [
+      'Has opportunities for repeat business',
+      'Convenient to work with',
+      'Motivated to act now',
+      'Shows appreciation',
+      'Expects quality (not just lowest price)',
+      'Gives useful feedback',
+      'Has a sense of humor',
+      'Responsive to communication',
+      'One clear point of contact',
+      'Active in their community',
+      'Involved in their industry',
+      'Collaborative and cooperative',
+      'Pays on time'
+    ]
+  },
+  {
+    id: 'ideal',
+    title: 'Ideal To Have',
+    tag: 'Mindset & Behavior',
+    badge: 'Ideal',
+    ideal: true,
+    sub: 'How they think about value — these traits define your true champion clients.',
+    items: [
+      'Doesn\'t haggle over price',
+      'Passionate about their business',
+      'Refers others to you',
+      'Has patience with the process',
+      'Embraces change and new ideas',
+      'Values trust over price',
+      'Values fairness',
+      'Takes your advice'
+    ]
+  }
+];
 
 /* ─────────────────────────────────────────────
    STATE — localStorage
@@ -1153,6 +1351,68 @@ function renderProfitable() {
 }
 
 /* ─────────────────────────────────────────────
+   RENDER — Ideal Customer Behavior
+   ───────────────────────────────────────────── */
+function renderIdeal() {
+  const wrap = document.getElementById('ideal-content');
+  wrap.innerHTML = `
+    <div class="panel-header">
+      <div class="panel-label">Worksheet</div>
+      <h2 class="panel-title">Ideal Customer Behavior<span style="color:var(--gray-400); font-weight:500;"> — define your best-fit client</span></h2>
+      <p class="panel-intro">Work left to right. Start with the demographics they must have, narrow into the operational traits that make work easier, then define the mindset and behaviors that make them ideal. The patterns in the right column become your filter for messaging and acquisition.</p>
+    </div>
+
+    <div class="icb-intro">
+      <strong>How to use it:</strong> tick the attributes that apply to your best customers. Add anything else specific to your business in the "Add your own" field under each column. Aim for a tight list — the more specific, the more useful.
+    </div>
+
+    <div class="icb-grid">
+      ${ICB_COLUMNS.map(col => `
+        <div class="icb-col ${col.ideal ? 'ideal' : ''}" data-col="${col.id}">
+          <div class="icb-col-head">
+            <div class="icb-col-tag">
+              <span>${col.tag}</span>
+              <span class="icb-col-tag-badge">${col.badge}</span>
+            </div>
+            <div class="icb-col-title">${col.title}</div>
+            <div class="icb-col-sub">${col.sub}</div>
+          </div>
+          <div class="icb-items">
+            ${col.items.map((item, i) => {
+              const k = `icb|${col.id}|${i}`;
+              const checked = state.checks[k] ? 'checked' : '';
+              return `
+                <label class="icb-item">
+                  <input type="checkbox" data-key="${k}" data-icb-col="${col.id}" ${checked} />
+                  <span class="icb-item-label">${item}</span>
+                </label>
+              `;
+            }).join('')}
+          </div>
+          <div class="icb-custom">
+            <label>Add your own</label>
+            <textarea data-icb="${col.id}" placeholder="Your own attributes, one per line…">${escapeAttr(state.notes[`icb|${col.id}|custom`] || '')}</textarea>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  wrap.querySelectorAll('input[type="checkbox"][data-icb-col]').forEach(box => {
+    box.addEventListener('change', () => {
+      state.checks[box.dataset.key] = box.checked;
+      saveSoon();
+    });
+  });
+  wrap.querySelectorAll('textarea[data-icb]').forEach(ta => {
+    ta.addEventListener('input', () => {
+      state.notes[`icb|${ta.dataset.icb}|custom`] = ta.value;
+      saveSoon();
+    });
+  });
+}
+
+/* ─────────────────────────────────────────────
    PAGE SWITCHING
    ───────────────────────────────────────────── */
 function activatePage(pageId) {
@@ -1288,6 +1548,33 @@ function buildHourglassNote() {
   return { text: lines.join('\n'), totalItems, totalChecked, pct };
 }
 
+function buildIdealNote() {
+  const lines = [];
+  const date = state.company.date || new Date().toISOString().slice(0, 10);
+  lines.push(`IDEAL CUSTOMER BEHAVIOR WORKSHEET`);
+  lines.push(`Date: ${date}`);
+  lines.push('');
+
+  ICB_COLUMNS.forEach(col => {
+    const checked = col.items.filter((_, i) => state.checks[`icb|${col.id}|${i}`]);
+    const custom = (state.notes[`icb|${col.id}|custom`] || '').trim();
+    lines.push('');
+    lines.push(`=== ${col.title.toUpperCase()}${col.ideal ? ' (IDEAL)' : ''} ===`);
+    lines.push(`(${col.sub})`);
+    if (checked.length) {
+      checked.forEach(item => lines.push(`  ✓ ${item}`));
+    } else {
+      lines.push(`  (no items selected)`);
+    }
+    if (custom) {
+      lines.push(`Custom additions:`);
+      custom.split('\n').forEach(c => { if (c.trim()) lines.push(`  + ${c.trim()}`); });
+    }
+  });
+
+  return { text: lines.join('\n') };
+}
+
 function buildProfitableNote() {
   const lines = [];
   const date = state.company.date || new Date().toISOString().slice(0, 10);
@@ -1363,16 +1650,28 @@ function buildPayload() {
     };
   }
 
-  // page === 'profitable'
-  const summary = buildProfitableNote();
-  const quadFields = {};
-  QUADRANTS.forEach(q => {
-    const d = state.quadrants[q.id] || { customers: '', notes: '' };
-    const key = q.id.replace(/-/g, '_');
-    quadFields[`pc_${key}_customers`] = (d.customers || '').trim();
-    quadFields[`pc_${key}_notes`] = (d.notes || '').trim();
+  if (page === 'profitable') {
+    const summary = buildProfitableNote();
+    const quadFields = {};
+    QUADRANTS.forEach(q => {
+      const d = state.quadrants[q.id] || { customers: '', notes: '' };
+      const key = q.id.replace(/-/g, '_');
+      quadFields[`pc_${key}_customers`] = (d.customers || '').trim();
+      quadFields[`pc_${key}_notes`] = (d.notes || '').trim();
+    });
+    return { ...base, note: summary.text, ...quadFields };
+  }
+
+  // page === 'ideal'
+  const summary = buildIdealNote();
+  const icbFields = {};
+  ICB_COLUMNS.forEach(col => {
+    const checked = col.items.filter((_, i) => state.checks[`icb|${col.id}|${i}`]);
+    const custom = (state.notes[`icb|${col.id}|custom`] || '').trim();
+    icbFields[`icb_${col.id}_checked`] = checked.join('\n');
+    icbFields[`icb_${col.id}_custom`] = custom;
   });
-  return { ...base, note: summary.text, ...quadFields };
+  return { ...base, note: summary.text, ...icbFields };
 }
 
 async function sendToGHL() {
@@ -1440,7 +1739,10 @@ async function sendToGHL() {
    PDF generation (shared by Export + Send to CRM)
    ───────────────────────────────────────────── */
 function pdfFilename() {
-  const pageLabel = state.currentPage === 'profitable' ? 'Profitable-Customers' : 'Marketing-Hourglass';
+  const pageLabel =
+    state.currentPage === 'profitable' ? 'Profitable-Customers' :
+    state.currentPage === 'ideal' ? 'Ideal-Customer-Behavior' :
+    'Marketing-Hourglass';
   const date = state.company.date || new Date().toISOString().slice(0, 10);
   return `${pageLabel}-${date}.pdf`;
 }
@@ -1463,12 +1765,14 @@ function pdfOptions(filename) {
 // `runner` receives the configured worker; return its promise (save() or outputPdf(...)).
 async function runPdfPipeline(runner) {
   const replacements = [];
-  document.querySelectorAll('textarea[data-note], textarea[data-quad]').forEach(ta => {
+  document.querySelectorAll('textarea[data-note], textarea[data-quad], textarea[data-icb]').forEach(ta => {
     const div = document.createElement('div');
     if (ta.hasAttribute('data-quad')) {
       div.className = 'pdf-quad-display';
       if (ta.classList.contains('customers')) div.classList.add('customers');
       if (ta.classList.contains('notes')) div.classList.add('notes');
+    } else if (ta.hasAttribute('data-icb')) {
+      div.className = 'pdf-icb-display';
     } else {
       div.className = 'pdf-note-display';
     }
@@ -1546,6 +1850,7 @@ function init() {
   renderTabs();
   renderPanels();
   renderProfitable();
+  renderIdeal();
   wireCompanyFields();
   wireActions();
   wirePageNav();
