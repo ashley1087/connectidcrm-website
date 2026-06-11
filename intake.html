@@ -744,11 +744,18 @@
   // URL PARAMS
   // =========================================================
   const urlParams = new URLSearchParams(window.location.search);
-  const FORM_TYPE = urlParams.get('form') || 'sf';
-  const TOKEN     = urlParams.get('token') || urlParams.get('client');
-  const GHL_ID    = urlParams.get('ghl_id')    || null;
-  const CLICKUP_ID= urlParams.get('clickup_id')|| null;
-  const CRM_ID    = urlParams.get('crm_id')    || null;
+  const FORM_TYPE  = urlParams.get('form') || 'sf';
+  const TOKEN      = urlParams.get('token') || urlParams.get('client');
+  const GHL_ID     = urlParams.get('ghl_id')     || null;
+  const CLICKUP_ID = urlParams.get('clickup_id') || null;
+  const CRM_ID     = urlParams.get('crm_id')     || null;
+
+  // GHL trigger links can pass contact fields directly as URL params
+  const GHL_FIRST_NAME = urlParams.get('first_name') || null;
+  const GHL_LAST_NAME  = urlParams.get('last_name')  || null;
+  const GHL_EMAIL      = urlParams.get('email')      || null;
+  const GHL_PHONE      = urlParams.get('phone')      || null;
+  const GHL_COMPANY    = urlParams.get('company')    || urlParams.get('company_name') || null;
 
   // =========================================================
   // FORM CONFIG
@@ -833,6 +840,28 @@
     if (!value) return;
     const el = formEl.querySelector(`[name="${name}"]`);
     if (el && !el.value) el.value = value;
+  }
+
+  function prefillFromGHL() {
+    // Pre-fill directly from GHL URL params — works even before any Supabase record exists
+    if (GHL_FIRST_NAME) {
+      prefillField('first_name',    GHL_FIRST_NAME);
+      prefillField('contact_name',  [GHL_FIRST_NAME, GHL_LAST_NAME].filter(Boolean).join(' '));
+    }
+    if (GHL_LAST_NAME)  prefillField('last_name',     GHL_LAST_NAME);
+    if (GHL_EMAIL) {
+      prefillField('email',         GHL_EMAIL);
+      prefillField('contact_email', GHL_EMAIL);
+    }
+    if (GHL_PHONE) {
+      prefillField('phone', GHL_PHONE);
+      prefillField('call_forwarding_number', GHL_PHONE);
+      prefillField('sms_notifications_number', GHL_PHONE);
+    }
+    if (GHL_COMPANY) {
+      prefillField('company_name',  GHL_COMPANY);
+      prefillField('business_name', GHL_COMPANY);
+    }
   }
 
   function prefillFromInvitation() {
@@ -1146,7 +1175,8 @@
       }
       revealApp();
       loadDraft();                   // restore any in-progress draft first
-      await prefillFromSupabase();   // then fill remaining empty fields from DB
+      prefillFromGHL();              // fill from GHL URL params (instant, no DB needed)
+      await prefillFromSupabase();   // fill remaining empty fields from prior submissions
       showStep(1);
     }
   })();
