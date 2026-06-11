@@ -195,6 +195,7 @@ exports.handler = async (event) => {
 
   const GHL_KEY      = process.env.GHL_API_KEY;
   const CLICKUP_KEY  = process.env.CLICKUP_API_KEY;
+  const MAKE_WEBHOOK = process.env.MAKE_WEBHOOK_SF;
 
   let payload;
   try {
@@ -212,15 +213,32 @@ exports.handler = async (event) => {
   });
   await sbInsert('strategy_first_intakes', cleanPayload);
 
+  // ── 1b. Fire Make webhook ────────────────────────────────────────────────
+  if (MAKE_WEBHOOK) {
+    try {
+      await fetch(MAKE_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ form_type: 'strategy_first', ...cleanPayload }),
+      });
+      console.log('Make webhook fired (SF)');
+    } catch (e) {
+      console.error('Make webhook error (SF):', e.message);
+    }
+  }
+
   if (!GHL_KEY) {
     console.error('GHL_API_KEY not set — skipping GHL/ClickUp steps');
     return { statusCode: 202, body: '' };
   }
 
-  // ── 2. Get GHL contact ID from invitation record ─────────────────────────
-  const contactId = await ghlGetContactIdFromToken(token);
+  // ── 2. Get GHL contact ID — from URL param (new) or token (legacy) ─────────
+  let contactId = payload.ghl_contact_id || null;
   if (!contactId) {
-    console.error('No GHL contact ID found for token:', token);
+    contactId = await ghlGetContactIdFromToken(token);
+  }
+  if (!contactId) {
+    console.error('No GHL contact ID found');
     return { statusCode: 202, body: '' };
   }
   console.log('Found GHL contact ID:', contactId);
