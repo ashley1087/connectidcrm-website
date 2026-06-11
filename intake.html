@@ -933,7 +933,7 @@
           });
         } else {
           const el = formEl.querySelector(`[name="${key}"]`);
-          if (el) el.value = val;
+          if (el && val !== '' && val !== null && val !== undefined) el.value = val;
         }
       });
       if (step && step >= 1 && step <= cfg.totalSteps) showStep(step);
@@ -1131,8 +1131,8 @@
       const ok = await validateToken();
       if (!ok) return;
       revealApp();
-      prefillFromInvitation();
       loadDraft();
+      prefillFromInvitation(); // fills only empty fields after draft
       showStep(1);
     } else {
       // All other cases: SF via URL params, CRM, Website — skip gate
@@ -1142,8 +1142,8 @@
         if (alreadyDone) { showGateState('submitted'); return; }
       }
       revealApp();
-      await prefillFromSupabase();
-      loadDraft();
+      loadDraft();                   // restore any in-progress draft first
+      await prefillFromSupabase();   // then fill remaining empty fields from DB
       showStep(1);
     }
   })();
