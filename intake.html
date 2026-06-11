@@ -846,11 +846,13 @@
   }
 
   async function prefillFromSupabase() {
-    if (!GHL_ID && !CLICKUP_ID) return;
+    console.log('[prefill] GHL_ID:', GHL_ID, '| CLICKUP_ID:', CLICKUP_ID);
+    if (!GHL_ID && !CLICKUP_ID) { console.log('[prefill] No IDs — skipping'); return; }
 
     const idField = GHL_ID ? 'ghl_contact_id' : 'clickup_id';
     const idValue = encodeURIComponent(GHL_ID || CLICKUP_ID);
     const q = `${idField}=eq.${idValue}&select=*&limit=1`;
+    console.log('[prefill] Query:', q);
 
     // Query all 3 tables in parallel — use whatever has data
     let crm = null, sf = null, web = null;
@@ -861,9 +863,10 @@
         sbSelect('client_onboarding',       q),
       ]);
       crm = r1.data; sf = r2.data; web = r3.data;
-    } catch (e) { return; }
+      console.log('[prefill] crm:', crm, '| sf:', sf, '| web:', web);
+    } catch (e) { console.log('[prefill] Error:', e); return; }
 
-    if (!crm && !sf && !web) return;
+    if (!crm && !sf && !web) { console.log('[prefill] No data found in any table'); return; }
 
     // ── Shared: name ──────────────────────────────────────────────────────
     const fullName = sf?.contact_name
