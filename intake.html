@@ -531,6 +531,20 @@
         <textarea name="qualifying_question_2" rows="3"></textarea>
       </div>
       <div class="field">
+        <label>When a lead is qualified, what happens next?</label>
+        <p class="hint">Should your AI offer them a booking slot on your calendar, or send you a live notification so you can personally call or text them right away?</p>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="qualified_lead_action" value="book_calendar" /> Book them on my calendar automatically</label>
+          <label class="radio-item"><input type="radio" name="qualified_lead_action" value="notify_me" /> Notify me immediately so I can call or text them personally</label>
+          <label class="radio-item"><input type="radio" name="qualified_lead_action" value="both" /> Both — book them and notify me</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>What would you like to name your AI assistant?</label>
+        <p class="hint">Your AI will introduce itself by this name when chatting with leads. A friendly female name tends to work best — just avoid names already used by people on your team.</p>
+        <input type="text" name="ai_name" placeholder="e.g. Sophie, Cara, Nova, Lexi" />
+      </div>
+      <div class="field">
         <label>Outgoing offer and stipulations</label>
         <p class="hint">What offer do you make to outbound leads? Are there any restrictions or eligibility requirements?</p>
         <textarea name="outgoing_offer" rows="3"></textarea>
