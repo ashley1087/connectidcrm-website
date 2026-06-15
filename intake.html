@@ -535,6 +535,28 @@
         <p class="hint">What offer do you make to outbound leads? Are there any restrictions or eligibility requirements?</p>
         <textarea name="outgoing_offer" rows="3"></textarea>
       </div>
+      <div class="field">
+        <label>Do you offer financing?</label>
+        <div class="radio-group">
+          <label class="radio-item"><input type="radio" name="offers_financing" value="true" /> Yes</label>
+          <label class="radio-item"><input type="radio" name="offers_financing" value="false" /> No</label>
+        </div>
+      </div>
+      <div class="field" id="crm-financing-details-wrap">
+        <label>How do customers apply for financing?</label>
+        <p class="hint">Paste the application link and/or describe the process (e.g. "Apply via GreenSky at the link below, we submit on their behalf").</p>
+        <textarea name="financing_details" rows="3" placeholder="e.g. https://apply.greenskyonline.com/... — customers apply online, we submit same day"></textarea>
+      </div>
+      <div class="field">
+        <label>Warranty or guarantee</label>
+        <p class="hint">Do you offer a warranty on your work, a satisfaction guarantee, or any promise to customers? Describe it here.</p>
+        <textarea name="warranty_guarantee" rows="3" placeholder="e.g. 2-year workmanship warranty, 100% satisfaction guarantee, we'll come back and fix it for free"></textarea>
+      </div>
+      <div class="field">
+        <label>Business logo</label>
+        <p class="hint">Please share your logo files — ideally in multiple formats (PNG, SVG, EPS, or AI). If you have a Google Drive folder, paste the link below. If not, email them to <a href="mailto:ashley@connectidcrm.com" style="color:var(--red);">ashley@connectidcrm.com</a> with your business name.</p>
+        <input type="url" name="business_logo_url" placeholder="Paste a Google Drive or Dropbox link (optional)" />
+      </div>
     </section>
 
     <!-- Success -->
@@ -542,8 +564,8 @@
       <div class="success">
         <div class="success-icon">✓</div>
         <h2>You're all set.</h2>
-        <p>Your CRM onboarding information has been received. Ashley will begin setting up your account and reach out with next steps within one business day.</p>
-        <p style="font-size:13px; color:var(--gray-400);">You can close this tab.</p>
+        <p>Great! Now let's go into your system and get things set up in there!</p>
+        <p style="font-size:13px; color:var(--gray-400);">Ashley will be in touch shortly with your next steps.</p>
       </div>
     </section>
 
@@ -1036,6 +1058,23 @@
           wrap.classList.toggle('checked', el.checked);
         }
       }
+    });
+  });
+
+  // Toggle reveals (CRM form)
+  const crmEstimateChargeWrap = document.getElementById('crm-estimate-charge-wrap');
+  const crmFinancingWrap = document.getElementById('crm-financing-details-wrap');
+  if (crmEstimateChargeWrap) crmEstimateChargeWrap.style.display = 'none';
+  if (crmFinancingWrap) crmFinancingWrap.style.display = 'none';
+
+  document.querySelectorAll('[name="offers_free_estimates"]').forEach(r => {
+    r.addEventListener('change', () => {
+      if (crmEstimateChargeWrap) crmEstimateChargeWrap.style.display = r.value === 'false' && r.checked ? 'block' : (document.querySelector('[name="offers_free_estimates"]:checked')?.value === 'false' ? 'block' : 'none');
+    });
+  });
+  document.querySelectorAll('[name="offers_financing"]').forEach(r => {
+    r.addEventListener('change', () => {
+      if (crmFinancingWrap) crmFinancingWrap.style.display = r.value === 'true' && r.checked ? 'block' : 'none';
     });
   });
 
