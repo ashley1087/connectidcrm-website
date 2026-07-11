@@ -1,0 +1,34 @@
+# Connectid
+
+> Connectid is a Strategy First marketing agency serving $1M+ home service businesses nationwide. We help owners recover revenue from the customers they already have — without paid ads or complicated funnels. We combine fractional CMO strategy, CRM automation (GoHighLevel), and done-with-you execution to build marketing systems that run without the owner.
+
+## About
+
+- [About Connectid](https://connectidcrm.com/about.html): Background on founder Ashley DePiano and the Connectid mission — built for trades and home service owners who are ready to stop guessing and start leading with strategy.
+
+## Services & Process
+
+- [Strategy First](https://connectidcrm.com/strategy-first.html): Our flagship engagement. A complete marketing strategy presentation delivered in 30–45 days — covering ideal client personas, core message, competitive landscape, customer journey map, content strategy, and a 90-day execution calendar.
+- [Our Process](https://connectidcrm.com/strategy-first-guide.html): How Strategy First works — the 7-step discovery and research process that goes into every client strategy presentation.
+- [Services](https://connectidcrm.com/services.html): Full breakdown of Connectid's services — fractional CMO leadership, CRM setup and automation, reputation management, reactivation campaigns, and more.
+- [Discovery Call](https://connectidcrm.com/discovery.html): Book a free 30-minute strategy call with Ashley.
+
+## Education & Resources
+
+- [How to Build a Marketing Strategy](https://connectidcrm.com/marketing-strategy.html): A complete guide to building a marketing strategy for home service businesses — covers narrowing your ideal client, crafting a clear promise, mapping the customer journey, and using content as the voice of your strategy.
+- [The Handshake Business Podcast](https://connectidcrm.com/handshake-podcast.html): A podcast hosted by Ashley DePiano featuring real conversations with $1M+ home service business owners. Topics include marketing, operations, growth, and what it actually takes to build a sustainable trades business.
+- [Blog](https://connectidcrm.com/blog.html): Articles on marketing strategy, the Marketing Hourglass framework, home service business growth, and CRM best practices.
+
+## Contact
+
+- [Contact](https://connectidcrm.com/contact.html): Get in touch with the Connectid team.
+
+## Key Facts
+
+- Founder: Ashley DePiano
+- Location: Mahopac, NY (serves clients nationwide)
+- Specialty: Home service businesses — HVAC, plumbing, roofing, garage doors, landscaping, concrete, general contracting, and more
+- Core framework: The Marketing Hourglass (Know → Like → Trust → Try → Buy → Repeat → Refer)
+- Technology: GoHighLevel CRM, Resend, Netlify
+- Contact: ashley@connectidcrm.com
+- Website: https://connectidcrm.com

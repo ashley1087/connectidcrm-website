@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# Private / utility pages — not for indexing
+Disallow: /admin.html
+Disallow: /intake.html
+Disallow: /intake-error.html
+Disallow: /ig.html
+Disallow: /ig-thanks.html
+Disallow: /audit.html
+Disallow: /leonard.html
+Disallow: /marjan.html
+Disallow: /miguel.html
+Disallow: /netlify/
+
+# Sitemaps
+Sitemap: https://connectidcrm.com/sitemap.xml
+
+# AI crawlers — welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
