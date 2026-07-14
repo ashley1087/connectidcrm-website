@@ -1692,6 +1692,352 @@
   </div>
 </section>
 
+<!-- ═══ TESTIMONIAL MARQUEE ═══ -->
+<section style="background:#111;padding:80px 0;overflow:hidden;">
+  <div style="text-align:center;margin-bottom:48px;padding:0 24px;">
+    <span class="section-label" style="color:rgba(255,255,255,0.5);">What Owners Are Saying</span>
+    <h2 class="section-title" style="color:#fff;margin-top:12px;">From the field.</h2>
+  </div>
+
+  <style>
+    .marquee-track { display:flex; width:max-content; gap:20px; }
+    .marquee-row { overflow:hidden; margin-bottom:20px; }
+    .marquee-row:last-child { margin-bottom:0; }
+    .marquee-row--left  .marquee-track { animation:marquee-left  45s linear infinite; }
+    .marquee-row--right .marquee-track { animation:marquee-right 45s linear infinite; }
+    .marquee-row:hover .marquee-track { animation-play-state:paused; }
+    @keyframes marquee-left  { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    @keyframes marquee-right { from{transform:translateX(-50%)} to{transform:translateX(0)} }
+    .tcard {
+      width:320px; flex-shrink:0;
+      background:#1a1a1a; border:1px solid rgba(255,255,255,0.07);
+      border-radius:16px; padding:28px 24px;
+      display:flex; flex-direction:column; gap:16px;
+    }
+    .tcard-stars { color:#FA5E36; font-size:15px; letter-spacing:2px; }
+    .tcard-quote { font-size:15px; font-weight:500; color:rgba(255,255,255,0.85); line-height:1.7; flex:1; }
+    .tcard-byline { display:flex; align-items:center; gap:12px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.07); }
+    .tcard-avatar { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#FA5E36,#EB3656); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:#fff; flex-shrink:0; }
+    .tcard-name { font-size:13px; font-weight:700; color:#fff; margin:0 0 2px; }
+    .tcard-role { font-size:11px; color:rgba(255,255,255,0.4); margin:0; }
+    .tcard-result { display:inline-block; margin-top:10px; padding:3px 10px; border-radius:99px; background:rgba(250,94,54,0.12); color:#FA5E36; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1px; }
+  </style>
+
+  <!-- ROW 1 — scrolls left -->
+  <div class="marquee-row marquee-row--left">
+    <div class="marquee-track">
+
+      <!-- Card set — duplicated below for seamless loop -->
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"If you're on the fence, just do it. Strategy First was the engine that powered our $2M jump. We finally had a real plan — not just a wish list."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">CC</div>
+          <div>
+            <p class="tcard-name">Casarra Cover</p>
+            <p class="tcard-role">Whitaker's Garage Door Store · Peekskill, NY</p>
+            <span class="tcard-result">$5M → $7M in 12 months</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"We got 5 online orders today. We usually get maybe 1 on a Sunday. I checked the conversion details — all came from Google searches. I couldn't believe it."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">AA</div>
+          <div>
+            <p class="tcard-name">Anthony Angrisani</p>
+            <p class="tcard-role">Home Services Owner</p>
+            <span class="tcard-result">5x Sunday conversions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Everything is accounted for and no one can drop the ball. For the first time I feel like I actually know what my marketing is doing and why."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">EM</div>
+          <div>
+            <p class="tcard-name">Ellen Moody</p>
+            <p class="tcard-role">Home Services Business Owner</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Getting the job has become so much easier. We're not chasing people down anymore — the right leads are finding us and they're already sold before they call."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">MR</div>
+          <div>
+            <p class="tcard-name">Marjan & Vitore Radi</p>
+            <p class="tcard-role">Radi General Contracting Corp.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Working with Ashley was the greatest thing we did for our business. We went from guessing what to do next to having a real direction. The difference is night and day."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">MR</div>
+          <div>
+            <p class="tcard-name">Marjan & Vitore Radi</p>
+            <p class="tcard-role">Radi General Contracting Corp.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"I came in skeptical. I left with a strategy deck I actually understood and a 90-day plan I could hand to my team. We're already seeing results from the first month."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">MB</div>
+          <div>
+            <p class="tcard-name">Miguel Banuelos</p>
+            <p class="tcard-role">Pristine Concrete · Denver, CO</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duplicate for seamless loop -->
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"If you're on the fence, just do it. Strategy First was the engine that powered our $2M jump. We finally had a real plan — not just a wish list."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">CC</div>
+          <div>
+            <p class="tcard-name">Casarra Cover</p>
+            <p class="tcard-role">Whitaker's Garage Door Store · Peekskill, NY</p>
+            <span class="tcard-result">$5M → $7M in 12 months</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"We got 5 online orders today. We usually get maybe 1 on a Sunday. I checked the conversion details — all came from Google searches. I couldn't believe it."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">AA</div>
+          <div>
+            <p class="tcard-name">Anthony Angrisani</p>
+            <p class="tcard-role">Home Services Owner</p>
+            <span class="tcard-result">5x Sunday conversions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Everything is accounted for and no one can drop the ball. For the first time I feel like I actually know what my marketing is doing and why."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">EM</div>
+          <div>
+            <p class="tcard-name">Ellen Moody</p>
+            <p class="tcard-role">Home Services Business Owner</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Getting the job has become so much easier. We're not chasing people down anymore — the right leads are finding us and they're already sold before they call."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">MR</div>
+          <div>
+            <p class="tcard-name">Marjan & Vitore Radi</p>
+            <p class="tcard-role">Radi General Contracting Corp.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Working with Ashley was the greatest thing we did for our business. We went from guessing what to do next to having a real direction. The difference is night and day."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">MR</div>
+          <div>
+            <p class="tcard-name">Marjan & Vitore Radi</p>
+            <p class="tcard-role">Radi General Contracting Corp.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"I came in skeptical. I left with a strategy deck I actually understood and a 90-day plan I could hand to my team. We're already seeing results from the first month."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">MB</div>
+          <div>
+            <p class="tcard-name">Miguel Banuelos</p>
+            <p class="tcard-role">Pristine Concrete · Denver, CO</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 2 — scrolls right, different order -->
+  <div class="marquee-row marquee-row--right">
+    <div class="marquee-track">
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Net profit up $50K in 90 days. No new ad spend, no new headcount. Just a strategy that connected everything we were already doing."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">GD</div>
+          <div>
+            <p class="tcard-name">Garage Door Installer</p>
+            <p class="tcard-role">Northeast US · Fractional CMO Client</p>
+            <span class="tcard-result">+$50,404 net profit · 90 days</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"I knew I needed this the moment Ashley started talking. She wasn't selling me a service — she was describing exactly what was wrong with my business and how to fix it."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">CC</div>
+          <div>
+            <p class="tcard-name">Casarra Cover</p>
+            <p class="tcard-role">Whitaker's Garage Door Store · Peekskill, NY</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"We had vendors, we had ads, we had a website. What we didn't have was a plan that connected all of it. Now we do. The 90-day calendar alone was worth the whole engagement."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">MB</div>
+          <div>
+            <p class="tcard-name">Miguel Banuelos</p>
+            <p class="tcard-role">Pristine Concrete · Denver, CO</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Our conversion rate went from 85% to 98%. That's not a tweak — that's a different business. And it came from finally knowing who we were talking to and what they needed to hear."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">CC</div>
+          <div>
+            <p class="tcard-name">Casarra Cover</p>
+            <p class="tcard-role">Whitaker's Garage Door Store · Peekskill, NY</p>
+            <span class="tcard-result">85% → 98% lead conversion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Ashley doesn't just hand you a document and disappear. She makes sure you understand it, believe in it, and know how to use it. That's the difference between a consultant and a real partner."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">AA</div>
+          <div>
+            <p class="tcard-name">Anthony Angrisani</p>
+            <p class="tcard-role">Home Services Owner</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Before this, I was throwing money at marketing and crossing my fingers. Now I know what's working, why it's working, and what to do when it stops."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">EM</div>
+          <div>
+            <p class="tcard-name">Ellen Moody</p>
+            <p class="tcard-role">Home Services Business Owner</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Duplicate for seamless loop -->
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Net profit up $50K in 90 days. No new ad spend, no new headcount. Just a strategy that connected everything we were already doing."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">GD</div>
+          <div>
+            <p class="tcard-name">Garage Door Installer</p>
+            <p class="tcard-role">Northeast US · Fractional CMO Client</p>
+            <span class="tcard-result">+$50,404 net profit · 90 days</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"I knew I needed this the moment Ashley started talking. She wasn't selling me a service — she was describing exactly what was wrong with my business and how to fix it."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">CC</div>
+          <div>
+            <p class="tcard-name">Casarra Cover</p>
+            <p class="tcard-role">Whitaker's Garage Door Store · Peekskill, NY</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"We had vendors, we had ads, we had a website. What we didn't have was a plan that connected all of it. Now we do. The 90-day calendar alone was worth the whole engagement."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">MB</div>
+          <div>
+            <p class="tcard-name">Miguel Banuelos</p>
+            <p class="tcard-role">Pristine Concrete · Denver, CO</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Our conversion rate went from 85% to 98%. That's not a tweak — that's a different business. And it came from finally knowing who we were talking to and what they needed to hear."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">CC</div>
+          <div>
+            <p class="tcard-name">Casarra Cover</p>
+            <p class="tcard-role">Whitaker's Garage Door Store · Peekskill, NY</p>
+            <span class="tcard-result">85% → 98% lead conversion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Ashley doesn't just hand you a document and disappear. She makes sure you understand it, believe in it, and know how to use it. That's the difference between a consultant and a real partner."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">AA</div>
+          <div>
+            <p class="tcard-name">Anthony Angrisani</p>
+            <p class="tcard-role">Home Services Owner</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-quote">"Before this, I was throwing money at marketing and crossing my fingers. Now I know what's working, why it's working, and what to do when it stops."</p>
+        <div class="tcard-byline">
+          <div class="tcard-avatar">EM</div>
+          <div>
+            <p class="tcard-name">Ellen Moody</p>
+            <p class="tcard-role">Home Services Business Owner</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
 <!-- ═══ FINAL CTA ═══ -->
 <section class="final-cta" id="book">
   <div class="container">
