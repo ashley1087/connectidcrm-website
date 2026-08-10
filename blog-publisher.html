@@ -73,12 +73,21 @@
 
   <div class="card hidden" id="preview-card">
     <h2 class="section">Preview</h2>
-    <p class="hint" style="margin-bottom:16px">Read it through. Check it sounds like Micah, no em dashes, nothing made up. If it's good, publish. If not, tweak your inputs above and generate again.</p>
+    <p class="hint" style="margin-bottom:16px">Read it through. Check it sounds like Micah, no em dashes, nothing made up. If it's good, send it to Ashley to approve. If not, tweak your inputs above and generate again.</p>
     <iframe class="preview-frame" id="preview" title="Preview"></iframe>
     <div style="margin-top:20px;display:flex;gap:12px">
-      <button class="btn btn-primary" id="publish-btn">Publish to website</button>
+      <button class="btn btn-primary" id="submit-btn">Submit for Ashley's approval</button>
       <button class="btn btn-ghost" id="regen-btn">Start over</button>
     </div>
+  </div>
+
+  <!-- ADMIN: Ashley's approval queue -->
+  <div class="card" id="admin-card" style="margin-top:40px">
+    <h2 class="section">Ashley — approval queue</h2>
+    <p class="hint">Enter the admin code to review posts Michelle submitted, then publish or reject each one.</p>
+    <input type="password" id="admin-code" autocomplete="off" placeholder="Admin code" />
+    <button class="btn btn-ghost" id="load-queue">Load pending posts</button>
+    <div id="queue" style="margin-top:24px"></div>
   </div>
 
 </div>
@@ -147,27 +156,16 @@
     },3000);
   });
 
-  $('publish-btn').addEventListener('click',async()=>{
-    $('publish-btn').disabled=true;
-    setStatus('working','Publishing to the website…',true);
-    await fetch('/.netlify/functions/publish-blog-post-background',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({draft_id:draftId,access_code:$('access').value.trim()})
+  // Michelle submits for approval — does NOT publish.
+  $('submit-btn').addEventListener('click',async()=>{
+    $('submit-btn').disabled=true;
+    await fetch(SUPABASE_URL+'/rest/v1/blog_drafts?draft_id=eq.'+draftId,{
+      method:'PATCH',headers:{...SB,Prefer:'return=minimal'},
+      body:JSON.stringify({status:'pending_review'})
     });
-    clearInterval(pollTimer);
-    pollTimer=setInterval(async()=>{
-      const d=await getDraft();
-      if(!d)return;
-      if(d.status==='published'){
-        clearInterval(pollTimer);
-        setStatus('ok','Published! It\\'s live at <a href="'+d.published_url+'" target="_blank">'+d.published_url+'</a> (may take a minute to appear).');
-        $('preview-card').classList.add('hidden');
-      }else if(d.status==='error'){
-        clearInterval(pollTimer);
-        $('publish-btn').disabled=false;
-        setStatus('error','Publish failed: '+(d.error_message||'unknown')+'. Text Ashley.');
-      }
-    },3000);
+    setStatus('ok','Sent to Ashley for approval. She\\'ll publish it once she\\'s reviewed it. You can start another post.');
+    $('preview-card').classList.add('hidden');
+    $('submit-btn').disabled=false;
   });
 
   $('regen-btn').addEventListener('click',()=>{
@@ -176,6 +174,55 @@
     $('question').value='';$('keyword').value='';$('notes').value='';
     $('write-card').scrollIntoView({behavior:'smooth'});
   });
+
+  // ---- Ashley's approval queue ----
+  function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+  $('load-queue').addEventListener('click',loadQueue);
+
+  async function loadQueue(){
+    const admin=$('admin-code').value.trim();
+    if(!admin){$('queue').innerHTML='<p class="hint">Enter the admin code first.</p>';return;}
+    $('queue').innerHTML='<p class="hint"><span class="spin"></span> Loading…</p>';
+    const r=await fetch(SUPABASE_URL+'/rest/v1/blog_drafts?status=eq.pending_review&select=draft_id,seo_title,question,generated_html&order=created_at.asc',{headers:SB});
+    const rows=await r.json();
+    if(!rows||!rows.length){$('queue').innerHTML='<p class="hint">Nothing waiting for approval right now.</p>';return;}
+    $('queue').innerHTML=rows.map(d=>`
+      <div style="border:1.5px solid var(--gray-300);border-radius:10px;padding:20px;margin-bottom:20px">
+        <div style="font-weight:700;margin-bottom:4px">${esc(d.seo_title||'Untitled')}</div>
+        <div class="hint">${esc(d.question||'')}</div>
+        <iframe class="preview-frame" style="height:480px;margin-top:12px" srcdoc="${esc(d.generated_html).replace(/"/g,'&quot;')}"></iframe>
+        <div style="margin-top:14px;display:flex;gap:10px">
+          <button class="btn btn-primary" data-pub="${d.draft_id}">Publish</button>
+          <button class="btn btn-ghost" data-rej="${d.draft_id}">Reject</button>
+        </div>
+      </div>`).join('');
+    $('queue').querySelectorAll('[data-pub]').forEach(b=>b.addEventListener('click',()=>publishOne(b.dataset.pub,admin,b)));
+    $('queue').querySelectorAll('[data-rej]').forEach(b=>b.addEventListener('click',()=>rejectOne(b.dataset.rej,b)));
+  }
+
+  async function publishOne(id,admin,btn){
+    btn.disabled=true;btn.textContent='Publishing…';
+    await fetch('/.netlify/functions/publish-blog-post-background',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({draft_id:id,access_code:admin})
+    });
+    const t=setInterval(async()=>{
+      const r=await fetch(SUPABASE_URL+'/rest/v1/blog_drafts?draft_id=eq.'+id+'&select=status,published_url,error_message&limit=1',{headers:SB});
+      const d=(await r.json())[0];if(!d)return;
+      if(d.status==='published'){clearInterval(t);btn.textContent='Published ✓';loadQueue();}
+      else if(d.status==='error'){clearInterval(t);btn.disabled=false;btn.textContent='Retry';alert('Publish failed: '+(d.error_message||'unknown'));}
+    },3000);
+  }
+
+  async function rejectOne(id,btn){
+    if(!confirm('Reject this post? Michelle will need to redo it.'))return;
+    btn.disabled=true;
+    await fetch(SUPABASE_URL+'/rest/v1/blog_drafts?draft_id=eq.'+id,{
+      method:'PATCH',headers:{...SB,Prefer:'return=minimal'},body:JSON.stringify({status:'rejected'})
+    });
+    loadQueue();
+  }
 </script>
 </body>
 </html>

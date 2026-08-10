@@ -340,7 +340,13 @@ exports.handler = async (event) => {
     return { statusCode: 202, body: '' };
   }
 
-  await sbUpsertDraft(draftId, { status: 'generating' });
+  // Store the inputs so the approval queue can show context.
+  await sbUpsertDraft(draftId, {
+    status: 'generating',
+    question: payload.question || payload.title || null,
+    keyword: payload.keyword || null,
+    micah_notes: payload.micah_notes || null,
+  });
 
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {

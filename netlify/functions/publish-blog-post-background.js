@@ -43,8 +43,9 @@ exports.handler = async (event) => {
   const draftId = payload.draft_id;
   if (!draftId) return { statusCode: 400, body: 'Missing draft_id' };
 
-  if (payload.access_code !== process.env.PUBLISHER_ACCESS_CODE) {
-    await sbUpdateDraft(draftId, { status: 'error', error_message: 'Bad access code' });
+  // Publishing requires the ADMIN code — Michelle's regular code cannot publish.
+  if (payload.access_code !== process.env.PUBLISHER_ADMIN_CODE) {
+    await sbUpdateDraft(draftId, { status: 'error', error_message: 'Publishing requires the admin code' });
     return { statusCode: 202, body: '' };
   }
 
