@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Publisher | Division 7 Millwork</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--navy:#111;--red:#EC3857;--grad:linear-gradient(135deg,#FA5E36,#EC3857);--gray-100:#FAF9F8;--gray-300:#E5E4E2;--gray-600:#6c757d;--text:#1a1a1a}
+    body{font-family:'Poppins',-apple-system,sans-serif;color:var(--text);background:var(--gray-100);font-size:16px;line-height:1.6}
+    header{background:var(--navy);padding:20px 24px;color:#fff}
+    header .inner{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    header h1{font-size:18px;font-weight:800}
+    header span{font-size:13px;color:rgba(255,255,255,.5)}
+    .wrap{max-width:900px;margin:32px auto 80px;padding:0 24px}
+    .card{background:#fff;border-radius:14px;box-shadow:0 12px 48px rgba(0,0,0,.1);padding:36px;margin-bottom:24px}
+    label{display:block;font-size:14px;font-weight:600;color:var(--navy);margin-bottom:6px}
+    .hint{font-size:13px;color:var(--gray-600);margin-bottom:8px}
+    input[type=text],input[type=url],input[type=password],textarea{width:100%;padding:12px 14px;border:1.5px solid var(--gray-300);border-radius:8px;font-family:inherit;font-size:15px;margin-bottom:20px}
+    textarea{resize:vertical;min-height:90px;line-height:1.6}
+    input:focus,textarea:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(236,56,87,.12)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:7px;font-size:14px;font-weight:700;border:none;font-family:inherit;cursor:pointer}
+    .btn-primary{background:var(--grad);color:#fff}
+    .btn-primary:hover{opacity:.92}
+    .btn-primary:disabled{opacity:.5;cursor:not-allowed}
+    .btn-ghost{background:#f0efee;color:var(--navy)}
+    .step-note{font-size:13px;color:var(--gray-600);margin-top:14px}
+    .status{padding:14px 16px;border-radius:8px;font-size:14px;font-weight:600;margin-bottom:20px;display:none}
+    .status.show{display:block}
+    .status.working{background:#fff8e6;color:#8a6d00;border:1px solid #ffe9a8}
+    .status.error{background:#fff5f5;color:#991b1b;border:1px solid #fecaca}
+    .status.ok{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+    .preview-frame{width:100%;height:640px;border:1.5px solid var(--gray-300);border-radius:8px;background:#fff}
+    .spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(0,0,0,.15);border-top-color:var(--red);border-radius:50%;animation:s .8s linear infinite;vertical-align:middle}
+    @keyframes s{to{transform:rotate(360deg)}}
+    .hidden{display:none}
+    h2.section{font-size:20px;font-weight:800;margin-bottom:16px;color:var(--navy)}
+  </style>
+</head>
+<body>
+<header><div class="inner"><h1>Division 7 Millwork — Blog Publisher</h1><span>Connectid</span></div></header>
+
+<div class="wrap">
+
+  <!-- STEP 1: write -->
+  <div class="card" id="write-card">
+    <h2 class="section">Write a new post</h2>
+
+    <label>Access code</label>
+    <p class="hint">Ask Ashley for this. Keeps the page private.</p>
+    <input type="password" id="access" autocomplete="off" />
+
+    <label>What question does this post answer? <span style="color:var(--red)">*</span></label>
+    <p class="hint">Use this week's question from the content calendar. e.g. "How long does a custom kitchen take to build?"</p>
+    <input type="text" id="question" />
+
+    <label>Target keyword</label>
+    <p class="hint">The phrase to include naturally. e.g. "custom kitchen cabinets Westchester"</p>
+    <input type="text" id="keyword" />
+
+    <label>Micah's take <span style="color:var(--red)">*</span></label>
+    <p class="hint">Paste Micah's voice-memo notes or 4–5 bullets. His real answer, one example or story, anything he'd warn a homeowner about. This is what makes the post good — don't skip it.</p>
+    <textarea id="notes" rows="7"></textarea>
+
+    <button class="btn btn-primary" id="gen-btn">Generate draft</button>
+    <p class="step-note">Takes about a minute. You'll see a full preview before anything goes live.</p>
+  </div>
+
+  <!-- STEP 2: status + preview -->
+  <div class="status" id="status"></div>
+
+  <div class="card hidden" id="preview-card">
+    <h2 class="section">Preview</h2>
+    <p class="hint" style="margin-bottom:16px">Read it through. Check it sounds like Micah, no em dashes, nothing made up. If it's good, publish. If not, tweak your inputs above and generate again.</p>
+    <iframe class="preview-frame" id="preview" title="Preview"></iframe>
+    <div style="margin-top:20px;display:flex;gap:12px">
+      <button class="btn btn-primary" id="publish-btn">Publish to website</button>
+      <button class="btn btn-ghost" id="regen-btn">Start over</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const SUPABASE_URL='https://ihjhfcuiofudkdpinkxo.supabase.co';
+  const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloamhmY3Vpb2Z1ZGtkcGlua3hvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NjgxNzQsImV4cCI6MjA5MzA0NDE3NH0.fvnL13SthNvKxCvjAdvintux50YkbL1rgMLSWUUrDEk';
+  const SB={apikey:SUPABASE_KEY,Authorization:'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'};
+
+  let draftId=null, pollTimer=null;
+  const $=id=>document.getElementById(id);
+  const statusEl=$('status');
+
+  function setStatus(kind,msg,spin){
+    statusEl.className='status show '+kind;
+    statusEl.innerHTML=(spin?'<span class="spin"></span> ':'')+msg;
+  }
+
+  async function createDraftRow(){
+    draftId=crypto.randomUUID();
+    await fetch(SUPABASE_URL+'/rest/v1/blog_drafts',{
+      method:'POST',headers:{...SB,Prefer:'return=minimal'},
+      body:JSON.stringify({draft_id:draftId,status:'queued'})
+    });
+  }
+
+  async function getDraft(){
+    const r=await fetch(SUPABASE_URL+'/rest/v1/blog_drafts?draft_id=eq.'+draftId+'&select=status,generated_html,error_message,published_url&limit=1',{headers:SB});
+    const rows=await r.json();
+    return rows&&rows[0];
+  }
+
+  $('gen-btn').addEventListener('click',async()=>{
+    const access=$('access').value.trim();
+    const question=$('question').value.trim();
+    const notes=$('notes').value.trim();
+    if(!access){setStatus('error','Enter the access code.');return;}
+    if(!question||!notes){setStatus('error','Please fill in the question and Micah\\'s take.');return;}
+
+    $('gen-btn').disabled=true;
+    $('preview-card').classList.add('hidden');
+    setStatus('working','Writing the draft in Micah\\'s voice…',true);
+
+    await createDraftRow();
+    await fetch('/.netlify/functions/generate-blog-post-background',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({draft_id:draftId,access_code:access,question,keyword:$('keyword').value.trim(),micah_notes:notes,title:question})
+    });
+
+    clearInterval(pollTimer);
+    pollTimer=setInterval(async()=>{
+      const d=await getDraft();
+      if(!d)return;
+      if(d.status==='ready'){
+        clearInterval(pollTimer);
+        $('gen-btn').disabled=false;
+        setStatus('ok','Draft ready — review it below.');
+        $('preview').srcdoc=d.generated_html;
+        $('preview-card').classList.remove('hidden');
+        $('preview-card').scrollIntoView({behavior:'smooth'});
+      }else if(d.status==='error'){
+        clearInterval(pollTimer);
+        $('gen-btn').disabled=false;
+        setStatus('error','Something went wrong: '+(d.error_message||'unknown')+'. Try again or text Ashley.');
+      }
+    },3000);
+  });
+
+  $('publish-btn').addEventListener('click',async()=>{
+    $('publish-btn').disabled=true;
+    setStatus('working','Publishing to the website…',true);
+    await fetch('/.netlify/functions/publish-blog-post-background',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({draft_id:draftId,access_code:$('access').value.trim()})
+    });
+    clearInterval(pollTimer);
+    pollTimer=setInterval(async()=>{
+      const d=await getDraft();
+      if(!d)return;
+      if(d.status==='published'){
+        clearInterval(pollTimer);
+        setStatus('ok','Published! It\\'s live at <a href="'+d.published_url+'" target="_blank">'+d.published_url+'</a> (may take a minute to appear).');
+        $('preview-card').classList.add('hidden');
+      }else if(d.status==='error'){
+        clearInterval(pollTimer);
+        $('publish-btn').disabled=false;
+        setStatus('error','Publish failed: '+(d.error_message||'unknown')+'. Text Ashley.');
+      }
+    },3000);
+  });
+
+  $('regen-btn').addEventListener('click',()=>{
+    $('preview-card').classList.add('hidden');
+    statusEl.className='status';
+    $('question').value='';$('keyword').value='';$('notes').value='';
+    $('write-card').scrollIntoView({behavior:'smooth'});
+  });
+</script>
+</body>
+</html>
