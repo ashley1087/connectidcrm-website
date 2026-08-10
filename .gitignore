@@ -1,0 +1,6 @@
+.DS_Store
+Icon?
+*.mp4
+*.mov
+node_modules/
+.env
