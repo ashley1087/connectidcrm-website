@@ -83,6 +83,8 @@
     .btn-outline-white:hover { border-color: white; background: rgba(255,255,255,0.08); }
     .btn-apple-podcasts { background: #872EC4; color: white; }
     .btn-apple-podcasts:hover { background: #7325A8; opacity: 1; }
+    .btn-spotify { background: #1DB954; color: white; }
+    .btn-spotify:hover { background: #17a349; opacity: 1; }
     .btn-sm { padding: 10px 20px; font-size: 13px; }
 
     /* ── NAV ── */
@@ -700,7 +702,11 @@
           </a>
           <a href="https://podcasts.apple.com/us/podcast/the-handshake-business/id6805160695" target="_blank" rel="noopener" class="btn btn-apple-podcasts">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.582 0 0 3.582 0 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 2.4a5.6 5.6 0 1 1 0 11.2A5.6 5.6 0 0 1 8 2.4zm0 1.2a4.4 4.4 0 1 0 0 8.8A4.4 4.4 0 0 0 8 3.6zM8 5a.8.8 0 1 1 0 1.6A.8.8 0 0 1 8 5zm-.8 2.4h1.6v4H7.2V7.4z"/></svg>
-            Listen on Apple Podcasts
+            Apple Podcasts
+          </a>
+          <a href="https://open.spotify.com/episode/3ad3YGz5W08W5ciQiCjbOV" target="_blank" rel="noopener" class="btn btn-spotify">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+            Spotify
           </a>
           <a href="#" onclick="openBooking(); return false;" class="btn btn-outline-white">Be a Guest</a>
         </div>
@@ -712,7 +718,7 @@
             <svg viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg"><path d="M17.6 2.18A2.25 2.25 0 0 0 16.02.6C14.63.18 9 .18 9 .18S3.37.18 1.98.6A2.25 2.25 0 0 0 .4 2.18C0 3.58 0 6.5 0 6.5s0 2.92.4 4.32A2.25 2.25 0 0 0 1.98 12.4C3.37 12.82 9 12.82 9 12.82s5.63 0 7.02-.42A2.25 2.25 0 0 0 17.6 10.82c.4-1.4.4-4.32.4-4.32s0-2.92-.4-4.32zM7.2 9.36V3.64L11.93 6.5 7.2 9.36z"/></svg>
           </div>
           <div>
-            <div class="podcast-art-badge-text">YouTube &amp; Apple Podcasts</div>
+            <div class="podcast-art-badge-text">YouTube · Apple · Spotify</div>
             <div class="podcast-art-badge-sub">New episodes dropping</div>
           </div>
         </div>
@@ -721,8 +727,13 @@
   </section>
 
   <!-- ══ PLATFORM EMBEDS ══ -->
+  <style>
+    .platform-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; max-width:1100px; margin:0 auto; }
+    .platform-stack { display:flex; flex-direction:column; gap:32px; }
+    @media (max-width:768px) { .platform-grid { grid-template-columns:1fr; } }
+  </style>
   <section style="background:#FAF9F8; padding:56px 24px 48px;">
-    <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;">
+    <div class="platform-grid">
 
       <!-- YouTube Playlist -->
       <div>
@@ -739,26 +750,36 @@
         </div>
       </div>
 
-      <!-- Apple Podcasts -->
-      <div>
-        <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#872EC4;display:block;margin-bottom:16px;">Listen on Apple Podcasts</span>
-        <iframe
-          allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-          frameborder="0"
-          height="450"
-          style="width:100%;border-radius:12px;overflow:hidden;"
-          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-          src="https://embed.podcasts.apple.com/us/podcast/the-handshake-business/id6805160695">
-        </iframe>
+      <!-- Apple Podcasts + Spotify stacked -->
+      <div class="platform-stack">
+
+        <div>
+          <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#872EC4;display:block;margin-bottom:16px;">Listen on Apple Podcasts</span>
+          <iframe
+            allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+            frameborder="0"
+            height="180"
+            style="width:100%;border-radius:12px;overflow:hidden;"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src="https://embed.podcasts.apple.com/us/podcast/the-handshake-business/id6805160695?compact=true">
+          </iframe>
+        </div>
+
+        <div>
+          <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#1DB954;display:block;margin-bottom:16px;">Listen on Spotify</span>
+          <iframe
+            style="border-radius:12px;width:100%;"
+            src="https://open.spotify.com/embed/episode/3ad3YGz5W08W5ciQiCjbOV?utm_source=generator"
+            height="152"
+            frameborder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy">
+          </iframe>
+        </div>
+
       </div>
 
     </div>
-    <!-- Mobile: stack vertically -->
-    <style>
-      @media (max-width: 768px) {
-        .platform-embeds-grid { grid-template-columns: 1fr !important; }
-      }
-    </style>
   </section>
 
   <!-- ══ EPISODES ══ -->
