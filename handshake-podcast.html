@@ -746,19 +746,35 @@
   <section style="background:#FAF9F8; padding:56px 24px 48px;">
     <div class="platform-grid">
 
-      <!-- YouTube Playlist -->
-      <div>
-        <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#FF0000;display:block;margin-bottom:16px;">Watch on YouTube</span>
-        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">
+      <!-- YouTube + iHeart stacked -->
+      <div class="platform-stack">
+
+        <div>
+          <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#FF0000;display:block;margin-bottom:16px;">Watch on YouTube</span>
+          <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">
+            <iframe
+              src="https://www.youtube.com/embed/cRVhfgmporU"
+              title="The Handshake Business — Latest Episode"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              style="position:absolute;top:0;left:0;width:100%;height:100%;">
+            </iframe>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#C6002B;display:block;margin-bottom:16px;">Listen on iHeart Radio</span>
           <iframe
-            src="https://www.youtube.com/embed/videoseries?list=PLr8L1iEc1z2p7xEe6jqqBnIRHVekQOInm"
-            title="The Handshake Business — YouTube Playlist"
+            allow="autoplay"
+            width="100%"
+            height="200"
+            src="https://www.iheart.com/podcast/269-the-handshake-business-342341408?embed=true"
             frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+            style="border-radius:12px;">
           </iframe>
         </div>
+
       </div>
 
       <!-- Apple Podcasts + Spotify stacked -->
@@ -785,18 +801,6 @@
             frameborder="0"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy">
-          </iframe>
-        </div>
-
-        <div>
-          <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#C6002B;display:block;margin-bottom:16px;">Listen on iHeart Radio</span>
-          <iframe
-            allow="autoplay"
-            width="100%"
-            height="200"
-            src="https://www.iheart.com/podcast/269-the-handshake-business-342341408?embed=true"
-            frameborder="0"
-            style="border-radius:12px;">
           </iframe>
         </div>
 
